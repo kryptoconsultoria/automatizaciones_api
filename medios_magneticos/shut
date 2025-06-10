@@ -1,0 +1,62 @@
+  bancos:
+    ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/07 Medios Magnéticos/insumos/puc_exogena/"
+    ruta_carpeta: "C:/Users/Krypto/PycharmProjects/medios_magneticos/medios_magneticos/insumos/puc_exogena/"
+    nombre_tabla: "bancos"
+    nombre_hoja: "Bancos"
+    columnas: "NumId,dv,RazonSocial,CodDpto,CodMcp,Cuentas,IdCliente"
+    cabeceras: 2
+    indice_columna: "N/A"
+
+  departamento:
+    ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/07 Medios Magnéticos/insumos/departamento_municipio_pais/"
+    ruta_carpeta: "C:/Users/Krypto/PycharmProjects/automatizaciones_api/medios_magneticos/insumos/departamento_municipio_pais/"
+    nombre_tabla: "departamento"
+    nombre_hoja: "Departamento"
+    columnas: "IdDepartamento,NombreDepartamento,Homologacion"
+    cabeceras: 2
+    indice_columna: "N/A"
+
+  municipio:
+    ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/07 Medios Magnéticos/insumos/departamento_municipio_pais/"
+    ruta_carpeta: "C:/Users/Krypto/PycharmProjects/automatizaciones_api/medios_magneticos/insumos/departamento_municipio_pais/"
+    nombre_tabla: "municipio"
+    nombre_hoja: "Municipio"
+    columnas: "IdMunicipio,NombreMunicipio,Homologacion,IdDepartamento"
+    cabeceras: 2
+    indice_columna: "N/A"
+
+  pais:
+    ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/07 Medios Magnéticos/insumos/departamento_municipio_pais/"
+    ruta_carpeta: "C:/Users/Krypto/PycharmProjects/automatizaciones_api/medios_magneticos/insumos/departamento_municipio_pais/"
+    nombre_tabla: "pais"
+    nombre_hoja: "Pais"
+    columnas: "IdPais,Descripcion,Homologacion"
+    cabeceras: 2
+    indice_columna: "N/A"
+
+  tipo_doc:
+    ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/07 Medios Magnéticos/insumos/homologaciones/"
+    ruta_carpeta: "C:/Users/Krypto/PycharmProjects/automatizaciones_api/medios_magneticos/insumos/homologaciones/"
+    nombre_tabla: "tipo_doc"
+    nombre_hoja: "TipoDoc"
+    columnas: "IdTipoDoc,Descripcion,Homologacion"
+    cabeceras: 2
+    indice_columna: "N/A"
+
+  direcciones:
+    ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/07 Medios Magnéticos/insumos/homologaciones/"
+    ruta_carpeta: "C:/Users/Krypto/PycharmProjects/automatizaciones_api/medios_magneticos/insumos/homologaciones/"
+    nombre_tabla: "direccion"
+    nombre_hoja: "Direcciones"
+    columnas: "Abreviatura,Significado,Homologacion"
+    cabeceras: 2
+    indice_columna: "N/A"
+
+  cliente:
+    ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/07 Medios Magnéticos/insumos/clientes_krypto/"
+    ruta_carpeta: "C:/Users/Krypto/PycharmProjects/automatizaciones_api/medios_magneticos/insumos/clientes_krypto/"
+    nombre_tabla: "cliente"
+    nombre_hoja: "Clientes"
+    columnas: "IdCliente,Nombre,DV,Direccion,IdPais,IdDepartamento,IdMunicipio,IdSistema,IdTipoDoc,IdTipoInformante"
+    cabeceras: 2
+    indice_columna: "N/A" 

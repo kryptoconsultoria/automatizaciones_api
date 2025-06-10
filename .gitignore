@@ -1,0 +1,59 @@
+# Archivos de Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.swp
+*.swo
+
+# Entornos virtuales
+venv/
+env/
+*.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Configuración de entornos
+.env
+.env.local
+.settings/
+.vscode/
+.idea/
+*.iml
+
+# Archivos de logs
+logs/
+
+# Jupyter Notebooks Checkpoints
+.ipynb_checkpoints/
+
+# Modelos y datasets
+insumos/
+*.csv
+*.tsv
+*.json
+*.xlsx
+*.db
+*.sqlite
+*.h5
+*.pkl
+*.joblib
+*.pth
+*.onnx
+
+# Modelos y NLP
+model/
+models/
+*.bin
+*.vec
+*.hdf5
+
+# Archivos de configuración
+config.yaml
+config.json
+
+# Caché de Machine Learning
+*.cache/
+__pycache__/
+wandb/
+mlruns/
