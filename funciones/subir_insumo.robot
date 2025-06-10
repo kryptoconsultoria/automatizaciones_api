@@ -20,7 +20,7 @@ Library     DatabaseLibrary
 *** Keywords ***
 Ejecutar Carga Masiva desde CSV
     [Documentation]    Ejecuta un comando SQL para cargar datos desde un archivo CSV en la tabla indicada.
-    [Arguments]    ${nombre_bd}    ${usuario}    ${contrasena}    ${host}    ${puerto}    ${archivo_csv}    ${nombre_tabla}    ${cabeceras}    ${columnas}    ${usuario_sistema}
+    [Arguments]    ${nombre_bd}    ${usuario}    ${contrasena}    ${host}    ${puerto}    ${archivo_csv}    ${nombre_tabla}    ${cabeceras}    ${columnas}    ${usuario_sistema}=${EMPTY}
     Log    Preparando conexión con la base de datos...
     Connect To Database    pymysql    ${nombre_bd}    ${usuario}    ${contrasena}    ${host}    ${puerto}    local_infile=1
     Log    Conexión exitosa con la base de datos: ${nombre_bd}
