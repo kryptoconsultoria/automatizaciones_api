@@ -140,7 +140,7 @@ Resource          ../funciones/descargar_onedrive.robot
             ...    a.RazonSocial = b.RazonSocial,
             ...    a.CodDpto = b.CodDpto,
             ...    a.CodMcp = b.CodMcp 
-            ...    WHERE Usuario='${usuario}'
+            ...    WHERE a.Usuario='${usuario}'
 
             Execute SQL String    ${sql}
 
@@ -154,5 +154,5 @@ Resource          ../funciones/descargar_onedrive.robot
             ${completado}=    Set Variable    ${False}
         END
     END
-    [return]    ${completado}
+    RETURN    ${completado}
 

@@ -20,7 +20,7 @@ Extraer Entidades De Direccion
     [Arguments]    ${texto}
     ${entidades}    Extraer Entidades    ${texto}
     Log    ${entidades}
-    [return]    ${entidades}
+    RETURN    ${entidades}
 
 
 Reemplazar Entidades De Direccion
@@ -28,18 +28,18 @@ Reemplazar Entidades De Direccion
     [Arguments]    ${texto}    ${entidades}    ${nuevas_palabras}
     ${resultado}    Reemplazar Entidades    ${texto}    ${entidades}    ${nuevas_palabras}
     Log     ${resultado}
-    [return]    ${resultado}
+    RETURN    ${resultado}
 
 Reemplazar Por Tipo
     [Documentation]    Reemplazar por tipo
     [Arguments]     ${texto}    ${entidades_reemplazar}    ${nueva_palabra}
     ${resultado}    Reemplazar Entidades Por Tipo    ${texto}    ${entidades_reemplazar}    ${nueva_palabra}
     Log    ${resultado}
-    [return]     ${resultado}
+    RETURN     ${resultado}
 
 Reemplazar Múltiples Tipos
     [Documentation]    Reemplazar multiples tipos
     [Arguments]    ${texto}    ${tipos_reemplazos}   
     ${resultado}    Reemplazar Multiples Tipos Entidades    ${texto}    ${tipos_reemplazos}
     Log    ${resultado}
-    [return]     ${resultado}
+    RETURN     ${resultado}

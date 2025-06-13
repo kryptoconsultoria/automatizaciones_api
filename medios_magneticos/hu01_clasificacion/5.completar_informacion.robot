@@ -44,7 +44,9 @@ completar_informacion
             ...    a.PrimerNombre = IF(b.EncontradoDian='NO',a.PrimerNombre,b.PrimerNombre),
             ...    a.OtrosNombres = IF(b.EncontradoDian='NO',a.OtrosNombres,b.OtrosNombres),
             ...    a.EncontradoDian = b.EncontradoDian,
-            ...    a.RazonSocial=IF(b.EncontradoDian='NO',a.RazonSocial,'');
+            ...    a.RazonSocial=IF(b.EncontradoDian='NO',a.RazonSocial,'')
+            ...    WHERE a.Usuario='${usuario}';
+
             
             Execute SQL String    ${sql}
 
@@ -96,11 +98,10 @@ completar_informacion
             #     END
             # END
             # Disconnect From Database
-            # ${completado}=    Set Variable    ${True}
-
+            ${completado}    Set Variable    ${True}
         EXCEPT     AS    ${error}
             Disconnect From Database
-            ${completado}=    Set Variable    ${False}
+            ${completado}    Set Variable    ${False}
         END
     END
-    [return]    ${completado}
+    RETURN    ${completado}

@@ -40,8 +40,6 @@ async def medios_magneticos(req: RunMediosMagneticos):
         "medios_magneticos/main.robot"
     ], capture_output=True, text=True)
 
-    result.wait()
-
     return {
         "stdout": result.stdout,
         "stderr": result.stderr,

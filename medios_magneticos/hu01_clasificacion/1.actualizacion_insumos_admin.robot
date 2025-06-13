@@ -104,5 +104,5 @@ actualizacion_insumos_admin
             ${completado}=    Set Variable    ${False}
         END
     END
-    [return]    ${completado}
+    RETURN    ${completado}
     

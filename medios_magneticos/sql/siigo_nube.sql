@@ -82,7 +82,8 @@ INNER JOIN
             Homologacion
     ) f 
     ON f.Homologacion = b.Ciudad 
-    AND b.codPais = '169';
+    AND b.codPais = '169'
+WHERE b.Usuario='USUARIO';
 
 -- Convertir a UTF8
 ALTER TABLE cross_terceros_siigo_nube_nacionales
@@ -120,7 +121,8 @@ LEFT JOIN
     ON f.Homologacion = b.Ciudad 
     AND b.codPais = '169'
 WHERE 
-    f.IdMunicipio IS NULL;
+    f.IdMunicipio IS NULL
+    AND b.Usuario='USUARIO';
 
 
 -- Convertir a UTF8
@@ -190,3 +192,4 @@ FROM
 LEFT JOIN 
     clean_terceros_siigo_nube AS b 
     ON TRIM(a.Identificacion) = TRIM(b.NumId)
+WHERE a.Usuario='USUARIO';

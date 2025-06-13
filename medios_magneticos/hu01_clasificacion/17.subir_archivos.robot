@@ -18,7 +18,7 @@ Resource   ../funciones/subir_insumo.robot
 #     Subir formatos   ${config}
 
 *** Keywords ***
-Subir formatos
+subir_archivos
     [Arguments]    &{parametros}
     ${reintentos}    Set Variable    2
     FOR    ${i}    IN RANGE    1    ${reintentos}
@@ -41,5 +41,5 @@ Subir formatos
             ${completado}    Set Variable    ${False}
         END
     END
-    [return]    ${completado}
+    RETURN    ${completado}
 

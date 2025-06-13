@@ -47,7 +47,7 @@ Encontrar Claves Con Término
             BREAK
         END
     END
-    [Return]    ${resultados}    
+    RETURN    ${resultados}    
 
 exportar_excel_final
     [Documentation]    Ejecuta un comando SQL para clasificar los datos en su respectivo formato.
@@ -113,7 +113,7 @@ exportar_excel_final
                 ${numero_fila}    Evaluate    ${numero_fila}+2
 
                 # registrar cada fila de cada formato en su respectiva hoja de excel
-                ${resultados}=    Query    SELECT ${columna_din} FROM formato_${formato} AND Usuario='${usuario}'
+                ${resultados}=    Query    SELECT ${columna_din} FROM formato_${formato} WHERE Usuario='${usuario}'
                 ${resultados_lista}=    Evaluate    list(map(list, ${resultados}))
 
                 # Llenar todas las filas en bloque
@@ -130,7 +130,7 @@ exportar_excel_final
             ${completado}=    Set Variable    ${False}
         END
     END
-    [return]    ${completado}
+    RETURN    ${completado}
         
 
 

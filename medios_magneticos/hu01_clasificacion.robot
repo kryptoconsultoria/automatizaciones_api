@@ -39,7 +39,7 @@ Ordenar Archivos Por Prefijo Numérico
     ...    sorted($num_archivos, key=lambda name: int(name.split('.',1)[0]))
     ...    modules=re
     # 4. Devolvemos la lista ordenada
-    [Return]    ${ordenado}
+    RETURN    ${ordenado}
 
 HU01 Clasificacion
     [Documentation]    Clasificar movimientos del balance en cada formato de medios exógeno para la DIAN
@@ -48,6 +48,7 @@ HU01 Clasificacion
     &{parametros}=    Create Dictionary    config_file=&{config}    config_pdf=&{config_pdf}
     ${bd_config}       Get From Dictionary    ${config['credenciales']}    base_datos
     ${fecha_actual}    Get Current Date    result_format=%Y-%m-%d %H:%M:%S
+    ${usuario}   Get From Dictionary   ${parametros['config_file']['credenciales']}   usuario
     #============================================================================================================================================================================ 
     Connect To Database    pymysql    ${bd_config["nombre_bd"]}    ${bd_config["usuario"]}    ${bd_config["contrasena"]}    ${bd_config["servidor"]}    ${bd_config["puerto"]}
     ${sql}    Catenate    
@@ -56,14 +57,14 @@ HU01 Clasificacion
     ${tam_estado_actual}    Get Length  ${estado_actual}  
     IF  ${tam_estado_actual} == 0
         ${sql}    Catenate
-        ...    INSERT INTO estado (Tarea,HistoriaUsuario,Estado,IdBot,Fecha) VALUES ('actualizacion_insumos_contabilidad.robot','HU01','Iniciado',1,'${fecha_actual}')
+        ...    INSERT INTO estado (Tarea,HistoriaUsuario,Estado,IdBot,Fecha,Usuario) VALUES ('actualizacion_insumos_contabilidad.robot','HU01','Iniciado',1,'${fecha_actual}','${usuario}')
         Execute SQL String    ${sql}
         ${sql}    Catenate    
-        ...    select * from automatizaciones.estado WHERE IdBot=1 AND HistoriaUsuario='HU01' and Estado IN ('Error','Iniciado') order by fecha desc limit 1
+        ...    select * from automatizaciones.estado WHERE IdBot=1 AND HistoriaUsuario='HU01' and Estado IN ('Error','Iniciado') and Usuario='${usuario}' order by fecha desc limit 1
         ${estado_actual}    Query       ${sql}
     ELSE
         ${sql}    Catenate
-        ...    UPDATE automatizaciones.estado SET Estado='Iniciado',HistoriaUsuario='HU01' WHERE IdBot=1 AND idEstado=${estado_actual}[0][0]
+        ...    UPDATE automatizaciones.estado SET Estado='Iniciado',HistoriaUsuario='HU01' WHERE IdBot=1 AND idEstado=${estado_actual}[0][0] and Usuario='${usuario}'
         Execute SQL String    ${sql}
     END
     Disconnect From Database
@@ -89,7 +90,10 @@ HU01 Clasificacion
 
         Connect To Database    pymysql    ${bd_config["nombre_bd"]}    ${bd_config["usuario"]}    ${bd_config["contrasena"]}    ${bd_config["servidor"]}    ${bd_config["puerto"]}
         ${sql}    Catenate    
-        ...    Select Count(*) FROM automatizaciones.estado WHERE IdBot=1 AND HistoriaUsuario='HU01' and Tarea='${palabra_clave}.robot' and idEstado=${estado_actual}[0][0] and Estado IN ('Error','Iniciado')
+        ...    Select Count(*) FROM automatizaciones.estado WHERE IdBot=1 AND 
+        ...    HistoriaUsuario='HU01' and Tarea='${palabra_clave}.robot' and idEstado=${estado_actual}[0][0] 
+        ...    and Estado IN ('Error','Iniciado') and Usuario='${usuario}'
+
         ${Estado}    Query       ${sql}
         Disconnect From Database  
         IF  '${Estado[0][0]}' == '1' 
@@ -97,10 +101,10 @@ HU01 Clasificacion
             Connect To Database    pymysql    ${bd_config["nombre_bd"]}    ${bd_config["usuario"]}    ${bd_config["contrasena"]}    ${bd_config["servidor"]}    ${bd_config["puerto"]}
             IF    ${completado}
                 ${sql}    Catenate
-                ...    UPDATE automatizaciones.estado SET Estado='Iniciado',HistoriaUsuario='HU01',Tarea='${siguiente_palabra_clave}.robot' WHERE IdBot=1 AND idEstado=${estado_actual}[0][0]
+                ...    UPDATE automatizaciones.estado SET Estado='Iniciado',HistoriaUsuario='HU01',Tarea='${siguiente_palabra_clave}.robot' WHERE IdBot=1 AND idEstado=${estado_actual}[0][0] and Usuario='${usuario}'
             ELSE
                 ${sql}    Catenate
-                ...    UPDATE automatizaciones.estado SET Estado='Error',HistoriaUsuario='HU01',Tarea='${palabra_clave}.robot' WHERE IdBot=1 AND idEstado=${estado_actual}[0][0]
+                ...    UPDATE automatizaciones.estado SET Estado='Error',HistoriaUsuario='HU01',Tarea='${palabra_clave}.robot' WHERE IdBot=1 AND idEstado=${estado_actual}[0][0] and Usuario='${usuario}'
                 RETURN    ${palabra_clave}    ${completado}    
             END
             Execute SQL String    ${sql}

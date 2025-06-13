@@ -45,7 +45,7 @@ ${REGEX_PORCENTAJE}      (?:(?:[0-9]{1,2}(?:[.,]\\d+)?|100(?:[.,]0+)?))%
          ${cliente}=   Get From Dictionary   ${parametros['config_file']['credenciales']}   cliente
 
          #Conexion a sharepoint
-         ${token_refresco}    Get File    path=./logs/token.txt    encoding=UTF-8
+         ${token_refresco}    Get File    path=${CURDIR}/../logs/token.txt    encoding=UTF-8
 
          # Conectar a la base de datos
          Connect To Database    pymysql    ${bd_config["nombre_bd"]}    ${bd_config["usuario"]}    ${bd_config["contrasena"]}    ${bd_config["servidor"]}    ${bd_config["puerto"]}
@@ -224,5 +224,5 @@ ${REGEX_PORCENTAJE}      (?:(?:[0-9]{1,2}(?:[.,]\\d+)?|100(?:[.,]0+)?))%
          ${completado}=    Set Variable    ${False}
       END
    END
-   [return]    ${completado}
+   RETURN    ${completado}
         

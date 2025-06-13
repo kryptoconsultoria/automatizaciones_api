@@ -152,4 +152,4 @@ ${REGEX_EXP_NIT}  \\b\\d{2}\\s\\d{5,}\\b
             ${completado}=    Set Variable    ${False}
         END
     END
-    [return]    ${completado}
+    RETURN    ${completado}

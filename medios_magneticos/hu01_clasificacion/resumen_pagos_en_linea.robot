@@ -171,5 +171,5 @@ resumen_pagos_en_linea
             ${completado}=    Set Variable    ${False}
        END
    END
-   [return]    ${completado}
+   RETURN    ${completado}
         

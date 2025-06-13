@@ -2,7 +2,6 @@
 Library           DatabaseLibrary
 Library           Collections
 Library           OperatingSystem
-Library           RPA.FileSystem
 Library           String
 Library           Dialogs
 
@@ -41,17 +40,32 @@ procesar
 
             Execute SQL Script    ${CURDIR}/../sql/tablas_temporales.sql
 
+            ${exists}=    Run Keyword And Return Status    File Should Exist    ${CURDIR}/../sql/tmp.sql
+            Run Keyword If    ${exists}    Remove File    ${CURDIR}/../sql/tmp.sql
+
             IF     ${id_sistema}[0][0] == 1
-                Execute SQL Script    ${CURDIR}/../sql/siigo_pyme.sql
+                ${content}=    Get File    ${CURDIR}/../sql/siigo_pyme.sql
+                ${content2}=   Replace String    ${content}    search_for=USUARIO    replace_with=${usuario}
+                Create File    ${CURDIR}/../sql/tmp.sql    ${content2}
             ELSE IF  ${id_sistema}[0][0] == 2
-                Execute SQL Script    ${CURDIR}/../sql/siigo_nube.sql
+                ${content}=    Get File    ${CURDIR}/../sql/siigo_nube.sql
+                ${content2}=   Replace String    ${content}    search_for=USUARIO    replace_with=${usuario}  
+                Create File    ${CURDIR}/../sql/tmp.sql    ${content2}
             ELSE IF  ${id_sistema}[0][0] == 3
-                Execute SQL Script    ${CURDIR}/../sql/avansys.sql
+                ${content}=    Get File    ${CURDIR}/../sql/avansys.sql
+                ${content2}=   Replace String    ${content}    search_for=USUARIO    replace_with=${usuario} 
+                Create File    ${CURDIR}/../sql/tmp.sql    ${content2}
             ELSE IF  ${id_sistema}[0][0] == 4
-                Execute SQL Script    ${CURDIR}/../sql/allegra.sql
+                ${content}=    Get File    ${CURDIR}/../sql/allegra.sql
+                ${content2}=   Replace String    ${content}    search_for=USUARIO    replace_with=${usuario}  
+                Create File    ${CURDIR}/../sql/tmp.sql    ${content2}
             ELSE IF  ${id_sistema}[0][0] == 5
-                Execute SQL Script    ${CURDIR}/../sql/aliaddo.sql
+                ${content}=    Get File    ${CURDIR}/../sql/aliaddo.sql
+                ${content2}=   Replace String    ${content}    search_for=USUARIO    replace_with=${usuario}  
+                Create File    ${CURDIR}/../sql/tmp.sql    ${content2}
             END
+
+            Execute SQL Script    ${CURDIR}/../sql/tmp.sql
 
             ${sql}=    Catenate
             ...    INSERT INTO Balances 
@@ -59,7 +73,7 @@ procesar
             ...    SELECT Codigo,TipoDoc,NumId,DV,
             ...    UPPER(Direccion),CodDpto,CodMcp,UPPER(Departamento),UPPER(Municipio),UPPER(PaisResidencia),
             ...    UPPER(PrimerApellido),UPPER(SegundoApellido),UPPER(PrimerNombre),UPPER(OtrosNombres),
-            ...    UPPER(RazonSocial),UPPER(SaldoInicial),Debito,Credito,SaldoFinal,NULL,${usuario} FROM intermedio;
+            ...    UPPER(RazonSocial),UPPER(SaldoInicial),Debito,Credito,SaldoFinal,NULL,'${usuario}' FROM intermedio;
 
             Execute Sql String    ${sql}
 
@@ -86,4 +100,4 @@ procesar
             ${completado}=    Set Variable    ${False}
         END
     END
-    [return]    ${completado}
+    RETURN    ${completado}

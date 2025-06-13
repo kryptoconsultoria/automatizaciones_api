@@ -42,7 +42,7 @@ Prompt Perplexity
    Autenticar Perplexity     ${clave_api}
    ${Resultado}    Consultar PerPlexity    model=${modelo}    prompt=${prompt}    instructions=${instrucciones}
    Log        Resultado de la consulta ${Resultado}    console=True
-   [return]     ${Resultado}
+   RETURN     ${Resultado}
 
 
 

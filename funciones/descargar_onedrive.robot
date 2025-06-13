@@ -39,7 +39,7 @@ Autorizar y Configurar Graph
     ${refresh_token}    Authorize And Get Token    authorization_url=${url_oauth}                
     Log      refresh token obtenido=${refresh_token}     level=DEBUG
     Create File    path=../logs/token.txt    content=${refresh_token}     encoding=UTF-8
-    [return]     ${refresh_token}   
+    RETURN     ${refresh_token}   
 
 
 Descargar Archivo de Sharepoint
@@ -55,13 +55,13 @@ Descargar Archivo de Sharepoint
         Download File From Sharepoint        target_file=${ruta_archivo}    site=${sitio}    to_path=${ruta_descarga}    drive=${drives}[3]
         ${estado}    Set Variable    Exitoso
     EXCEPT    AS    ${error}
-        IF     'Not Found' in '${error}'
+        IF    'Not Found' in $error
             ${estado}    Set Variable    No encontrado
         ELSE
             ${estado}    Set Variable    Fallido
         END
     END
-    [return]     ${estado} 
+    RETURN     ${estado} 
 
 
 Listar archivos
@@ -78,15 +78,15 @@ Listar archivos
         Log     ${files}    level=DEBUG
         ${estado}    Set Variable    Exitoso
     EXCEPT    AS    ${error}
-        IF     'Not Found' in '${error}'
-            ${estado}    Set Variable    No encontrado
-            ${files}    Create List
+        IF    'Not Found' in $error
+            ${estado}=    Set Variable    No encontrado
+            ${files}=     Create List
         ELSE
-            ${estado}    Set Variable    Fallido
-            ${files}    Create List
+            ${estado}=    Set Variable    Fallido
+            ${files}=     Create List
         END
     END
-    [return]     ${estado}    ${files}
+    RETURN     ${estado}    ${files}
 
 Subida de insumo
     [Documentation]    Subida de insumo
@@ -97,7 +97,7 @@ Subida de insumo
     ${drives}    List SharePoint Site Drives    ${sitio}
     Log    Available Drives ${drives}    level=DEBUG
     Upload File To Onedrive    file_path=${archivo_local}   target_folder=${carpeta_onedrive}   drive=${drives}[3]
-    [return]     'Exitoso'
+    RETURN     'Exitoso'
 
 
 

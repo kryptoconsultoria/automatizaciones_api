@@ -103,7 +103,7 @@ actualizacion_insumos_contabilidad
                         END
 
                         # Subir archivo procesado a la base de datos
-                        Ejecutar Carga Masiva desde CSV     nombre_bd=${bd_config["nombre_bd"]}    usuario=${bd_config["usuario"]}    contrasena=${bd_config["contrasena"]}    host=${bd_config["servidor"]}    puerto=${bd_config["puerto"]}    archivo_csv=${ruta["nombre_tabla"]}    cabeceras=${ruta["cabeceras"]}    columnas=${ruta["columnas"]}    usuario_sistema=${usuario}
+                        Ejecutar Carga Masiva desde CSV     nombre_bd=${bd_config["nombre_bd"]}    usuario=${bd_config["usuario"]}    contrasena=${bd_config["contrasena"]}    host=${bd_config["servidor"]}    puerto=${bd_config["puerto"]}    archivo_csv=${archivo_csv}  nombre_tabla=${ruta["nombre_tabla"]}    cabeceras=${ruta["cabeceras"]}    columnas=${ruta["columnas"]}    usuario_sistema=${usuario}
                         OperatingSystem.Remove File    ${archivo_csv}
                     END
                 END

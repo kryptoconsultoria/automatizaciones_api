@@ -76,4 +76,4 @@ Consulta DIAN
             Close Browser
         END
     END
-    [return]    ${datos}    ${completado}
+    RETURN    ${datos}    ${completado}

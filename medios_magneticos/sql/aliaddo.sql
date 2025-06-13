@@ -60,7 +60,8 @@ INNER JOIN
     cross_tipo_doc_dian e 
     ON e.Homologacion = b.TipoId
 WHERE
-	TRIM(b.Pais) = 'CO';
+	TRIM(b.Pais) = 'CO'
+    AND b.Usuario='USUARIO';
     
 
 -- Convertir a UTF8
@@ -96,7 +97,8 @@ LEFT JOIN
 WHERE 
     d.IdMunicipio IS NULL 
     AND d.IdDepartamento IS NULL 
-    AND (f.idPais != '169' OR f.idPais IS NULL);
+    AND (f.idPais != '169' OR f.idPais IS NULL)
+    AND b.Usuario='USUARIO';
     
 
 -- Convertir a UTF8
@@ -166,5 +168,7 @@ FROM
 LEFT JOIN 
     clean_terceros_aliaddo AS b 
     ON TRIM(a.Identificacion) = TRIM(b.NumId)
+WHERE    
+    a.Usuario='USUARIO';
     
     

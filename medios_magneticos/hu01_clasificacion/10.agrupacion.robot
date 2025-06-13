@@ -105,8 +105,8 @@ agrupacion
                 Execute SQL String    ${sql}
 
                 ${sql}    Catenate      
-                ...    INSERT INTO ${formato} (${columna_din_5},${columna_din},${sumatorias_formato}) 
-                ...    SELECT ${columna_din_5},${columna_din},${sumatorias_formato}  FROM Agrupado WHERE Usuario='${usuario}'
+                ...    INSERT INTO ${formato} (${columna_din_5},${columna_din},${sumatorias_formato},Usuario) 
+                ...    SELECT ${columna_din_5},${columna_din},${sumatorias_formato},'${usuario}'  FROM Agrupado
                 ${sql}    Replace String    string=${sql}    search_for=,,    replace_with=,
                 Execute SQL String    ${sql}
 
@@ -155,7 +155,7 @@ agrupacion
             ${sql}    Set Variable      DELETE FROM formato_1001 WHERE NumId IN (SELECT NumId FROM AgrupadoIva) AND Usuario='${usuario}';       
             Execute SQL String    ${sql}
 
-            ${sql}    Set Variable     INSERT INTO formato_1001 SELECT * FROM AgrupadoIva
+            ${sql}    Set Variable     INSERT INTO formato_1001 SELECT *,'${usuario}' FROM AgrupadoIva
             Execute SQL String    ${sql}
 
             # Borrar duplicados formato_2276
@@ -163,7 +163,7 @@ agrupacion
             ...    DELETE t1 FROM formato_2276 t1
             ...    INNER JOIN formato_2276 t2 
             ...    WHERE t1.id > t2.id AND t1.NumId = t2.NumId
-            ...    AND Usuario='${usuario}';
+            ...    AND t1.Usuario='${usuario}';
             Execute SQL String    ${sql}
 
             ${completado}    Set Variable    ${True}
@@ -174,5 +174,5 @@ agrupacion
             ${completado}    Set Variable    ${False}
         END
     END
-    [return]    ${completado}
+    RETURN    ${completado}
     

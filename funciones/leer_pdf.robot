@@ -23,7 +23,7 @@ Leer PDF
     ${resultado}=   Get From Dictionary    ${contenido}    ${primera_clave}
     Log      ${resultado}    level=DEBUG
     Close PDF
-    [Return]    ${resultado}
+    RETURN    ${resultado}
 
 Obtener Numero Paginas
     [Arguments]    ${archivo_pdf}
@@ -31,7 +31,7 @@ Obtener Numero Paginas
     ${numero_paginas}=    Get Number Of Pages      ${archivo_pdf}
     Log      ${numero_paginas}    level=DEBUG    
     Close PDF
-    [Return]    ${numero_paginas}
+    RETURN    ${numero_paginas}
 
 Leer PDF Plumber
     [Arguments]    ${archivo_pdf}      ${pagina}
@@ -39,4 +39,4 @@ Leer PDF Plumber
     ${contenido}=    Extraer Texto    numero_pagina=${pagina}
     Log      ${contenido}        level=DEBUG 
     Cerrar PDF
-    [Return]    ${contenido}
+    RETURN    ${contenido}

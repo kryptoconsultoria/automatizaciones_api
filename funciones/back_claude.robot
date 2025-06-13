@@ -41,7 +41,7 @@ Convertir a base 64
     [Documentation]    Conversión de PDF a base64
     [Arguments]        ${PDF}    ${Password}    
     ${resultado}       Pasar a base 64    ruta_pdf=${PDF}    pass_pdf=${Password} 
-    [return]           ${resultado}
+    RETURN           ${resultado}
 
 Prompt Claude
     [Documentation]    Consulta de PDF para retornar resultados en JSON
@@ -49,7 +49,7 @@ Prompt Claude
     Autenticar         api_key=${CLAVE_API}
     ${cadena_json}       Consulta Claude    modelo=${MODELO}    pdf_base_64=${PDF}    prompt=${PROMPT}
     Log     cadena json:${cadena_json}
-    [return]           ${cadena_json}
+    RETURN           ${cadena_json}
 
 
 

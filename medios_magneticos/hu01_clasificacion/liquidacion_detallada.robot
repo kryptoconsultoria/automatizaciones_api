@@ -152,5 +152,5 @@ planillas
             ${completado}=    Set Variable    ${False}
        END
    END
-   [return]    ${completado}
+   RETURN    ${completado}
         

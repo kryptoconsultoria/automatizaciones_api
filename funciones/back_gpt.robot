@@ -27,7 +27,7 @@ Hacer Consulta a GPT
     Actualizar hilo      id_hilo=${id_hilo}    archivo_pdf=${archivo_pdf}
     ${Resultado}    Correr hilo    id_thread=${id_hilo}    assistant_id=${id_asistente}
     Log        Resultado de la consulta ${Resultado}
-    [return]     ${Resultado}
+    RETURN     ${Resultado}
 
 
 

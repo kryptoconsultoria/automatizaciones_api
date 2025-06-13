@@ -46,7 +46,7 @@ Encontrar Claves Con Término
             BREAK
         END
     END
-    [Return]    ${resultados}
+    RETURN    ${resultados}
     
 
 exportar_excel
@@ -74,16 +74,24 @@ exportar_excel
             ${resultados}=    Query    SELECT Formato FROM formato
 
             FOR    ${fila}    IN    @{resultados}
-                ${formato}    Set Variable    ${fila}[0]
-                ${columna_din}         Set Variable    ${columnas}[${formato}],${sumatorias}[${formato}]
-                ${primera_columna}    Split String    string=${columna_din}    separator=,
 
+                ${formato}    Set Variable    ${fila}[0]
+                ${valor_columna}    Get From Dictionary    ${columnas}    ${formato}
+                ${valor_sumatoria}  Get From Dictionary    ${sumatorias}  ${formato}
+                ${columna_din}      Set Variable           ${valor_columna},${valor_sumatoria}
+
+                ${columnas_lista}    Split String    string=${valor_columna}    separator=,
+
+                # Reemplazar la primera columna de la lista de columnas con el nombre de la columna tal cual aparece en el formato de la Dian
+                ${primera_columna}    Replace String    ${columnas_lista}[0]    search_for=TipoDoc    replace_with=Tipo de documento
+                    
                 Set Active Worksheet    ${formato}
 
                 # Leer toda la hoja activa como lista de filas (listas internas)
                 @{rows}=    Read Worksheet As Table    header=False    trim=${false}
 
-                @{posicion}    Encontrar Claves Con Término     @{rows}    termino=${primera_columna}[0]
+                # Encontrar la posición de la primera columna que contiene el término
+                @{posicion}    Encontrar Claves Con Término     @{rows}    termino=${primera_columna}
                 ${numero_fila}    Set Variable   ${posicion}[0][1]
                 ${numero_fila}    Evaluate    ${numero_fila}+2
                 ${columna}    Set Variable   ${posicion}[0][0]                
@@ -106,21 +114,7 @@ exportar_excel
             ${completado}=    Set Variable    ${False}
         END
     END
-    [return]    ${completado}
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
+    RETURN    ${completado}
 
 
 

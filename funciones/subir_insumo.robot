@@ -29,7 +29,7 @@ Ejecutar Carga Masiva desde CSV
      ${cadena_usuario}    Set Variable    ${EMPTY}
     
     IF    '${usuario_sistema}' != '${EMPTY}'
-        ${cadena_usuario}    Set Variable    SET  Usuario=${usuario_sistema};
+        ${cadena_usuario}    Set Variable    SET Usuario='${usuario_sistema}'
     END
     
     ${comando_sql}    Catenate     

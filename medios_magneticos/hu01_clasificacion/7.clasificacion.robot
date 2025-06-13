@@ -132,16 +132,16 @@ clasificacion
                 END
 
                 ${sql}    Catenate
-                ...    INSERT INTO ${formato} (${columna_din})
+                ...    INSERT INTO ${formato} (${columna_din},Usuario)
                 ...    WITH datos_agg AS (
                 ...    SELECT
                 ...    ${condicion_num_id}
-                ...    ${columna_din_2}
+                ...    ${columna_din_2},'${usuario}' as Usuario
                 ...    FROM balances a
                 ...    LEFT JOIN (SELECT c.IdTercero FROM exclusion_nits c INNER JOIN Formato k ON k.IdFormato = c.IdFormato 
                 ...    AND k.Formato   = '${formato}') ex  ON a.NumId = ex.IdTercero ${condicion_retenciones}
                 ...    WHERE a.Codigo LIKE '${cuenta_contable}%'
-                ...    AND ex.IdTercero IS NULL AND Usuario='${usuario}'
+                ...    AND ex.IdTercero IS NULL AND a.Usuario='${usuario}'
                 ...    GROUP BY ${columna_din3}
                 ...    ),
                 ...    datos_flag AS (
@@ -150,7 +150,7 @@ clasificacion
                 ...    OVER () AS cnt_no_vacios
                 ...    FROM datos_agg d
                 ...    )
-                ...    SELECT ${columna_din}
+                ...    SELECT ${columna_din},Usuario
                 ...    FROM datos_flag
                 ...    WHERE
                 ...    (cnt_no_vacios > 0 AND NumId IS NOT NULL AND NumId <> '')
@@ -181,7 +181,7 @@ clasificacion
             ...    WHERE (a.Codigo LIKE '2365%'
             ...    OR a.Codigo LIKE '6%' OR a.Codigo LIKE '5%')
             ...    AND b.Concepto != '0' 
-            ...    AND Usuario=${usuario}
+            ...    AND Usuario='${usuario}'
 
             Execute SQL String    ${sql}
 
@@ -193,9 +193,9 @@ clasificacion
                 ...    INSERT INTO formato_2276 (Codigo,EntidadInformante,TipoDoc,
                 ...    NumId,PrimerApellido,SegundoApellido,
                 ...    PrimerNombre,OtrosNombres
-                ...    Direccion,CodDpto,CodMcp,PaisResidencia) 
+                ...    Direccion,CodDpto,CodMcp,PaisResidencia,Usuario) 
                 ...    SELECT Codigo,'Informate general',TipoDoc,NumId,PrimerApellido,SegundoApellido,PrimerNombre,OtrosNombres
-                ...    Direccion,CodDpto,CodMcp,PaisResidencia 
+                ...    Direccion,CodDpto,CodMcp,PaisResidencia,'${usuario}' 
                 ...    FROM formato_1001 WHERE Codigo LIKE '2365%' AND TipoDoc = '13'
 
                 ${sql}    Catenate    
@@ -207,7 +207,7 @@ clasificacion
             ${sql}=    Catenate
             ...    INSERT INTO formato_1012 (Codigo,Concepto,TipoDoc,NumId,DV,RazonSocial,PaisResidencia,ValorAl3112,Usuario)
             ...    SELECT ANY_VALUE(Codigo),ANY_VALUE(Concepto),ANY_VALUE(TipoDoc),ANY_VALUE(c.NumId),ANY_VALUE(c.DV),
-            ...    ANY_VALUE(c.RazonSocial),ANY_VALUE(PaisResidencia),ABS(SUM(CAST(SaldoFinal AS SIGNED))),${usuario} 
+            ...    ANY_VALUE(c.RazonSocial),ANY_VALUE(PaisResidencia),ABS(SUM(CAST(SaldoFinal AS SIGNED))),'${usuario}'
             ...    FROM automatizaciones.balances a 
             ...    INNER JOIN puc b ON a.Codigo = b.CuentaContable
             ...    INNER JOIN cross_bancos c ON a.Codigo=c.Cuentas AND b.IdCliente=c.IdCliente
@@ -233,4 +233,4 @@ clasificacion
             ${completado}=    Set Variable    ${False}
         END
     END
-    [return]    ${completado}
+    RETURN    ${completado}
