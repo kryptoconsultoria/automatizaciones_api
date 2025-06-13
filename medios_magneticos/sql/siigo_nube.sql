@@ -142,7 +142,8 @@ SELECT
     IF(c.NumId IS NULL, b.CodMcp, IF(c.PaisResidencia = '169', c.CodMcp, NULL)) AS CodMcp,
     IF(c.NumId IS NULL, b.CodDpto, IF(c.PaisResidencia = '169', c.CodDpto, NULL)) AS CodDpto,
     IF(c.NumId IS NULL, b.Direccion, c.Direccion) AS Direccion,
-    IF(c.NumId IS NULL, b.PaisResidencia, c.PaisResidencia) AS PaisResidencia
+    IF(c.NumId IS NULL, b.PaisResidencia, c.PaisResidencia) AS PaisResidencia,
+    IF(c.NumId IS NULL, 'Rues', 'Terceros') AS Origen
 FROM 
     cross_terceros_siigo_nube_nacionales b
 LEFT JOIN
@@ -186,7 +187,8 @@ SELECT
     CAST(SaldoInicial AS FLOAT) AS SaldoInicial,
     CAST(Debito AS FLOAT) AS Debito,
     CAST(Credito AS FLOAT) AS Credito,
-    CAST(SaldoFinal AS FLOAT) AS SaldoFinal
+    CAST(SaldoFinal AS FLOAT) AS SaldoFinal,
+    b.Origen AS Origen
 FROM 
     balance_siigo_nube AS a
 LEFT JOIN 

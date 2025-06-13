@@ -106,7 +106,8 @@ SELECT
     IF(c.NumId IS NULL, b.CodMcp, IF(c.PaisResidencia = '169', c.CodMcp, NULL)) AS CodMcp,
     IF(c.NumId IS NULL, b.Departamento, c.Departamento) AS Departamento,
     IF(c.NumId IS NULL, b.Municipio, c.Municipio) AS Municipio,
-    IF(c.NumId IS NULL, b.PaisResidencia, c.PaisResidencia) AS PaisResidencia
+    IF(c.NumId IS NULL, b.PaisResidencia, c.PaisResidencia) AS PaisResidencia,
+    IF(c.NumId IS NULL, 'Rues', 'Terceros') AS Origen
 FROM 
     cross_terceros_siigo_pyme_nacionales b
 LEFT JOIN
@@ -159,7 +160,8 @@ SELECT
     CAST(Debito AS FLOAT) AS Debito,
     CAST(Credito AS FLOAT) AS Credito,
     CAST(NuevoSaldo AS FLOAT) AS SaldoFinal,
-    NULL
+    NULL,
+    b.Origen AS Origen
 FROM 
     balance_siigo_pyme AS a 
 LEFT JOIN 
