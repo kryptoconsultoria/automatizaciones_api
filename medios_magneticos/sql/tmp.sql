@@ -57,7 +57,7 @@ LEFT JOIN
 WHERE 
     d.IdMunicipio IS NOT NULL 
     AND d.IdDepartamento IS NOT NULL
-    AND  b.Usuario='felipe';
+    AND  b.Usuario='felop';
 
 
 ALTER TABLE cross_terceros_siigo_pyme_nacionales CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -91,7 +91,7 @@ WHERE
     d2.IdMunicipio IS NULL 
     AND d2.IdDepartamento IS NULL 
     AND (f2.idPais != '169' OR f2.idPais IS NULL)
-    AND  b2.Usuario='felipe';
+    AND  b2.Usuario='felop';
     
     
 DROP TEMPORARY TABLE IF EXISTS clean_terceros_siigo_pyme;
@@ -106,7 +106,8 @@ SELECT
     IF(c.NumId IS NULL, b.CodMcp, IF(c.PaisResidencia = '169', c.CodMcp, NULL)) AS CodMcp,
     IF(c.NumId IS NULL, b.Departamento, c.Departamento) AS Departamento,
     IF(c.NumId IS NULL, b.Municipio, c.Municipio) AS Municipio,
-    IF(c.NumId IS NULL, b.PaisResidencia, c.PaisResidencia) AS PaisResidencia
+    IF(c.NumId IS NULL, b.PaisResidencia, c.PaisResidencia) AS PaisResidencia,
+    IF(c.NumId IS NULL, 'Terceros', 'Rues') AS Origen
 FROM 
     cross_terceros_siigo_pyme_nacionales b
 LEFT JOIN
@@ -122,7 +123,8 @@ SELECT
     b.CodMcp,
     b.Departamento,
     b.Municipio,
-    b.PaisResidencia
+    b.PaisResidencia,
+    'Terceros'
 FROM 
     cross_terceros_siigo_pyme_internacionales b;
 
@@ -159,10 +161,11 @@ SELECT
     CAST(Debito AS FLOAT) AS Debito,
     CAST(Credito AS FLOAT) AS Credito,
     CAST(NuevoSaldo AS FLOAT) AS SaldoFinal,
-    NULL
+    NULL,
+    b.Origen AS Origen
 FROM 
     balance_siigo_pyme AS a 
 LEFT JOIN 
     clean_terceros_siigo_pyme AS b ON TRIM(a.Nit) = TRIM(b.NumId)
 WHERE
-    a.Usuario='felipe';
+    a.Usuario='felop';

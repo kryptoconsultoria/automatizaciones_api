@@ -158,7 +158,8 @@ SELECT
     d.CodMcp AS CodMcp,
     d.CodDpto AS CodDpto,
     d.Direccion AS Direccion,
-    d.PaisResidencia AS PaisResidencia
+    d.PaisResidencia AS PaisResidencia,
+    'Terceros' AS Origen
 FROM 
     cross_terceros_siigo_nube_internacionales d;
 

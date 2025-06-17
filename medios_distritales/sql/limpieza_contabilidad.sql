@@ -1,0 +1,26 @@
+TRUNCATE TABLE balance_aliaddo;
+TRUNCATE TABLE balance_allegra;
+TRUNCATE TABLE balance_avansys;
+TRUNCATE TABLE balance_siigo_nube;
+TRUNCATE TABLE balance_siigo_pyme;
+TRUNCATE TABLE balances;
+TRUNCATE TABLE ciudades_siigo_nube;
+TRUNCATE TABLE formato_1001;
+TRUNCATE TABLE formato_1003;
+TRUNCATE TABLE formato_1005;
+TRUNCATE TABLE formato_1006;
+TRUNCATE TABLE formato_1007;
+TRUNCATE TABLE formato_1008;
+TRUNCATE TABLE formato_1009;
+TRUNCATE TABLE formato_1010;
+TRUNCATE TABLE formato_1011;
+TRUNCATE TABLE formato_1012;
+TRUNCATE TABLE formato_1647;
+TRUNCATE TABLE formato_2275;
+TRUNCATE TABLE formato_2276;
+
+TRUNCATE TABLE terceros_aliaddo;
+TRUNCATE TABLE terceros_allegra;
+TRUNCATE TABLE terceros_avansys;
+TRUNCATE TABLE terceros_siigo_nube;
+TRUNCATE TABLE terceros_siigo_pyme;

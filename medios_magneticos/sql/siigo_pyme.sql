@@ -107,7 +107,7 @@ SELECT
     IF(c.NumId IS NULL, b.Departamento, c.Departamento) AS Departamento,
     IF(c.NumId IS NULL, b.Municipio, c.Municipio) AS Municipio,
     IF(c.NumId IS NULL, b.PaisResidencia, c.PaisResidencia) AS PaisResidencia,
-    IF(c.NumId IS NULL, 'Rues', 'Terceros') AS Origen
+    IF(c.NumId IS NULL, 'Terceros', 'Rues') AS Origen
 FROM 
     cross_terceros_siigo_pyme_nacionales b
 LEFT JOIN
@@ -123,7 +123,8 @@ SELECT
     b.CodMcp,
     b.Departamento,
     b.Municipio,
-    b.PaisResidencia
+    b.PaisResidencia,
+    'Terceros'
 FROM 
     cross_terceros_siigo_pyme_internacionales b;
 

@@ -40,3 +40,11 @@ Leer PDF Plumber
     Log      ${contenido}        level=DEBUG 
     Cerrar PDF
     RETURN    ${contenido}
+
+Extraer Tablas
+    [Arguments]     ${archivo_pdf}      ${pagina}    ${tabla} 
+    Abrir PDF   ${archivo_pdf}
+    ${contenido}    Extraer Tablas    archivo_pdf=${archivo_pdf}    pagina=${pagina}    tabla=${tabla}
+    Log      ${contenido}        level=DEBUG 
+    Cerrar PDF
+    RETURN    ${contenido}

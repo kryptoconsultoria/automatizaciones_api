@@ -4,22 +4,7 @@ Library           Collections
 Library           OperatingSystem
 Library           RPA.FileSystem
 Library           String
-Resource          hu01_clasificacion/1.actualizacion_insumos_admin.robot
-Resource          hu01_clasificacion/2.actualizacion_insumos_contabilidad.robot
-Resource          hu01_clasificacion/3.limpiar_puc.robot
-Resource          hu01_clasificacion/4.procesar.robot
-Resource          hu01_clasificacion/5.arreglar_nombres.robot
-Resource          hu01_clasificacion/6.direcciones.robot
-Resource          hu01_clasificacion/7.clasificacion.robot
-Resource          hu01_clasificacion/8.exportar_excel.robot
-Resource          hu01_clasificacion/9.1003.robot
-Resource          hu01_clasificacion/10.agrupacion.robot
-Resource          hu01_clasificacion/12.limpiar_ceros.robot
-Resource          hu01_clasificacion/13.cuantias_menores.robot
-Resource          hu01_clasificacion/14.1010.robot
-Resource          hu01_clasificacion/15.2276.robot
-Resource          hu01_clasificacion/16.exportar_excel_final.robot
-Resource          hu01_clasificacion/17.subir_archivos.robot
+
 
 *** Keywords ***
 Ordenar Archivos Por Prefijo Numérico

@@ -104,12 +104,16 @@ class LibreriaPDF:
             pagina = self.pdf.pages[numero_pagina]
             # pagina = self.__recortar_pagina(pagina)  # Uncomment if cropping is needed
 
-            configuracion_tabla = {}
+            configuracion_tabla = {
+                "vertical_strategy": "text",
+                "horizontal_strategy": "text"
+            }
 
             tablas = pagina.extract_tables(configuracion_tabla)
             if tablas and numero_tabla < len(tablas):
                 df = pd.DataFrame(tablas[numero_tabla][1:], columns=tablas[numero_tabla][0])
-                return df.to_dict(orient='list')
+                # Exportar a CSV
+                df.to_csv("tabla_exportada.csv", index=False, encoding='utf-8-sig')  # nombre del archivo y sin índice
             return f"No se encontró la tabla número {numero_tabla} en la página {numero_pagina + 1}."
         return f"El número de página {numero_pagina + 1} está fuera del rango del documento."
     
@@ -120,7 +124,7 @@ if __name__ == "__main__":
     # Ejemplo de uso independiente (para pruebas)
     libreria = LibreriaPDF()
     
-    ruta_pdf = "C:\\Users\\Krypto\\Downloads\\2024_1012318246 (2).pdf"
+    ruta_pdf = "C:\\Users\\Krypto\\PycharmProjects\\automatizaciones_api\\medios_distritales\\insumos\\Rete_ICA\\4. Kconsultoria rte ica presentado IV Bim 2023.pdf"
     
     print("Testing 'Abrir PDF':")
     print(libreria.abrir_pdf(ruta_pdf))
@@ -132,10 +136,11 @@ if __name__ == "__main__":
     print("\nTesting 'Extraer Texto' en la página 1:")
     print(libreria.extraer_texto(0))
 
-    libreria.cerrar_pdf()
+    #print("\nTesting 'Extraer Tablas' en la página 1:")
+    #print(libreria.extraer_tablas(0, 0))
 
-    # print("\nTesting 'Extraer Tablas' en la página 1:")
-    # print(libreria.extraer_tablas(0, 0))
 
     # print("\nTesting 'Cerrar PDF':")
     # print(libreria.cerrar_pdf())
+
+    libreria.cerrar_pdf()

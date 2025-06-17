@@ -97,7 +97,7 @@ completar_informacion
             #         Execute SQL String    ${sql}    
             #     END
             # END
-            # Disconnect From Database
+            Disconnect From Database
             ${completado}    Set Variable    ${True}
         EXCEPT     AS    ${error}
             Disconnect From Database

@@ -61,11 +61,3 @@
     cabeceras: 2
     indice_columna: "N/A"
 
-  exogena:
-    ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/07 Medios Magnéticos/insumos/puc_exogena/"
-    ruta_carpeta: "C:/Users/Krypto/PycharmProjects/automatizaciones_api/medios_magneticos/insumos/puc_exogena/"
-    nombre_tabla: "puc"
-    nombre_hoja: "PUC"
-    columnas: "CuentaContable,Descripcion,Formato,Concepto,Columna,IdFormula,NitReporta,IdCliente"
-    cabeceras: 2
-    indice_columna: "N/A" 

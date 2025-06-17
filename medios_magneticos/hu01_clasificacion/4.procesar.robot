@@ -69,11 +69,11 @@ procesar
 
             ${sql}=    Catenate
             ...    INSERT INTO Balances 
-            ...    (Codigo,TipoDoc,NumId,DV,Direccion,CodDpto,CodMcp,Departamento,Municipio,PaisResidencia,PrimerApellido,SegundoApellido,PrimerNombre,OtrosNombres,RazonSocial,SaldoInicial,Debito,Credito,SaldoFinal,EncontradoDIAN,Usuario)
+            ...    (Codigo,TipoDoc,NumId,DV,Direccion,CodDpto,CodMcp,Departamento,Municipio,PaisResidencia,PrimerApellido,SegundoApellido,PrimerNombre,OtrosNombres,RazonSocial,SaldoInicial,Debito,Credito,SaldoFinal,EncontradoDIAN,Usuario,Origen)
             ...    SELECT Codigo,TipoDoc,NumId,DV,
             ...    UPPER(Direccion),CodDpto,CodMcp,UPPER(Departamento),UPPER(Municipio),UPPER(PaisResidencia),
             ...    UPPER(PrimerApellido),UPPER(SegundoApellido),UPPER(PrimerNombre),UPPER(OtrosNombres),
-            ...    UPPER(RazonSocial),UPPER(SaldoInicial),Debito,Credito,SaldoFinal,NULL,'${usuario}' FROM intermedio;
+            ...    UPPER(RazonSocial),UPPER(SaldoInicial),Debito,Credito,SaldoFinal,NULL,'${usuario}',Origen FROM intermedio;
 
             Execute Sql String    ${sql}
 

@@ -161,6 +161,8 @@ resumen_pagos_en_linea
                             Execute SQL String    ${sql}      
                         END
                     END
+                ELSE    
+
                 END
             END
             ${completado}=    Set Variable    ${True}
