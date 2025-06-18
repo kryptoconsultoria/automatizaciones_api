@@ -1,34 +1,32 @@
-# 1. Etapa de build: instalar dependencias y ejecutar tests
+# Etapa 1: Build con tests RPA
 FROM python:3.12-slim AS build
 
 WORKDIR /app
 
-# Copia dependencias y optimiza cache de Docker
+# Copia de dependencias y preparación del entorno
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copia el código y los tests RPA
-COPY app/ app/
-COPY tests/ tests/
+# Instalación de RobotFramework y RPA Framework
+RUN pip install robotframework rpaframework>=29.0.0
 
-# Ejecuta tests RobotFramework
-RUN pip install robotframework
+# Ejecución de tests RPA durante el build
 RUN robot --outputdir robot-results tests/
 
-# 2. Etapa de producción: imagen limpia solo con runtime
+# Etapa 2: Imagen de producción ligera
 FROM python:3.12-slim AS runtime
 
 WORKDIR /app
 
-# Copia solo lo esencial
+# Copia únicamente el código de la app
 COPY --from=build /app/app/ app/
-COPY --from=build /app/requirements.txt .
+COPY requirements.txt .
 
-# Instala solo dependencias necesarias (sin robot ni herramientas de build)
+# Instalación de dependencias necesarias (sin herramientas de test)
 RUN pip install --no-cache-dir -r requirements.txt
 
-ENV PORT=8000
-EXPOSE 8000
+EXPOSE 82
+ENV PORT=82
 
-# Comando final para ejecutar tu app
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Comando final para arrancar FastAPI
+CMD ["uvicorn", "app.main:app", "--host", "host.docker.internal", "--port", "82"]
