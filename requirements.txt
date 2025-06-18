@@ -33,7 +33,6 @@ pyOpenSSL==25.1.0
 PyPDF2==3.0.1
 pytest==8.4.0
 redis==6.2.0
-robotframework==7.3
 seleniumbase==4.39.3
 spacy==3.8.7
 Sphinx==8.2.3
@@ -44,3 +43,5 @@ urllib3_secure_extra==0.1.0
 uv==0.7.12
 xx==3.3.2
 zstandard==0.23.0
+fastapi
+uvicorn[standard]

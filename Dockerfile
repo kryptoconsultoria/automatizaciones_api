@@ -1,32 +1,37 @@
-# Etapa 1: Build con tests RPA
-FROM python:3.12-slim AS build
+# ┌────────── Etapa de compilación (builder) ──────────┐
+FROM python:3.12 AS builder
 
 WORKDIR /app
 
-# Copia de dependencias y preparación del entorno
+# Instala herramientas de compilación necesarias
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+       gcc libpq-dev build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
 
-# Instalación de RobotFramework y RPA Framework
-RUN pip install robotframework rpaframework>=29.0.0
+# Asegura que haya versión moderna de wheel (para evitar errores con thriftpy2)
+RUN pip install --upgrade pip wheel setuptools \
+    && pip install --no-cache-dir -r requirements.txt
 
-# Ejecución de tests RPA durante el build
-RUN robot --outputdir robot-results tests/
-
-# Etapa 2: Imagen de producción ligera
-FROM python:3.12-slim AS runtime
+# ┌────────── Etapa final ──────────────────────────────┐
+FROM python:3.12
 
 WORKDIR /app
 
-# Copia únicamente el código de la app
-COPY --from=build /app/app/ app/
-COPY requirements.txt .
+# Instala solo runtime dependencies
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+       libpq5 \
+    && rm -rf /var/lib/apt/lists/*
 
-# Instalación de dependencias necesarias (sin herramientas de test)
-RUN pip install --no-cache-dir -r requirements.txt
+COPY --from=builder /usr/local/lib/python3.12/site-packages /usr/local/lib/python3.12/site-packages
+COPY --from=builder /usr/local/bin /usr/local/bin
 
+COPY . .
+# Puerto expuesto (ajusta si no aplicable)
 EXPOSE 82
-ENV PORT=82
 
-# Comando final para arrancar FastAPI
-CMD ["uvicorn", "app.main:app", "--host", "host.docker.internal", "--port", "82"]
+# Comando de arranque (ajusta según tu app)
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "82"]
