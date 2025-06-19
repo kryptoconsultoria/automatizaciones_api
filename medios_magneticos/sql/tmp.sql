@@ -57,7 +57,7 @@ LEFT JOIN
 WHERE 
     d.IdMunicipio IS NOT NULL 
     AND d.IdDepartamento IS NOT NULL
-    AND  b.Usuario='felop';
+    AND  b.Usuario='felipe';
 
 
 ALTER TABLE cross_terceros_siigo_pyme_nacionales CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -91,7 +91,7 @@ WHERE
     d2.IdMunicipio IS NULL 
     AND d2.IdDepartamento IS NULL 
     AND (f2.idPais != '169' OR f2.idPais IS NULL)
-    AND  b2.Usuario='felop';
+    AND  b2.Usuario='felipe';
     
     
 DROP TEMPORARY TABLE IF EXISTS clean_terceros_siigo_pyme;
@@ -168,4 +168,4 @@ FROM
 LEFT JOIN 
     clean_terceros_siigo_pyme AS b ON TRIM(a.Nit) = TRIM(b.NumId)
 WHERE
-    a.Usuario='felop';
+    a.Usuario='felipe';
