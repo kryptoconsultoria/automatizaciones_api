@@ -87,8 +87,8 @@ actualizacion_insumos_contabilidad
                         ${extension}=    Get From List    ${lista}    1
 
                         # Construir rutas de archivo
-                        ${archivo_csv}=     Set Variable    ${ruta_cliente}${nombre_base}.csv
-                        ${archivo_excel}=   Set Variable    ${ruta_cliente}${nombre_base}.${extension}
+                        ${archivo_csv}=     Set Variable    ${CURDIR}/../${ruta_cliente}${nombre_base}.csv
+                        ${archivo_excel}=   Set Variable    ${CURDIR}/../${ruta_cliente}${nombre_base}.${extension}
 
                         # Determinar acción según la extensión
                         IF    '${extension}' == 'xlsx' or '${extension}' == 'xls'
@@ -116,5 +116,5 @@ actualizacion_insumos_contabilidad
             ${completado}=    Set Variable    ${False}
         END
     END
-    Return From Keyword    ${completado}    ${error}    
+    RETURN   ${completado}    ${error}    
     

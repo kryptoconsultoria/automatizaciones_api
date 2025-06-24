@@ -2,9 +2,10 @@
 Library     SeleniumLibrary
 Library     RPA.Tasks
 Library     Collections
-Library     OperatingSystem
 Library     RPA.FileSystem
+Library     RPA.JSON
 Resource    hu01_clasificacion.robot
+
 
 *** Variables ***
 ${CONFIG_FILE}    ${CURDIR}/config.yaml
@@ -14,7 +15,7 @@ ${USUARIO}    admin
 
 *** Tasks ***
 Medios magneticos
-    [Documentation]    Clasifica formatos de la Dian y saca medios magneticos
+    [Documentation]    Clasifica formatos ICA y reteica Impuesto distritales
     # Leer y cargar la configuración desde el archivo YAML
     ${yaml_content}=    Read File    ${config_file}
     ${yaml_content_pdf}=    Read File    ${config_file_pdf}
@@ -25,4 +26,15 @@ Medios magneticos
     Set To Dictionary    ${config['credenciales']}    cliente      ${CLIENTE}                        
     Set To Dictionary    ${config['credenciales']}    usuario      ${USUARIO}
 
-    HU01 Clasificacion    ${config}     ${config_pdf}
+    &{respuesta}    HU01 Clasificacion    ${config}     ${config_pdf}
+
+    ${respuesta_json}=      Convert JSON to string    ${respuesta}
+
+    ${ruta_json}    Set Variable    ${CURDIR}/../medios_distritales/salida.json
+    ${json_existe}    Does file exist      ${ruta_json}
+    
+    IF    ${json_existe}
+        RPA.FileSystem.Remove File    ${ruta_json}
+    END
+
+    RPA.FileSystem.Create File    ${ruta_json}    content=${respuesta_json}

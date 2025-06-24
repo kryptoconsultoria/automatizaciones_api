@@ -47,7 +47,7 @@ ${REGEX_EXP_NIT}  \\b\\d{2}\\s\\d{5,}\\b
             # Iterar sobre cada ruta en rutas_locales
             #==================================================================================
             # validar si la ruta contiene la palabra insumos si la contiene solo sube el excel asociado con el cliente
-            ${carpeta_2276}    Replace String    ${pdf_2276["ruta_carpeta"]}    search_for=CLIENTE    replace_with=${cliente}
+            ${carpeta_2276}    Replace String    ${CURDIR}/../${pdf_2276["ruta_carpeta"]}    search_for=CLIENTE    replace_with=${cliente}
             ${ruta_nube}    Replace String    ${pdf_2276["ruta_nube"]}    CLIENTE   ${cliente}
 
             #Borrar archivos de cada carpeta

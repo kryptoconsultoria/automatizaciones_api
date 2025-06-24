@@ -61,7 +61,7 @@ ${REGEX_PORCENTAJE}      (?:(?:[0-9]{1,2}(?:[.,]\\d+)?|100(?:[.,]0+)?))%
 
          #==================================================================================
          # validar si la ruta contiene la palabra insumos si la contiene solo sube el excel asociado con el cliente
-         ${carpeta_1010}    Replace String    ${pdf_1010["ruta_carpeta"]}    search_for=CLIENTE    replace_with=${cliente}
+         ${carpeta_1010}    Replace String    ${CURDIR}/../${pdf_1010["ruta_carpeta"]}    search_for=CLIENTE    replace_with=${cliente}
          ${ruta_nube}    Replace String    ${pdf_1010["ruta_nube"]}    CLIENTE   ${cliente}
 
          #Borrar archivos de cada carpeta

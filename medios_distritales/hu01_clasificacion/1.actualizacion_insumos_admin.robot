@@ -69,6 +69,7 @@ actualizacion_insumos_admin
                     BREAK
                 END
                 #==================================================================================
+        
                 ${archivos}=    RPA.FileSystem.List files in directory    ${ruta["ruta_carpeta"]}
                     
                 FOR    ${archivo}    IN    @{archivos}
@@ -81,8 +82,8 @@ actualizacion_insumos_admin
                     ${extension}=    Get From List    ${lista}    1
 
                     # Construir rutas de archivo
-                    ${archivo_csv}=     Set Variable    ${CURDIR}/../${ruta["ruta_carpeta"]}${nombre_base}.csv
-                    ${archivo_excel}=   Set Variable    ${CURDIR}/../${ruta["ruta_carpeta"]}${nombre_base}.${extension}
+                    ${archivo_csv}=     Set Variable    ${ruta["ruta_carpeta"]}${nombre_base}.csv
+                    ${archivo_excel}=   Set Variable    ${ruta["ruta_carpeta"]}${nombre_base}.${extension}
                     # Determinar acción según la extensión
                     IF    '${extension}' == 'xlsx' or '${extension}' == 'xls'
                         Convertir Archivo CSV    ${archivo_excel}    ${ruta["nombre_hoja"]}    ${archivo_csv}

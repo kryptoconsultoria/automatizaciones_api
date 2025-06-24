@@ -48,7 +48,7 @@ Resource          ../funciones/descargar_onedrive.robot
             # Iterar sobre cada ruta en rutas_locales
             #==================================================================================
             # validar si la ruta contiene la palabra insumos si la contiene solo sube el excel asociado con el cliente
-            ${carpeta_1003}    Replace String    ${pdf_1003["ruta_carpeta"]}    search_for=CLIENTE    replace_with=${cliente}
+            ${carpeta_1003}    Replace String    ${CURDIR}/../${pdf_1003["ruta_carpeta"]}    search_for=CLIENTE    replace_with=${cliente}
             ${ruta_nube}    Replace String    ${pdf_1003["ruta_nube"]}    CLIENTE   ${cliente}
 
             #Borrar archivos de cada carpeta

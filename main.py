@@ -10,12 +10,12 @@ import ast,json
 
 app = FastAPI()
 
-class RunMediosMagneticos(BaseModel):
+class RunMedios(BaseModel):
     cliente: str
     usuario: str
 
 @app.post("/medios_magneticos")
-async def medios_magneticos(req: RunMediosMagneticos):
+async def medios_magneticos(req: RunMedios):
     #sys.stdout = open(os.devnull, 'w')
     #sys.stderr = open(os.devnull, 'w')
     #logging.disable(logging.CRITICAL)
@@ -60,4 +60,6 @@ async def medios_magneticos(req: RunMediosMagneticos):
             "ErrorDetalle": 'No se generó archivo JSON'
         }
 
-
+@app.post("/medios_magneticos")
+async def medios_distrateles(req: RunMedios):
+    pass

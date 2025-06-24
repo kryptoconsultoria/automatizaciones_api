@@ -92,12 +92,7 @@ actualizacion_insumos_contabilidad
 
                         # Determinar acción según la extensión
                         IF    '${extension}' == 'xlsx' or '${extension}' == 'xls'
-                            IF    '${ruta["nombre_tabla"]}' == 'balance_siigo_pyme'
-                                #Completar valores nulos para insumos siigo pyme
-                                Completar Valores Nulos    ${archivo_excel}    ${archivo_csv}    ${ruta["nombre_hoja"]}    ${ruta["indice_columna"]}
-                            ELSE
-                                Convertir Archivo CSV    ${archivo_excel}    ${ruta["nombre_hoja"]}    ${archivo_csv}
-                            END
+                            Convertir Archivo CSV    ${archivo_excel}    ${ruta["nombre_hoja"]}    ${archivo_csv}
                         ELSE
                             Guardar CSV en UTF-8    ${archivo_csv}    ${archivo_csv}
                         END
@@ -108,12 +103,13 @@ actualizacion_insumos_contabilidad
                     END
                 END
             END
-            ${completado}=    Set Variable    ${True}
+            ${completado}    Set Variable    ${True}
+            ${error}    Set Variable    ${None}
             BREAK
         EXCEPT     AS    ${error}
             Disconnect From Database
             ${completado}=    Set Variable    ${False}
         END
     END
-    Return From Keyword    ${completado}
+    RETURN      ${completado}    ${error}
     

@@ -5,7 +5,7 @@ rutas_pdf:
 
   pdf_2276:
     ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/07 Medios Magnéticos/insumos/pdf_2276/CLIENTE/"
-    ruta_carpeta: "C:/Users/Krypto/PycharmProjects/automatizaciones_api/medios_magneticos/insumos/pdf_2276/CLIENTE/"
+    ruta_carpeta: "medios_magneticos/insumos/pdf_2276/CLIENTE/"
     documento: 0
     salarios: 0
     bonosServ: 1
@@ -61,11 +61,11 @@ rutas_pdf:
 
   pdf_1010:
     ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/07 Medios Magnéticos/insumos/pdf_1010/CLIENTE/"
-    ruta_carpeta: "C:/Users/Krypto/PycharmProjects/automatizaciones_api/medios_magneticos/insumos/pdf_1010/CLIENTE/"
+    ruta_carpeta: "medios_magneticos/insumos/pdf_1010/CLIENTE/"
 
   pdf_1003:
     ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/07 Medios Magnéticos/insumos/pdf_1003/CLIENTE/"
-    ruta_carpeta: "C:/Users/Krypto/PycharmProjects/automatizaciones_api/medios_magneticos/insumos/pdf_1003/CLIENTE/"
+    ruta_carpeta: "medios_magneticos/insumos/pdf_1003/CLIENTE/"
     prompt: >
       You are an excellent Colombian accountant with high capabilities of system programming responsible for preparing the magnetic media to present information to the DIAN.
       You need to review PDF files containing third-party information related to withholding tax, which must be reported in the DIAN's required format 1003 for the presentation of magnetic media.
