@@ -31,7 +31,7 @@ COPY --from=builder /usr/local/bin /usr/local/bin
 
 COPY . .
 # Puerto expuesto (ajusta si no aplicable)
-EXPOSE 23
+EXPOSE 82
 
 # Comando de arranque
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "82"]
