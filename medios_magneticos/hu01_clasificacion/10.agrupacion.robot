@@ -167,6 +167,7 @@ agrupacion
             Execute SQL String    ${sql}
 
             ${completado}    Set Variable    ${True}
+            ${error}    Set Variable     ${None}
             Disconnect From Database
             BREAK
         EXCEPT     AS    ${error}
@@ -174,5 +175,5 @@ agrupacion
             ${completado}    Set Variable    ${False}
         END
     END
-    RETURN    ${completado}
+    RETURN    ${completado}    ${error}
     

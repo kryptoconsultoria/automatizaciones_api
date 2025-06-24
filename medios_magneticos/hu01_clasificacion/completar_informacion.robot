@@ -99,6 +99,8 @@ completar_informacion
             # END
             Disconnect From Database
             ${completado}    Set Variable    ${True}
+            ${error}    Set Variable     ${None}
+            BREAK
         EXCEPT     AS    ${error}
             Disconnect From Database
             ${completado}    Set Variable    ${False}

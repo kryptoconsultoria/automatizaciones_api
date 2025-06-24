@@ -65,13 +65,14 @@ Limpiar ceros
 
                 Execute SQL String    ${sql}    
             END
-            ${completado}=    Set Variable    ${True}
+            ${completado}    Set Variable    ${True}
+            ${error}    Set Variable     ${None}           
             Disconnect From Database
         EXCEPT     AS    ${error}
             ${completado}=    Set Variable    ${False}
         END
     END
-    RETURN    ${completado}
+    RETURN    ${completado}    ${error}
 
 
 

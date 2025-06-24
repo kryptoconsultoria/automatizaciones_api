@@ -31,7 +31,7 @@ actualizacion_insumos_admin
             ${sharepoint}   Get From Dictionary   ${parametros['config_file']['credenciales']}   sharepoint
 
             #Conexion a sharepoint 
-            ${token_refresco}    Get File    path=${CURDIR}/../logs/token.txt    encoding=UTF-8
+            ${token_refresco}    Get File    path=${CURDIR}/../token.txt    encoding=UTF-8
 
             #Limpieza
             Connect To Database    pymysql    ${bd_config["nombre_bd"]}    ${bd_config["usuario"]}    ${bd_config["contrasena"]}    ${bd_config["servidor"]}    ${bd_config["puerto"]}
@@ -98,11 +98,12 @@ actualizacion_insumos_admin
                     OperatingSystem.Remove File    ${archivo_csv}
                 END
             END
-            ${completado}=    Set Variable    ${True}
+            ${completado}    Set Variable    ${True}
+            ${error}    Set Variable     ${None}
             BREAK
         EXCEPT     AS    ${error}
             ${completado}=    Set Variable    ${False}
         END
     END
-    RETURN    ${completado}
+    RETURN    ${completado}    ${error}
     

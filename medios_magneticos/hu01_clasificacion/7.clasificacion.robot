@@ -226,6 +226,7 @@ clasificacion
             Execute SQL String    ${sql}
 
             ${completado}=    Set Variable    ${True}
+            ${error}    Set Variable     ${None}
             Disconnect From Database
 
         EXCEPT     AS    ${error}
@@ -233,4 +234,4 @@ clasificacion
             ${completado}=    Set Variable    ${False}
         END
     END
-    RETURN    ${completado}
+    RETURN    ${completado}    ${error}

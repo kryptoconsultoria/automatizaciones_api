@@ -128,14 +128,15 @@ cuantias_menores
                 ${sql}    Set Variable        DROP TEMPORARY TABLE IF EXISTS cuantias_menores_temp
                 Execute SQL String    ${sql}
             END
-            ${completado}=    Set Variable    ${True}
+            ${completado}    Set Variable    ${True}
+            ${error}    Set Variable     ${None} 
             Disconnect From Database
         EXCEPT     AS    ${error}
             Disconnect From Database
             ${completado}=    Set Variable    ${False}
         END
     END
-    RETURN    ${completado}
+    RETURN    ${completado}    ${error}
 
 
 

@@ -7,6 +7,7 @@ Library           String
 Resource          ../funciones/leer_pdf.robot
 Resource          ../funciones/completar_informacion_dian.robot
 Resource          ../funciones/descargar_onedrive.robot
+Resource          ../funciones/arreglar_nombres.robot
 
 
 *** Variables ***
@@ -45,7 +46,7 @@ ${REGEX_PORCENTAJE}      (?:(?:[0-9]{1,2}(?:[.,]\\d+)?|100(?:[.,]0+)?))%
          ${cliente}=   Get From Dictionary   ${parametros['config_file']['credenciales']}   cliente
 
          #Conexion a sharepoint
-         ${token_refresco}    Get File    path=${CURDIR}/../logs/token.txt    encoding=UTF-8
+         ${token_refresco}    Get File    path=${CURDIR}/../token.txt    encoding=UTF-8
 
          # Conectar a la base de datos
          Connect To Database    pymysql    ${bd_config["nombre_bd"]}    ${bd_config["usuario"]}    ${bd_config["contrasena"]}    ${bd_config["servidor"]}    ${bd_config["puerto"]}
@@ -145,6 +146,9 @@ ${REGEX_PORCENTAJE}      (?:(?:[0-9]{1,2}(?:[.,]\\d+)?|100(?:[.,]0+)?))%
 
                      ${NumIdSocio}               Set Variable    ${matches_numeros}[${item_par}]
                      ${NumIdSocio}=    Replace String      ${NumIdSocio}     .    ${EMPTY}   
+                     
+                     #${primer_nombre}    ${segundo_nombre}    ${primer_apellido}    ${segundo_apellido}    ${validar_nombre}    Arreglar nombres apellidos    ${razon_social}
+                     
                      ${datos}    ${completado}=     Consulta DIAN     ${NumIdSocio}
                      
                      IF    $datos is not None    
@@ -153,7 +157,6 @@ ${REGEX_PORCENTAJE}      (?:(?:[0-9]{1,2}(?:[.,]\\d+)?|100(?:[.,]0+)?))%
                         ${SegundoApellido}          Set Variable    ${datos[3]}
                         ${PrimerNombreSocio}        Set Variable    ${datos[4]}
                         ${OtrosNombresSocio}        Set Variable    ${datos[5]}
-
                      ELSE
                         ${DV}                       Set Variable    ${EMPTY}
                         ${PrimerApellido}           Set Variable    ${EMPTY}
@@ -218,11 +221,12 @@ ${REGEX_PORCENTAJE}      (?:(?:[0-9]{1,2}(?:[.,]\\d+)?|100(?:[.,]0+)?))%
          # Desconectar de la base de datos
          Disconnect From Database
          ${completado}=    Set Variable    ${True}
+         ${error}    Set Variable     ${None} 
          BREAK
       EXCEPT      AS    ${error}
          Disconnect From Database
          ${completado}=    Set Variable    ${False}
       END
    END
-   RETURN    ${completado}
+   RETURN    ${completado}    ${error}
         

@@ -3,12 +3,12 @@ from pydantic import BaseModel
 from datetime import datetime
 import subprocess
 import os
+import sys
+import logging
+import ast,json
 
-app = FastAPI(
-    title="Automatizaciones API",
-    description="API para ejecutar robots en robot Framework.",
-    version="1.0.0"
-)
+
+app = FastAPI()
 
 class RunMediosMagneticos(BaseModel):
     cliente: str
@@ -16,20 +16,19 @@ class RunMediosMagneticos(BaseModel):
 
 @app.post("/medios_magneticos")
 async def medios_magneticos(req: RunMediosMagneticos):
-    """
-    Ejecuta de manera asincrónica el flujo de medios magneticos y retorna el resultado.
+    #sys.stdout = open(os.devnull, 'w')
+    #sys.stderr = open(os.devnull, 'w')
+    #logging.disable(logging.CRITICAL)
 
-    - **cliente**: Nombre del cliente.
-    - **usuario**: Nombre del usuario.
-    """
     date_str = datetime.now().strftime("%Y-%m-%d_%H_%M_%S")
     output_dir = f"medios_magneticos/logs/{date_str}/"
-
-    # Crear el directorio de salida si no existe
     os.makedirs(output_dir, exist_ok=True)
 
-    # Ejecutar el archivo .robot pasando las variables desde la solicitud
-    result = subprocess.run([
+    # rutas resultado salida json 
+    salida_json = os.path.join("medios_magneticos", f"salida.json")
+
+    # Comando para ejecutar el robot
+    command = [
         "robot",
         "--outputdir", output_dir,
         "--output", "output.xml",
@@ -37,11 +36,28 @@ async def medios_magneticos(req: RunMediosMagneticos):
         "--report", "report.html",
         "--variable", f"CLIENTE:{req.cliente}",
         "--variable", f"USUARIO:{req.usuario}",
+        "--console", "none",
         "medios_magneticos/main.robot"
-    ], capture_output=True, text=True)
+    ]
 
-    return {
-        "stdout": result.stdout,
-        "stderr": result.stderr,
-        "returncode": result.returncode
-    }
+    # Ejecutar de forma no bloqueante
+    subprocess.run(command)
+
+    if os.path.exists(salida_json):
+        with open(salida_json, "r", encoding="utf-8") as f:
+            datos = json.load(f)
+        return {
+            "Tarea": datos['tarea'],
+            "HistoriaUsuario": datos['hu'],
+            "Estado": datos['estado'],
+            "ErrorDetalle": datos['error_detalle']
+        }
+    else:
+        return {
+            "Tarea": '',
+            "HistoriaUsuario": '',
+            "Estado": 'Error',
+            "ErrorDetalle": 'No se generó archivo JSON'
+        }
+
+

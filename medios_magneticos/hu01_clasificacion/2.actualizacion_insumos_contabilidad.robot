@@ -32,7 +32,7 @@ actualizacion_insumos_contabilidad
             ${usuario}   Get From Dictionary   ${parametros['config_file']['credenciales']}   usuario
 
             #Conexion a sharepoint 
-            ${token_refresco}    Get File    path=${CURDIR}/../logs/token.txt    encoding=UTF-8
+            ${token_refresco}    Get File    path=${CURDIR}/../token.txt    encoding=UTF-8
 
             #Limpieza
             Connect To Database    pymysql    ${bd_config["nombre_bd"]}    ${bd_config["usuario"]}    ${bd_config["contrasena"]}    ${bd_config["servidor"]}    ${bd_config["puerto"]}
@@ -109,11 +109,12 @@ actualizacion_insumos_contabilidad
                 END
             END
             ${completado}=    Set Variable    ${True}
+            ${error}    Set Variable     ${None}
             BREAK
         EXCEPT     AS    ${error}
             Disconnect From Database
             ${completado}=    Set Variable    ${False}
         END
     END
-    Return From Keyword    ${completado}
+    Return From Keyword    ${completado}    ${error}    
     

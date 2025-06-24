@@ -38,7 +38,7 @@ ${REGEX_EXP_NIT}  \\b\\d{2}\\s\\d{5,}\\b
             ${usuario}   Get From Dictionary   ${parametros['config_file']['credenciales']}   usuario
 
             #Conexion a sharepoint
-            ${token_refresco}    Get File    path=${CURDIR}/../logs/token.txt    encoding=UTF-8
+            ${token_refresco}    Get File    path=${CURDIR}/../token.txt    encoding=UTF-8
 
             # Conectar a la base de datos
             Connect To Database    pymysql    ${bd_config["nombre_bd"]}    ${bd_config["usuario"]}    ${bd_config["contrasena"]}    ${bd_config["servidor"]}    ${bd_config["puerto"]}
@@ -144,7 +144,8 @@ ${REGEX_EXP_NIT}  \\b\\d{2}\\s\\d{5,}\\b
             # Desconectar de la base de datos
             Disconnect From Database
             Log    Conexión cerrada exitosamente.    level=INFO
-            ${completado}=    Set Variable    ${True}
+            ${completado}    Set Variable    ${True}
+            ${error}    Set Variable     ${None} 
             BREAK
         EXCEPT      AS    ${error}
             Log     ${error}    level=ERROR
@@ -152,4 +153,4 @@ ${REGEX_EXP_NIT}  \\b\\d{2}\\s\\d{5,}\\b
             ${completado}=    Set Variable    ${False}
         END
     END
-    RETURN    ${completado}
+    RETURN    ${completado}    ${error}

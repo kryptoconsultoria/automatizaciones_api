@@ -33,23 +33,23 @@ arreglar_nombres
 
             Connect To Database    pymysql    ${bd_config["nombre_bd"]}    ${bd_config["usuario"]}    ${bd_config["contrasena"]}    ${bd_config["servidor"]}    ${bd_config["puerto"]}
             
-            ${sql}=    Catenate 
-            ...    UPDATE balances a
-            ...    INNER JOIN persona_natural b ON a.NumId = b.NumId
-            ...    SET
-            ...    a.PrimerApellido = IF(b.EncontradoDian='NO',a.PrimerApellido,b.PrimerApellido),
-            ...    a.SegundoApellido = IF(b.EncontradoDian='NO',a.SegundoApellido,b.SegundoApellido),
-            ...    a.PrimerNombre = IF(b.EncontradoDian='NO',a.PrimerNombre,b.PrimerNombre),
-            ...    a.OtrosNombres = IF(b.EncontradoDian='NO',a.OtrosNombres,b.OtrosNombres),
-            ...    a.EncontradoDian = b.EncontradoDian,
-            ...    a.RazonSocial=IF(b.EncontradoDian='NO',a.RazonSocial,'')
-            ...    WHERE a.Usuario='${usuario}';
+            # ${sql}=    Catenate 
+            # ...    UPDATE balances a
+            # ...    INNER JOIN persona_natural b ON a.NumId = b.NumId
+            # ...    SET
+            # ...    a.PrimerApellido = IF(b.EncontradoDian='NO',a.PrimerApellido,b.PrimerApellido),
+            # ...    a.SegundoApellido = IF(b.EncontradoDian='NO',a.SegundoApellido,b.SegundoApellido),
+            # ...    a.PrimerNombre = IF(b.EncontradoDian='NO',a.PrimerNombre,b.PrimerNombre),
+            # ...    a.OtrosNombres = IF(b.EncontradoDian='NO',a.OtrosNombres,b.OtrosNombres),
+            # ...    a.EncontradoDian = b.EncontradoDian,
+            # ...    a.RazonSocial=IF(b.EncontradoDian='NO',a.RazonSocial,'')
+            # ...    WHERE a.Usuario='${usuario}';
             
             ${sql}=    Catenate    
              ...    SELECT NumId, TipoDoc, RazonSocial,Origen
              ...    FROM automatizaciones.balances a
              ...    WHERE a.TipoDoc IN ('13', '41', '22') 
-             ...    AND a.Origen = 'Rues' AND a.Usuario='${usuario}'
+             ...    AND a.Origen = 'Terceros' AND a.Usuario='${usuario}'
              ...    AND PrimerNombre = ''
              ...    GROUP BY NumId, TipoDoc,RazonSocial,Origen;
 
@@ -75,7 +75,7 @@ arreglar_nombres
             ...    SELECT NumId, TipoDoc, RazonSocial,Origen
             ...    FROM automatizaciones.balances a
             ...    WHERE a.TipoDoc IN ('13', '41', '22') 
-            ...    AND a.Origen = 'Terceros' AND a.Usuario='${usuario}'
+            ...    AND a.Origen = 'Rues' AND a.Usuario='${usuario}'
             ...    AND PrimerNombre = ''
             ...    GROUP BY NumId, TipoDoc,RazonSocial,Origen;
 
@@ -98,9 +98,10 @@ arreglar_nombres
             
             Disconnect From Database
            ${completado}    Set Variable    ${True}
+           ${error}    Set Variable     ${None}
         EXCEPT     AS    ${error}
             Disconnect From Database
             ${completado}    Set Variable    ${False}
         END
     END
-    RETURN    ${completado}
+    RETURN    ${completado}    ${error}

@@ -26,7 +26,7 @@ subir_archivos
             ${sharepoint}   Get From Dictionary   ${parametros['config_file']['credenciales']}   sharepoint
 
             #Conexion a sharepoint 
-            ${token_refresco}    Get File    path=${CURDIR}/../logs/token.txt    encoding=UTF-8
+            ${token_refresco}    Get File    path=${CURDIR}/../token.txt    encoding=UTF-8
 
             ${archivos}=    RPA.FileSystem.List files in directory    ${sharepoint['ruta_salidas_local']}
 
@@ -36,10 +36,11 @@ subir_archivos
                 OperatingSystem.Remove File    ${archivo_path}
             END
             ${completado}    Set Variable    ${True}
+            ${error}    Set Variable     ${None} 
             BREAK
         EXCEPT     AS    ${error}
             ${completado}    Set Variable    ${False}
         END
     END
-    RETURN    ${completado}
+    RETURN    ${completado}     ${error}
 

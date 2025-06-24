@@ -109,12 +109,13 @@ exportar_excel
             Disconnect From Database
             Close Workbook
             ${completado}=    Set Variable    ${True}
+            ${error}    Set Variable     ${None}
             BREAK   
         EXCEPT     AS    ${error}
             ${completado}=    Set Variable    ${False}
         END
     END
-    RETURN    ${completado}
+    RETURN    ${completado}    ${error}
 
 
 

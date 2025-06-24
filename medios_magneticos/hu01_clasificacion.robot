@@ -97,19 +97,39 @@ HU01 Clasificacion
         ${Estado}    Query       ${sql}
         Disconnect From Database  
         IF  '${Estado[0][0]}' == '1' 
-            ${completado}    Run Keyword    ${palabra_clave}     &{parametros}
+            ${completado}     ${error}        Run Keyword    ${palabra_clave}     &{parametros}
             Connect To Database    pymysql    ${bd_config["nombre_bd"]}    ${bd_config["usuario"]}    ${bd_config["contrasena"]}    ${bd_config["servidor"]}    ${bd_config["puerto"]}
             IF    ${completado}
                 ${sql}    Catenate
-                ...    UPDATE automatizaciones.estado SET Estado='Iniciado',HistoriaUsuario='HU01',Tarea='${siguiente_palabra_clave}.robot' WHERE IdBot=1 AND idEstado=${estado_actual}[0][0] and Usuario='${usuario}'
+                ...    UPDATE automatizaciones.estado SET Estado='Iniciado',HistoriaUsuario='HU01',Tarea='${siguiente_palabra_clave}.robot',ErrorDetalle="" WHERE IdBot=1 AND idEstado=${estado_actual}[0][0] and Usuario='${usuario}'
+                ${estado}    Set Variable    Iniciado
+                ${hu}    Set Variable    HU01
+                ${tarea}    Set Variable    ${siguiente_palabra_clave}
+                Execute SQL String    ${sql}  
             ELSE
                 ${sql}    Catenate
-                ...    UPDATE automatizaciones.estado SET Estado='Error',HistoriaUsuario='HU01',Tarea='${palabra_clave}.robot' WHERE IdBot=1 AND idEstado=${estado_actual}[0][0] and Usuario='${usuario}'
-                RETURN    ${palabra_clave}    ${completado}    
+                ...    UPDATE automatizaciones.estado SET Estado='Error',HistoriaUsuario='HU01',Tarea='${palabra_clave}.robot',ErrorDetalle="${error}" WHERE IdBot=1 AND idEstado=${estado_actual}[0][0] and Usuario='${usuario}'
+                ${estado}    Set Variable    Error
+                ${hu}    Set Variable    HU01
+                ${tarea}    Set Variable    ${palabra_clave}
+                Execute SQL String    ${sql}
+                BREAK
             END
-            Execute SQL String    ${sql}
+        
+            IF    ${completado} and '${palabra_clave}' == 'subir_archivos'
+                ${sql}    Catenate
+                ...    UPDATE automatizaciones.estado SET Estado='Finalizado',HistoriaUsuario='HU01',Tarea='${palabra_clave}.robot' WHERE IdBot=1 AND idEstado=${estado_actual}[0][0] and Usuario='${usuario}'
+                ${estado}    Set Variable    Finalizado
+                ${hu}    Set Variable    HU01
+                ${tarea}    Set Variable    ${palabra_clave}
+                Execute SQL String    ${sql}
+                BREAK
+            END 
+
+
             Disconnect From Database
         END
         ${contador}    Evaluate    ${contador}+1
     END
-    RETURN    ${palabra_clave}    ${completado}   
+    &{respuesta}=    Create Dictionary    estado=${estado}    hu=${hu}    tarea=${tarea}    error_detalle=${error}
+    RETURN   &{respuesta}

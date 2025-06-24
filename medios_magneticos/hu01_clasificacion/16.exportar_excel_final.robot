@@ -123,14 +123,15 @@ exportar_excel_final
             Save Workbook
             Disconnect From Database
             Close Workbook
-            ${completado}=    Set Variable    ${True}
+            ${completado}    Set Variable    ${True}
+            ${error}    Set Variable     ${None} 
             BREAK   
         EXCEPT     AS    ${error}
             Log     ${error}    level=ERROR
             ${completado}=    Set Variable    ${False}
         END
     END
-    RETURN    ${completado}
+    RETURN    ${completado}    ${error}
         
 
 
