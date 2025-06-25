@@ -1,1 +1,0 @@
-2025-06-23 15:46:40,382 [MainThread] {JavaAccessBridge.py:477} [WARNING] Environment variable `RC_JAVA_ACCESS_BRIDGE_DLL` needs to be set to absolute path of `WindowsAccessBridge-64.dll`

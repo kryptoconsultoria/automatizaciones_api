@@ -16,7 +16,7 @@ consolidado_ica
     FOR    ${i}    IN RANGE    1    ${reintentos}
         TRY
             # Obtener las rutas locales y la configuración de la base de datos
-            ${consolidado_rete_ica}=    Get From Dictionary    ${parametros['config_pdf']['rutas_pdf']}   consolidado_rete_ica
+            ${rete_ica}=    Get From Dictionary    ${parametros['config_pdf']['rutas_pdf']}   rete_ica
             ${bd_config}=       Get From Dictionary    ${parametros['config_file']['credenciales']}    base_datos
             ${sharepoint}   Get From Dictionary   ${parametros['config_file']['credenciales']}   sharepoint
             ${usuario}   Get From Dictionary   ${parametros['config_file']['credenciales']}   usuario
@@ -38,11 +38,11 @@ consolidado_ica
 
             #==================================================================================
             # validar si la ruta contiene la palabra insumos si la contiene solo sube el excel asociado con el cliente
-            ${carpeta_rete_ica}    Replace String    ${CURDIR}/../${consolidado_rete_ica["ruta_carpeta"]}    search_for=CLIENTE    replace_with=${cliente}
-            ${ruta_nube}    Replace String    ${consolidado_rete_ica["ruta_nube"]}    CLIENTE   ${cliente}
+            ${carpeta_rete_ica}    Replace String    ${CURDIR}/../${rete_ica["ruta_carpeta"]}    search_for=CLIENTE    replace_with=${cliente}
+            ${ruta_nube}    Replace String    ${rete_ica["ruta_nube"]}    CLIENTE   ${cliente}
 
             #Borrar archivos de cada carpeta
-            Remove Files    ${carpeta_rete_ica}/*
+            RPA.FileSystem.Remove Files    ${carpeta_rete_ica}/*
 
             #Enlistar archivo de sharepoint
             ${estado}    ${archivos}=     Listar archivos    refresh_token=${token_refresco}     secreto_cliente=${sharepoint['secreto_cliente']}    url_redireccion=${sharepoint['uri_redireccion']}   nombre_del_sitio=${sharepoint['nombre_sitio']}    ruta_carpeta=${ruta_nube}    id_cliente=${sharepoint['id_cliente']}       
@@ -56,7 +56,7 @@ consolidado_ica
                 ${archivo}    Convert To String    item=${archivo}
                 ${archivo}    Replace String    search_for=File:    string=${archivo}    replace_with=${empty}
                 ${archivo}    Strip String    string=${archivo}
-                ${estado_descarga}      Descargar Archivo de Sharepoint   refresh_token=${token_refresco}    id_cliente=${sharepoint['id_cliente']}     secreto_cliente=${sharepoint['secreto_cliente']}     url_redireccion=${sharepoint['uri_redireccion']}     nombre_del_sitio=${sharepoint['nombre_sitio']}     ruta_archivo=${ruta_nube}${archivo}     ruta_descarga=${carpeta_1010}
+                ${estado_descarga}      Descargar Archivo de Sharepoint   refresh_token=${token_refresco}    id_cliente=${sharepoint['id_cliente']}     secreto_cliente=${sharepoint['secreto_cliente']}     url_redireccion=${sharepoint['uri_redireccion']}     nombre_del_sitio=${sharepoint['nombre_sitio']}     ruta_archivo=${ruta_nube}${archivo}     ruta_descarga=${carpeta_rete_ica}
                 IF  '${estado_descarga}' == 'Fallido'
                     ${completado}=    Set Variable    ${False}
                     RETURN    ${completado}
@@ -64,6 +64,7 @@ consolidado_ica
                     CONTINUE
                 END
             END
+            BREAK
             #==================================================================================
         EXCEPT     AS    ${error}
             Disconnect From Database

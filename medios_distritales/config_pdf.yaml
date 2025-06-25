@@ -3,107 +3,12 @@
 #============================================
 rutas_pdf:
 
-  pdf_2276:
-    ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/07 Medios Magnéticos/insumos/pdf_2276/CLIENTE/"
-    ruta_carpeta: "C:/Users/Krypto/PycharmProjects/automatizaciones_api/medios_magneticos/insumos/pdf_2276/CLIENTE/"
-    documento: 0
-    salarios: 0
-    bonosServ: 1
-    excesoAlim: 2
-    honorarios: 3
-    servicios: 4
-    comisiones: 5
-    prestaciones: 6
-    viaticos: 7
-    gastosRep: 8
-    compTrabajo: 9
-    otrosPagos: 10
-    cesIntereses: 11
-    auxCes: 12
-    cesFondo: 13
-    pensiones: 14
-    apoyoEcon: 15
-    AporteSalud: 17
-    AportePens: 18
-    AporteRais: 19
-    AportePensVol: 20
-    AporteAFC: 21
-    AporteAVC: 22
-    Ultimos6Meses: 23
-    RetRentas: 24
+  rete_ica:
+    ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/11 Medios Magnéticos/insumos/reta_ica/CLIENTE/"
+    ruta_carpeta: "medios_distritales/insumos/rete_ica/CLIENTE/"
 
-  pdf_2276_2:
-    salarios: Pagos por salarios
-    bonosServ:   Pagos realizados con bonos electrónicos o de papel de servicio, cheques, tarjetas, vales, etc.
-    excesoAlim: Valor de exceso de los pagos por alimentación mayores a 41 UVT, art 387-1 E.T.
-    honorarios:  Pagos por honorarios
-    servicios: Pagos por servicios
-    comisiones: Pagos por comisiones
-    prestaciones:  Pagos por prestaciones sociales
-    viaticos:  Pagos por viáticos
-    gastosRep:  Pagos por gastos de representación
-    compTrabajo:  Pagos por compensaciones por el trabajo asociado cooperativo
-    otrosPagos:  Otros pagos
-    cesIntereses:  Auxilio de cesantía e intereses efectivamente pagados al empleado
-    auxCes:  Auxilio de cesantía reconocido a trabajadores del régimen tradicional del CST, contenido en el Capítulo VII, Título Vlll Parte Primera
-    cesFondo:  Auxilio de cesantía consignado al fondo de cesantías
-    pensiones: Pensiones de jubilación, vejez o invalidez
-    apoyoEcon:  Apoyos económicos educativos financiados con recursos públicos, no reembolsables o condonados
-    AporteSalud:  Aportes obligatorios por salud a cargo del trabajador
-    AportePens:  Aportes obligatorios a fondos de pensiones y solidaridad pensional a cargo del trabajador
-    AporteRais: Cotizaciones voluntarias al régimen de ahorro individual con solidaridad - RAIS
-    AportePensVol:  Aportes voluntarios a fondos de pensiones
-    AporteAFC:  Aportes a cuentas AFC
-    AporteAVC:  Aportes a cuentas AVC
-    Ultimos6Meses:  Ingreso laboral promedio de los últimos seis meses (numeral 4 art. 206 E.T.)
-    RetRentas: Valor de la retención en la fuente por ingresos laborales y de pensiones
+  ica:
+    ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/11 Medios Magnéticos/insumos/ica/CLIENTE/"
+    ruta_carpeta: "medios_distritales/insumos/ica/CLIENTE/"
 
-
-  pdf_1010:
-    ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/07 Medios Magnéticos/insumos/pdf_1010/CLIENTE/"
-    ruta_carpeta: "C:/Users/Krypto/PycharmProjects/automatizaciones_api/medios_magneticos/insumos/pdf_1010/CLIENTE/"
-
-  pdf_1003:
-    ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/07 Medios Magnéticos/insumos/pdf_1003/CLIENTE/"
-    ruta_carpeta: "C:/Users/Krypto/PycharmProjects/automatizaciones_api/medios_magneticos/insumos/pdf_1003/CLIENTE/"
-    prompt: >
-      You are an excellent Colombian accountant with high capabilities of system programming responsible for preparing the magnetic media to present information to the DIAN.
-      You need to review PDF files containing third-party information related to withholding tax, which must be reported in the DIAN's required format 1003 for the presentation of magnetic media.
-      In this format, one of the items to be reported is the withheld amount. To extract this information from the PDF database, you should consider the following:
-
-      Extract only the required data in JSON format, without line breaks or any additional text.
-      Return only the data found in the PDF, excluding explanations or irrelevant words.
-      If no data is available for numeric values, assign the value 0.
-      Do not include decimal values; all numeric values must be integers.
-      Keep in mind that formats and terms are in Spanish.
-      it is possible that there is information as an image Use OCR or image text capture technologies to extract the text you have to give me the best result.
-
-      "1302": {"ValorPagoRet":"0","RetPract":"0"},
-      "1304": {"ValorPagoRet":"in this field, extract the base value associated with 'Honorarios'","RetPract":"in this field, extract the tax withholding associated with 'Honorarios'"},
-      "1303": {"ValorPagoRet":"Extract the total base value for services if it appears, apply 1.5% if "Retención en la fuente" or "Retefuente" are mentioned, and apply 3.5% if terms related to software or informatics appear, which may also appear with 3.5%.","RetPract":"Extract the tax withholding for services if it appears, apply 1.5% if "Retención en la fuente" or "Retefuente" are mentioned, and apply 3.5% if terms related to software or informatics appear, which may also appear with 3.5%."},
-      "1305": {"ValorPagoRet":"if there is a occurrence of base value for 'comisiones' or related terms, place it here","RetPract":"if there is a occurrence of tax withholding for 'comisiones' or related terms, place it here"},
-      "1306": {"ValorPagoRet":"In this field, extract the base value if 'rendimientos financieros' or related terms are mentioned","RetPract":"In this field, extract the tax withholding if 'rendimientos financieros' or related terms are mentioned"},
-      "1308": {"ValorPagoRet":"in this field, extract the base value for 'Otros Ingresos Tributarios'","RetPract":"in this field, extract the tax withholding for 'Otros Ingresos Tributarios'"},
-      "NumId": "if you can see the NIT of the retaining company extract the nit in this field without the verification digit,You should note that in some cases, the verification digit is not preceded by a hyphen but by a period,Do not take information from the company BUSINESS_COMPANY",
-      "DV": "if you can see the verification digit of the NIT extract only the verification digit,If no data is available for string values, assign an empty string (''),You should note that in some cases, the verification digit is not preceded by a hyphen but by a period,Do not take information from the company BUSINESS_COMPANY",
-      "RazonSocial": "if you can see extract the name of the retaining company,If no data is available for string values, assign an empty string (''),Do not take information from the company BUSINESS_COMPANY",
-      "PrimerApellido": "If the retaining entity is an individual, extract their first last name,If no data is available for string values, assign an empty string (''),Do not take information from the company BUSINESS_COMPANY",
-      "SegundoApellido": "If the retaining entity is an individual, extract their second last name,If no data is available for string values, assign an empty string (''),Do not take information from the company BUSINESS_COMPANY",
-      "PrimerNombre": "If the retaining entity is an individual, extract their first name,If no data is available for string values, assign an empty string (''),Do not take information from the company BUSINESS_COMPANY",
-      "OtrosNombres": "If the retaining entity is an individual, extract any additional given names (such as a second name and others),If no data is available for string values, assign an empty string (''),Do not take information from the company BUSINESS_COMPANY"
-      }
-
-    modelo: "claude-3-7-sonnet-latest"
-
-  planillas:
-    ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/07 Medios Magnéticos/insumos/pdf_1009_1001/CLIENTE/"
-    ruta_carpeta: "C:/Users/Krypto/PycharmProjects/automatizaciones_api/medios_magneticos/insumos/pdf_1009_1001/CLIENTE/"
-    nombre_hoja: "Sheet2"
-    nombre_tabla: "planillas"
-    columnas: "A,Riesgo,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,AA,AB,ValorAPagar,AD,AE,AF"
-    cabeceras: 16
-
-    
-
-
-    
+  
