@@ -60,6 +60,6 @@ async def medios_magneticos(req: RunMedios):
             "ErrorDetalle": 'No se generó archivo JSON'
         }
 
-@app.post("/medios_magneticos")
-async def medios_distrateles(req: RunMedios):
+@app.post("/medios_distritales")
+async def medios_distritales(req: RunMedios):
     pass
