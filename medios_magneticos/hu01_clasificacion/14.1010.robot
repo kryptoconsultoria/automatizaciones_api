@@ -146,25 +146,23 @@ ${REGEX_PORCENTAJE}      (?:(?:[0-9]{1,2}(?:[.,]\\d+)?|100(?:[.,]0+)?))%
 
                      ${NumIdSocio}               Set Variable    ${matches_numeros}[${item_par}]
                      ${NumIdSocio}=    Replace String      ${NumIdSocio}     .    ${EMPTY}   
+
+                     #${datos}    ${completado}=     Consulta DIAN     ${NumIdSocio}
                      
-                     #${primer_nombre}    ${segundo_nombre}    ${primer_apellido}    ${segundo_apellido}    ${validar_nombre}    Arreglar nombres apellidos    ${razon_social}
-                     
-                     ${datos}    ${completado}=     Consulta DIAN     ${NumIdSocio}
-                     
-                     IF    $datos is not None    
-                        ${DV}                       Set Variable    ${datos[0]}
-                        ${PrimerApellido}           Set Variable    ${datos[2]}
-                        ${SegundoApellido}          Set Variable    ${datos[3]}
-                        ${PrimerNombreSocio}        Set Variable    ${datos[4]}
-                        ${OtrosNombresSocio}        Set Variable    ${datos[5]}
-                     ELSE
-                        ${DV}                       Set Variable    ${EMPTY}
-                        ${PrimerApellido}           Set Variable    ${EMPTY}
-                        ${SegundoApellido}          Set Variable    ${EMPTY}
-                        ${PrimerNombreSocio}        Set Variable    ${EMPTY}
-                        ${OtrosNombresSocio}        Set Variable    ${EMPTY}
-                        ${RazonSocial}              Set Variable    ${EMPTY}
-                     END
+                     # IF    $datos is not None    
+                     #    ${DV}                       Set Variable    ${datos[0]}
+                     #    ${PrimerApellido}           Set Variable    ${datos[2]}
+                     #    ${SegundoApellido}          Set Variable    ${datos[3]}
+                     #    ${PrimerNombreSocio}        Set Variable    ${datos[4]}
+                     #    ${OtrosNombresSocio}        Set Variable    ${datos[5]}
+                     #ELSE
+                     ${DV}                       Set Variable    ${EMPTY}
+                     ${PrimerApellido}           Set Variable    ${EMPTY}
+                     ${SegundoApellido}          Set Variable    ${EMPTY}
+                     ${PrimerNombreSocio}        Set Variable    ${EMPTY}
+                     ${OtrosNombresSocio}        Set Variable    ${EMPTY}
+                     ${RazonSocial}              Set Variable    ${EMPTY}
+                     #END
 
                      ${RazonSocial}              Set Variable    ${cliente}
                      ${PorcentajeParticipacion}  Set Variable    ${match}
