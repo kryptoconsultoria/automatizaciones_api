@@ -13,7 +13,7 @@ COPY requirements.txt .
 
 # Asegura que haya versión moderna de wheel (para evitar errores con thriftpy2)
 RUN pip install --upgrade pip wheel setuptools \
-    && pip install --no-cache-dir -r requirements.txt
+    && pip install requirements.txt
 
 # ┌────────── Etapa final ──────────────────────────────┐
 FROM python:3.12
