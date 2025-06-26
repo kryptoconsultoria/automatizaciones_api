@@ -66,8 +66,8 @@ exportar_excel
 
             ${fecha_actual}    Get Current Date    result_format=%Y-%m-%d_%H_%M_%S
 
-            ${excel_ruta}    Set Variable   ${output['salidas']}${/}exogena_${cliente}_desglosado_${fecha_actual}.xlsx
-            OperatingSystem.Copy File    ${output['ruta_desglose']}    ${excel_ruta}
+            ${excel_ruta}    Set Variable   ${CURDIR}/../${output['salidas']}${/}exogena_${cliente}_desglosado_${fecha_actual}.xlsx
+            OperatingSystem.Copy File    ${CURDIR}/../${output['ruta_desglose']}    ${excel_ruta}
             
             Open Workbook     ${excel_ruta}      data_only=True
 

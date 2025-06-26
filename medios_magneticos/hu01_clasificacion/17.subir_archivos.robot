@@ -28,7 +28,7 @@ subir_archivos
             #Conexion a sharepoint 
             ${token_refresco}    Get File    path=${CURDIR}/../token.txt    encoding=UTF-8
 
-            ${archivos}=    RPA.FileSystem.List files in directory    ${sharepoint['ruta_salidas_local']}
+            ${archivos}=    RPA.FileSystem.List files in directory    ${CURDIR}/../${sharepoint['ruta_salidas_local']}
 
             FOR    ${archivo}    IN    @{archivos}
                 ${archivo_path}=    Convert To String    ${archivo}
