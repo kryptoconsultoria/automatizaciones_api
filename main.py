@@ -36,7 +36,7 @@ async def medios_magneticos(req: RunMedios):
         "--report", "report.html",
         "--variable", f"CLIENTE:{req.cliente}",
         "--variable", f"USUARIO:{req.usuario}",
-        "--console", "none",
+    #    "--console", "none",
         "medios_magneticos/main.robot"
     ]
 
