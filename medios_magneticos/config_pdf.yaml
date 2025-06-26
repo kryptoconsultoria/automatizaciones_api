@@ -92,12 +92,11 @@ rutas_pdf:
       "PrimerNombre": "If the retaining entity is an individual, extract their first name,If no data is available for string values, assign an empty string (''),Do not take information from the company BUSINESS_COMPANY",
       "OtrosNombres": "If the retaining entity is an individual, extract any additional given names (such as a second name and others),If no data is available for string values, assign an empty string (''),Do not take information from the company BUSINESS_COMPANY"
       }
-
     modelo: "claude-3-7-sonnet-latest"
 
   planillas:
     ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/07 Medios Magnéticos/insumos/pdf_1009_1001/CLIENTE/"
-    ruta_carpeta: "C:/Users/Krypto/PycharmProjects/automatizaciones_api/medios_magneticos/insumos/pdf_1009_1001/CLIENTE/"
+    ruta_carpeta: "medios_magneticos/insumos/pdf_1009_1001/CLIENTE/"
     nombre_hoja: "Sheet2"
     nombre_tabla: "planillas"
     columnas: "A,Riesgo,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,AA,AB,ValorAPagar,AD,AE,AF"
