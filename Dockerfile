@@ -13,7 +13,7 @@ COPY requirements.txt .
 
 # Asegura que haya versión moderna de wheel (para evitar errores con thriftpy2)
 RUN pip install --upgrade pip wheel setuptools \
-    && pip install requirements.txt
+    && pip install --no-cache-dir -r requirements.txt
 
 # ┌────────── Etapa final ──────────────────────────────┐
 FROM python:3.12
@@ -30,10 +30,10 @@ COPY --from=builder /usr/local/lib/python3.12/site-packages /usr/local/lib/pytho
 COPY --from=builder /usr/local/bin /usr/local/bin
 
 COPY . .
-# Puerto expuesto
+# Puerto expuesto (ajusta si no aplicable)
 EXPOSE 82
 
-RUN pip install rpaframework
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Comando de arranque
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "82"]
