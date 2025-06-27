@@ -1,0 +1,221 @@
+#============================================
+# RUTAS LOCALES DONDE SE ALMACENAN LOS INSUMOS
+#============================================`  
+rutas_contabilidad:
+  #========================================================================================
+  balances_aliaddo:
+    ruta_nube:  "/Innovación y tecnología/IntegrIA/Proyectos Automatización/07 Medios Magnéticos/insumos/insumos_aliaddo/CLIENTE/balance_terceros/"
+    ruta_carpeta: "insumos/insumos_aliaddo/CLIENTE/balance_terceros/"
+    nombre_hoja: "Reporte"
+    nombre_tabla: "balance_aliaddo"
+    columnas: "Codigo,Cuenta,Tercero,Identificacion,SaldoInicial,Debito,Credito,SaldoFinal"
+    cabeceras: 9
+    indice_columna: "N/A"
+
+  listado_aliaddo:
+    ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/07 Medios Magnéticos/insumos/insumos_aliaddo/CLIENTE/listado_terceros/"
+    ruta_carpeta: "insumos/insumos_aliaddo/CLIENTE/listado_terceros/"
+    nombre_hoja: "Datos"
+    nombre_tabla: "terceros_aliaddo"
+    columnas: "RazonSocial,TipoId,Identificacion,DV,Tipo,CodigoDeLaResponsabilidadFiscal,CodigoDeResponsableDe,LeHacesRetencionEnLaFuente,TeHacenRetencionEnLaFuente,PrimerNombre,SegundoNombre,PrimerApellido,SegundoApellido,CodigoDeLaActividadEconomica,TelefonoPrincipal,OtroTelefono1,Email,EsDelExterior,Cliente,Proveedor,Propietario,CuentaParaCausarLasVentas,CuentaParaCausarLasCompras,CuentaParaCausarLosGastos,Etiqueta,VendedorAsignado,AplicaRetencionIca,TarifaIcaCompra,CuentaIcaCompra,TarifaRetencionIvaVenta,FechaNacimiento,IngresosAnuales,NumeroEmpleados,Moneda,CupoDeCredito,DiasCredito,Banco,TipoDeCuenta,NumeroDeCuenta,NombreDireccion,Direccion,Pais,Region,Ciudad,Barrio,otroTelefono,CodigoPostal,FechaDeCreacion"
+    cabeceras: 2
+    indice_columna: "N/A"
+  #========================================================================================
+  balances_siigo_nube:
+    ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/07 Medios Magnéticos/insumos/insumos_siigo_nube/CLIENTE/balance_terceros/"
+    ruta_carpeta: "insumos/insumos_siigo_nube/CLIENTE/balance_terceros/"
+    nombre_hoja: "Sheet1"
+    nombre_tabla: "balance_siigo_nube"
+    columnas: "Nivel,Transaccional,CodigoCuentaContable,NombreCuentaContable,Identificacion,Sucursal,NombreTercero,SaldoInicial,Debito,Credito,SaldoFinal"
+    cabeceras:  8
+    indice_columna: "N/A"
+
+  listado_siigo_nube:
+    ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/07 Medios Magnéticos/insumos/insumos_siigo_nube/CLIENTE/listado_terceros/"
+    ruta_carpeta: "insumos/insumos_siigo_nube/CLIENTE/listado_terceros/"
+    nombre_hoja: "Sheet1"
+    nombre_tabla: "terceros_siigo_nube"
+    columnas: "NombreTercero,TipoDeIdentificacion,Identificacion,DigitoVerificacion,Sucursal,TipoDeRegimenIVA,Direccion,Ciudad,Telefono,NombresContacto,Estado,codPais"
+    cabeceras: 8
+    indice_columna: "N/A"
+  #========================================================================================
+  balances_siigo_pyme:
+    ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/07 Medios Magnéticos/insumos/insumos_siigo_pyme/CLIENTE/balance_terceros/"
+    ruta_carpeta: "insumos/insumos_siigo_pyme/CLIENTE/balance_terceros/"
+    nombre_hoja: "Hoja1"
+    nombre_tabla: "balance_siigo_pyme"
+    columnas: "Grupo,Cuenta,Subcuenta,Auxiliar,Subauxil,NIT,Sucursal,DigitoVerificacion,CentroC,Empty1,Descripcion,UltimoMov,SaldoAnterior,Debito,Credito,NuevoSaldo"
+    cabeceras: 8
+    indice_columna: [0,1,2,3,4]
+
+  listado_siigo_pyme:
+    ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/07 Medios Magnéticos/insumos/insumos_siigo_pyme/CLIENTE/listado_terceros/"
+    ruta_carpeta: "insumos/insumos_siigo_pyme/CLIENTE/listado_terceros/"
+    nombre_hoja: "Hoja1"
+    nombre_tabla: "terceros_siigo_pyme"
+    columnas: "Nit,Sucursal,Nombre,Contacto,Direccion,Pais,Ciudad,Telefono1,Telefono2,Telefono3,Telefono4,Celular,Fax,Email,Apartado,Cupo,Precio,Califica,Observaciones,Cumple,Vendedor,Tipo,Digito,Clasific,FPago,PerPago,Activida,Descuento,TipoPersona,Declarante,AgenteRetenedor,Autorretenedor,BenRte,AgeRte,Estado,TipSoc,ContactoFacturacion,MailContactoFacturacion"
+    cabeceras: 8
+    indice_columna: "N/A"
+  #========================================================================================
+  balances_allegra:
+    ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/07 Medios Magnéticos/insumos/insumos_allegra/CLIENTE/balance_terceros/"
+    ruta_carpeta: "insumos/insumos_allegra/CLIENTE/balance_terceros/"
+    nombre_hoja: "Sheet1"
+    nombre_tabla: "balance_allegra"
+    columnas: "Nivel,Codigo,CuentaContable,Identificacion,NombreDelTercero,SaldoAnterior,Debito,Credito,SaldoFinal"
+    cabeceras: 10
+    indice_columna: "N/A"
+
+  listado_allegra:
+    ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/07 Medios Magnéticos/insumos/insumos_allegra/CLIENTE/listado_terceros/"
+    ruta_carpeta: "insumos/insumos_allegra/CLIENTE/listado_terceros/"
+    nombre_hoja: "Sheet1"
+    nombre_tabla: "terceros_allegra"
+    columnas: "TipoDeContacto,Nombre,SegundoNombre,PrimerApellido,SegundoApellido,TipoDeIdentificacion,Identificacion,DigitoDeVerificacion,TipoDePersona,ResponsabilidadTributaria,Telefono1,Telefono2,Celular,Pais,Departamento,Municipio,Direccion,CodigoPostal,CorreoSecundario,Correo,ListaDePrecios,Vendedor,PlazoDePago,CuentasPorCobrar,CuentasPorPagar,LimiteDeCredito"
+    cabeceras: 2
+    indice_columna: "N/A"
+  #======================================================================================== 
+  balances_avansys:
+    ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/07 Medios Magnéticos/insumos/insumos_avansys/CLIENTE/balance_terceros/"
+    ruta_carpeta: "insumos/insumos_avansys/CLIENTE/balance_terceros/"
+    nombre_hoja: "DATOS"
+    nombre_tabla: "balance_avansys"
+    columnas: "Codigo,Cuenta,Referencia,Tercero,SaldoInicial,Debito,Credito,SaldoFinal"
+    cabeceras: 10
+    indice_columna: "N/A"
+
+  listado_avansys:
+    ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/07 Medios Magnéticos/insumos/insumos_avansys/CLIENTE/listado_terceros/"
+    ruta_carpeta: "insumos/insumos_avansys/CLIENTE/listado_terceros/"
+    nombre_hoja: "Sheet 1"
+    nombre_tabla: "terceros_avansys"
+    columnas: "Id_1,IdentificationDocument,IdNumbers,CheckDigit,PrimerApellido,SegundoApellido,PrimerNombre,OtrosNombres,CommercialName,EmailBounced,ContactAddress,Email,CountryId,Phone,RefTypeId,DocumentTypeId,City,CityId"
+    cabeceras: 2
+    indice_columna: "N/A"
+  #========================================================================================
+  exogena:
+    ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/07 Medios Magnéticos/insumos/puc_exogena/CLIENTE/"
+    ruta_carpeta: "insumos/puc_exogena/"
+    nombre_tabla: "puc"
+    nombre_hoja: "PUC"
+    columnas: "CuentaContable,Descripcion,Formato,Concepto,Columna,IdFormula,NitReporta,IdCliente"
+    cabeceras: 1
+    indice_columna: "N/A" 
+
+rutas_admin:
+  rues:
+    ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/07 Medios Magnéticos/insumos/rues/"
+    ruta_carpeta: "insumos/rues/"
+    nombre_tabla: "rues"
+    nombre_hoja: "N/A"
+    columnas: "OrgJuridica,Categoria,FechaMatricula,RazonSocial,TipoIdentificacion,NumeroIdentificacion,ActividadEconomica,ActividadEconomica2,ActividadEconomica3,ActividadEconomica4,DescTamanoEmpresa,Departamento,Municipio,DireccionComercial,CorreoComercial,RepLegal"
+    cabeceras: 4
+    indice_columna: "N/A"
+          
+  exclusion_nits:
+    ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/07 Medios Magnéticos/insumos/exclusion_nits/"
+    ruta_carpeta: "insumos/exclusion_nits/"
+    nombre_tabla: "exclusion_nits"
+    nombre_hoja: "ExclusionNits"
+    columnas: "IdTercero,IdTipoDoc,IdFormato"
+    cabeceras: 2
+    indice_columna: "N/A"
+
+
+output:
+  ruta_plantilla: "medios_magneticos/plantillas/Formato.xlsx"
+  ruta_desglose: "medios_magneticos/plantillas/Formato_desglosado.xlsx"
+  salidas: "medios_magneticos/salidas/"
+
+
+#============================================
+# FORMATOS
+#============================================
+formatos:
+  formato_1001: "Codigo,Concepto,TipoDoc,NumId,PrimerApellido,SegundoApellido,PrimerNombre,OtrosNombres,RazonSocial,Direccion,CodDpto,CodMcp,PaisResidencia"
+  formato_1003: "Codigo,Concepto,TipoDoc,NumId,DV,PrimerApellido,SegundoApellido,PrimerNombre,OtrosNombres,RazonSocial,Direccion,CodDpto,CodMcp"
+  formato_1005: "Codigo,TipoDoc,NumId,DV,PrimerApellido,SegundoApellido,PrimerNombre,OtrosNombres,RazonSocial"
+  formato_1006: "Codigo,TipoDoc,NumId,DV,PrimerApellido,SegundoApellido,PrimerNombre,OtrosNombres,RazonSocial"
+  formato_1007: "Codigo,Concepto,TipoDoc,NumId,PrimerApellido,SegundoApellido,PrimerNombre,OtrosNombres,RazonSocial,PaisResidencia"
+  formato_1008: "Codigo,Concepto,TipoDoc,NumId,DV,PrimerApellido,SegundoApellido,PrimerNombre,OtrosNombres,RazonSocial,Direccion,CodDpto,CodMcp,PaisResidencia"
+  formato_1009: "Codigo,Concepto,TipoDoc,NumId,DV,PrimerApellido,SegundoApellido,PrimerNombre,OtrosNombres,RazonSocial,Direccion,CodDpto,CodMcp,PaisResidencia"
+  formato_1010: "TipoDoc,NumIdSocio,DV,PrimerApellidoSocio,SegundoApellidoSocio,PrimerNombreSocio,OtrosNombresSocio,RazonSocial,Direccion,CodDpto,CodMcp,PaisResidencia"
+  formato_1011: "Codigo,Concepto"
+  formato_1012: "Codigo,Concepto,TipoDoc,NumId,DV,PrimerApellido,SegundoApellido,PrimerNombre,OtrosNombres,RazonSocial,PaisResidencia"
+  formato_2276: "Codigo,EntidadInformante,TipoDoc,NumId,PrimerApellido,SegundoApellido,PrimerNombre,OtrosNombres,Direccion,CodDpto,CodMcp,PaisResidencia"
+  
+sumatorias:
+  formato_1001: "PagoDeducible,PagoNoDeducible,IVADeducible,IVANoDeducible,RetPractRenta,RetAsumRenta,RetPractIvaResp,RetPractIVANoRes"
+  formato_1003: "ValorPagoRet,RetPract"
+  formato_1004: "ValorDescTribTotal,ValorDescTribSolicitado"
+  formato_1005: "ImpuestoDescontable,IVADevolucionesVentas"
+  formato_1006: "ImpuestoGenerado,IVARecuperado,ImpuestoConsumo"
+  formato_1007: "IngresosBrutos,DevolucionesRebajasDescuentos"
+  formato_1008: "SaldoCtasCobrar"
+  formato_1009: "SaldoCtasPagar"
+  formato_1010: "ValorPatAcciones,PorcentajeParticipacion,PorcentajeParticipacionDecimal"
+  formato_1011: "Saldo"
+  formato_1012: "ValorAl3112"
+  formato_2276: > 
+    Salarios,EmolEcles,BonosServ,ExcesoAlim,Honorarios,Servicios,Comisiones,Prestaciones,Viaticos,GastosRep,CompTrabajo,ApoyoEcon,OtrosPagos,CesIntereses,CesFondo,AuxCes,Pensiones,IngresosBrutos,AporteSalud,AportePens,AporteRAIS,AportePensVol,AporteAFC,AporteAVC,RetRentas,IvaCosto,RetIva,Alim41,Ultimos6Meses,TipoDocDependiente,NumIdDependiente,NumIdFideicomiso,TipoDocParticipante,NumIdParticipante
+
+#============================================
+# CREDENCIALES
+#============================================
+credenciales:
+  # Credenciales de base de datos
+  base_datos:
+    servidor: "{{ environment.SERVIDOR_MEDIOS_MAGNETICOS }}"   # Dirección del servidor de la base de datos
+    puerto: 3306                                     # Puerto de la base de datos
+    usuario: "{{ environment.USUARIO_BD_MEDIOS_MAGNETICOS }}"   # Usuario de la base de datos
+    contrasena: "{{ environment.CONTRASENA_BD_MEDIOS_MAGNETICOS }}"  # Contraseña del usuario
+    nombre_bd: "medios_magneticos"   # Nombre de la base de datos
+
+  # Credenciales de OneDrive
+  sharepoint:
+    id_cliente: "{{ environment.CLIENT_ID_OFFICE_MEDIOS_MAGNETICOS }}"            # ID del cliente
+    secreto_cliente: "{{ environment.SECRET_ID_MEDIOS_MAGNETICOS }}"   # Secreto del cliente
+    nombre_sitio: "{{ environment.SECRET_ID_MEDIOS_MAGNETICOS }}"      # nombre sitio (organización)
+    scopes: ['Sites.ReadWrite.All','Files.ReadWrite.All']  
+    uri_redireccion: "{{ environment.REDIRECT_URI_MEDIOS_MAGNETICOS }}"
+    ruta_salidas:   "{{ environment.OUTPUT_PATH_MEDIOS_MAGNETICOS }}"
+    ruta_salidas_local:   "medios_magneticos/salidas/"
+    
+  chat_gpt:
+    token: "{{ environment.CHAT_GPT_TOKEN }}"
+
+  claude:
+    token:  "{{ environment.CLAUDE_TOKEN }}"
+
+  perplexity:
+    modelo: "sonar-pro"
+    token:  "{{ environment.PERPLEXITY_TOKEN }}"
+    prompt:  "You are an advanced search engine designed to retrieve detailed business information."
+    instrucciones: >
+        with the  provided name of a business BUSINESS_NAME and optionally the city of its headquarters CITY_HEADQUARTERS, search for and retrieve the full name and the headquarter address, including the city and country. 
+        If applicable, also retrieve the address and city of any subsidiary or branch of the company located in Colombia.
+        
+        # Steps
+        
+        1. Identify the full name and headquarter address of the business.
+        2. Determine the country and city of the headquarter address.
+        3. If applicable, locate the address and city of a Colombian branch or subsidiary.
+        
+        # Output Items
+        Please output only a JSON object containing the following fields:
+        
+        "HeadquarterAddress": "Address of the business headquarter, only get the address",
+        "HeadquarterCountry": "Country of the business headquarter, only get the Country",
+        "HeadquarterCity": "City of the business headquarter, only get the City",
+        "HeadquarterIdNumber": "Id number of the business headquarter, only get the id number",
+        "ColombiaAddress": "Address of the business branch or subsidiary in Colombia, only get the address",
+        "ColombiaCity": "City of the business branch or subsidiary in Colombia, only get the City"
+        "ColombiaNit":  "Colombia nit number, only get the id number",
+        
+  
+        # Notes
+        
+        - Ensure accuracy in the name and address details.
+        - If there is no branch or subsidiary in Colombia, leave the respective fields empty.
+        - When city information for the headquarter is provided in the prompt, cross-verify with the search results.
+

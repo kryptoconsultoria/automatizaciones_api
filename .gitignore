@@ -48,9 +48,6 @@ models/
 *.vec
 *.hdf5
 
-# Archivos de configuración
-config.yaml
-config.json
 
 # Caché de Machine Learning
 *.cache/

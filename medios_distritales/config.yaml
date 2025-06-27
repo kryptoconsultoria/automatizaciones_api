@@ -1,0 +1,50 @@
+#============================================
+# CONTABILIDAD DISTRITAL
+#============================================
+rutas_contabilidad:
+  balances_siigo_pyme:
+    ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/11 Medios Distritales/insumos/insumos_siigo_pyme/CLIENTE/"
+    ruta_carpeta: "medios_distritales/insumos/insumos_siigo_pyme/CLIENTE/"
+    nombre_hoja: "Hoja1"
+    nombre_tabla: "balance_siigo_pyme"
+    columnas: "Grupo,Cuenta,Subcuenta,Auxiliar,Subauxil,NIT,Sucursal,DigitoVerificacion,CentroC,Empty1,Descripcion,UltimoMov,SaldoAnterior,Debito,Credito,NuevoSaldo"
+    cabeceras: 8
+
+  listado_siigo_pyme:
+    ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/11 Medios Distritales/insumos/insumos_siigo_pyme/CLIENTE/"
+    ruta_carpeta: "medios_distritales/insumos/insumos_siigo_pyme/CLIENTE/"
+    nombre_hoja: "Hoja1"
+    nombre_tabla: "terceros_siigo_pyme"
+    columnas: "Nit,Sucursal,Nombre,Contacto,Direccion,Pais,Ciudad,Telefono1,Telefono2,Telefono3,Telefono4,Celular,Fax,Email,Apartado,Cupo,Precio,Califica,Observaciones,Cumple,Vendedor,Tipo,Digito,Clasific,FPago,PerPago,Activida,Descuento,TipoPersona,Declarante,AgenteRetenedor,Autorretenedor,BenRte,AgeRte,Estado,TipSoc,ContactoFacturacion,MailContactoFacturacion"
+    cabeceras: 8
+
+  revision_ica:
+    ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/11 Medios Distritales/insumos/insumos_siigo_pyme/CLIENTE/anexo_ica"
+    ruta_carpeta: "medios_distritales/insumos/insumos_siigo_pyme/CLIENTE/anexo_ica"
+    nombre_hoja: "Ingresos Año"
+    nombre_tabla: "ingresos_anexo_ica"
+    columnas: "CuentaDescripcion,Grupo,Ing,Tarifa,Comprobante,Fecha,Mes,Bimestre,Nit,Nombre,Municipio,DescripcionDetalle"
+    cabeceras: 8
+
+
+#============================================
+# CREDENCIALES
+#============================================
+credenciales:
+  # Credenciales de base de datos
+  base_datos:
+    servidor: "127.0.0.1"                            # Dirección del servidor de la base de datos
+    puerto: 3306                                     # Puerto del za
+    usuario: "root"                                  # Usuario de la base de datos
+    contrasena: "krypto123"                          # Contraseña del usuario
+    nombre_bd: "medios_distritales"                   # Nombre de la base de datos
+
+  # Credenciales de OneDrive
+  sharepoint:
+    id_cliente: "952ce091-2362-481e-aa37-61325d6f2e0f"            # ID del cliente
+    secreto_cliente: "jjk8Q~9~wfmhW4b-N2FDX1dY7mT1_gvgH0Kivc7y"   # Secreto del cliente
+    nombre_sitio: "kryptocolombia.sharepoint.com"                      # nombre sitio (organización)
+    scopes:   ['Sites.ReadWrite.All','Files.ReadWrite.All']            # scopes
+    uri_redireccion: "https://login.microsoftonline.com/common/oauth2/nativeclient"
+    ruta_salidas:   "/Innovación y tecnología/IntegrIA/Proyectos Automatización/07 Medios Magnéticos/salidas/"
+    ruta_salidas_local:   "C:/Users/Krypto/PycharmProjects/automatizaciones_api/medios_magneticos/salidas/"
