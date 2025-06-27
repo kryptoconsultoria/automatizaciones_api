@@ -10,7 +10,7 @@ Library           Dialogs
 # ${CONFIG_file}    ../config.yaml
 
 # *** Tasks ***
-# Clasificar En Formatos
+# Clasificar En formatos
 #     [Documentation]    Clasifica formatos de la Dian
 #     ${yaml_content}    Read File    ${config_file}
 #     ${config}          Evaluate    yaml.safe_load('''${yaml_content}''')    modules=yaml
@@ -48,10 +48,10 @@ clasificacion
             ...    FROM puc_exogena a INNER JOIN 
             ...    cliente b ON b.IdCliente=a.Cliente
             ...    WHERE b.Nombre='${cliente}' 
-            ...    AND Formato !='formato_1012' 
-            ...    and Formato !='formato_1010' 
-            ...    and Formato !='formato_1003'
-            ...    order by Formato ASC              
+            ...    AND formato !='formato_1012' 
+            ...    and formato !='formato_1010' 
+            ...    and formato !='formato_1003'
+            ...    order by formato ASC              
 
             ${resultados}=    Query     ${sql}     
 
@@ -138,7 +138,7 @@ clasificacion
                 ...    ${condicion_num_id}
                 ...    ${columna_din_2},'${usuario}' as Usuario
                 ...    FROM balances a
-                ...    LEFT JOIN (SELECT c.IdTercero FROM exclusion_nits c INNER JOIN Formato k ON k.IdFormato = c.IdFormato 
+                ...    LEFT JOIN (SELECT c.IdTercero FROM exclusion_nits c INNER JOIN formato k ON k.IdFormato = c.IdFormato 
                 ...    AND k.Formato   = '${formato}') ex  ON a.NumId = ex.IdTercero ${condicion_retenciones}
                 ...    WHERE a.Codigo LIKE '${cuenta_contable}%'
                 ...    AND ex.IdTercero IS NULL AND a.Usuario='${usuario}'
