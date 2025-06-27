@@ -69,7 +69,7 @@ procesar
             Execute SQL Script    ${CURDIR}/../sql/tmp.sql
 
             ${sql}=    Catenate
-            ...    INSERT INTO Balances 
+            ...    INSERT INTO balances 
             ...    (Codigo,TipoDoc,NumId,DV,Direccion,CodDpto,CodMcp,Departamento,Municipio,PaisResidencia,PrimerApellido,SegundoApellido,PrimerNombre,OtrosNombres,RazonSocial,SaldoInicial,Debito,Credito,SaldoFinal,EncontradoDIAN,Usuario,Origen)
             ...    SELECT Codigo,TipoDoc,NumId,DV,
             ...    UPPER(Direccion),CodDpto,CodMcp,UPPER(Departamento),UPPER(Municipio),UPPER(PaisResidencia),
