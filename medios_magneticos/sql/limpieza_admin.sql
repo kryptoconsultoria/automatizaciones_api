@@ -1,9 +1,3 @@
 TRUNCATE TABLE direccion;
 TRUNCATE TABLE rues;
 DELETE FROM puc;
-DELETE FROM cliente;
-DELETE FROM exclusion_nits;
-DELETE FROM tipo_doc;
-DELETE FROM municipio;
-DELETE FROM departamento;
-DELETE FROM pais;
