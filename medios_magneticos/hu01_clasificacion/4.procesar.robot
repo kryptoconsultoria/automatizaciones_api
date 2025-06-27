@@ -1,6 +1,7 @@
 *** Settings ***
 Library           DatabaseLibrary
 Library           Collections
+Library           RPA.FileSystem
 Library           OperatingSystem
 Library           String
 Library           Dialogs
@@ -41,7 +42,7 @@ procesar
             Execute SQL Script    ${CURDIR}/../sql/tablas_temporales.sql
 
             ${exists}=    Run Keyword And Return Status    File Should Exist    ${CURDIR}/../sql/tmp.sql
-            Run Keyword If    ${exists}    Remove File    ${CURDIR}/../sql/tmp.sql
+            Run Keyword If    ${exists}    RPA.FileSystem.Remove File    ${CURDIR}/../sql/tmp.sql
 
             IF     ${id_sistema}[0][0] == 1
                 ${content}=    Get File    ${CURDIR}/../sql/siigo_pyme.sql

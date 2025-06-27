@@ -47,4 +47,5 @@ fastapi
 uvicorn[standard]
 robotframework
 robotframework-databaselibrary
+robotframework-jsonlibrary
 pymysql
