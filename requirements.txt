@@ -49,3 +49,4 @@ robotframework
 robotframework-databaselibrary
 robotframework-jsonlibrary
 pymysql
+instructor
