@@ -1,7 +1,5 @@
 TRUNCATE TABLE direccion;
 TRUNCATE TABLE rues;
-DELETE FROM retenciones_asumidas;
-DELETE FROM bancos;
 DELETE FROM puc;
 DELETE FROM cliente;
 DELETE FROM exclusion_nits;
