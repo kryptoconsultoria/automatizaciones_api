@@ -44,7 +44,6 @@ salida.json
 # Modelos y NLP
 model/
 models/
-*.bin
 *.vec
 *.hdf5
 
