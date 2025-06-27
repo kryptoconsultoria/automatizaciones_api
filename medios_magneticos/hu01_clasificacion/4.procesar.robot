@@ -46,23 +46,23 @@ procesar
             IF     ${id_sistema}[0][0] == 1
                 ${content}=    Get File    ${CURDIR}/../sql/siigo_pyme.sql
                 ${content2}=   Replace String    ${content}    search_for=USUARIO    replace_with=${usuario}
-                Create File    ${CURDIR}/../sql/tmp.sql    ${content2}
+                RPA.FileSystem.Create File    ${CURDIR}/../sql/tmp.sql    ${content2}
             ELSE IF  ${id_sistema}[0][0] == 2
                 ${content}=    Get File    ${CURDIR}/../sql/siigo_nube.sql
                 ${content2}=   Replace String    ${content}    search_for=USUARIO    replace_with=${usuario}  
-                Create File    ${CURDIR}/../sql/tmp.sql    ${content2}
+                RPA.FileSystem.Create File    ${CURDIR}/../sql/tmp.sql    ${content2}
             ELSE IF  ${id_sistema}[0][0] == 3
                 ${content}=    Get File    ${CURDIR}/../sql/avansys.sql
                 ${content2}=   Replace String    ${content}    search_for=USUARIO    replace_with=${usuario} 
-                Create File    ${CURDIR}/../sql/tmp.sql    ${content2}
+                RPA.FileSystem.Create File    ${CURDIR}/../sql/tmp.sql    ${content2}
             ELSE IF  ${id_sistema}[0][0] == 4
                 ${content}=    Get File    ${CURDIR}/../sql/allegra.sql
                 ${content2}=   Replace String    ${content}    search_for=USUARIO    replace_with=${usuario}  
-                Create File    ${CURDIR}/../sql/tmp.sql    ${content2}
+                RPA.FileSystem.Create File    ${CURDIR}/../sql/tmp.sql    ${content2}
             ELSE IF  ${id_sistema}[0][0] == 5
                 ${content}=    Get File    ${CURDIR}/../sql/aliaddo.sql
                 ${content2}=   Replace String    ${content}    search_for=USUARIO    replace_with=${usuario}  
-                Create File    ${CURDIR}/../sql/tmp.sql    ${content2}
+                RPA.FileSystem.Create File    ${CURDIR}/../sql/tmp.sql    ${content2}
             END
 
             Execute SQL Script    ${CURDIR}/../sql/tmp.sql
