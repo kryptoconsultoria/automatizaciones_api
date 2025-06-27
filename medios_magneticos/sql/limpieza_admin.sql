@@ -1,3 +1,2 @@
-TRUNCATE TABLE direccion;
 TRUNCATE TABLE rues;
 DELETE FROM puc;
