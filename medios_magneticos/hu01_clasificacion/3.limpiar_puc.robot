@@ -36,7 +36,7 @@ limpiar_puc
             ${sql}    Catenate
             ...    SELECT *
             ...    FROM puc a INNER JOIN 
-            ...    Cliente b ON b.IdCliente=a.IdCliente
+            ...    cliente b ON b.IdCliente=a.IdCliente
             ...    Where  b.Nombre='${cliente}'
             ...    order by Formato,CuentaContable ASC
 
@@ -51,7 +51,7 @@ limpiar_puc
                 ${sql}    Catenate
                 ...    SELECT Count(*) FROM puc a
                 ...    INNER JOIN 
-                ...    Cliente b ON b.IdCliente=a.IdCliente
+                ...    cliente b ON b.IdCliente=a.IdCliente
                 ...    where CuentaContable like '${cuenta_contable}%'
                 ...    AND b.Nombre='${cliente}'
 
