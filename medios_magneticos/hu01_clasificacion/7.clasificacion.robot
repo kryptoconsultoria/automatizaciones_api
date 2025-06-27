@@ -208,7 +208,7 @@ clasificacion
             ...    INSERT INTO formato_1012 (Codigo,Concepto,TipoDoc,NumId,DV,RazonSocial,PaisResidencia,ValorAl3112,Usuario)
             ...    SELECT ANY_VALUE(Codigo),ANY_VALUE(Concepto),ANY_VALUE(TipoDoc),ANY_VALUE(c.NumId),ANY_VALUE(c.DV),
             ...    ANY_VALUE(c.RazonSocial),ANY_VALUE(PaisResidencia),ABS(SUM(CAST(SaldoFinal AS SIGNED))),'${usuario}'
-            ...    FROM automatizaciones.balances a 
+            ...    FROM medios_magneticos.balances a 
             ...    INNER JOIN puc b ON a.Codigo = b.CuentaContable
             ...    INNER JOIN cross_bancos c ON a.Codigo=c.Cuentas AND b.IdCliente=c.IdCliente
             ...    where b.formato='formato_1012' AND b.IdCliente=${id_sistema}[0][1] GROUP BY codigo
@@ -217,9 +217,9 @@ clasificacion
             # #Agrupar por cuenta sin importar tercero, solo cuentas donde este registrada la dian y si la sumatoria da 0 descartar
             ${sql}=    Catenate
             ...    WITH cuentas_dian AS (
-            ...    select b.*,c.Sumatoria from (SELECT id,Codigo,NumId,SaldoCtasPagar FROM automatizaciones.formato_1009 where NumId = '800197268') a
-            ...    inner join	(SELECT id,Codigo,NumId,SaldoCtasPagar FROM automatizaciones.formato_1009) b ON a.Codigo=b.Codigo
-            ...    inner join  (SELECT ANY_VALUE(Codigo) as Codigo,ANY_VALUE(NumId) as NumId,SUM(CAST(SaldoCtasPagar AS SIGNED)) as Sumatoria FROM automatizaciones.formato_1009 GROUP BY Codigo) c
+            ...    select b.*,c.Sumatoria from (SELECT id,Codigo,NumId,SaldoCtasPagar FROM medios_magneticos.formato_1009 where NumId = '800197268') a
+            ...    inner join	(SELECT id,Codigo,NumId,SaldoCtasPagar FROM medios_magneticos.formato_1009) b ON a.Codigo=b.Codigo
+            ...    inner join  (SELECT ANY_VALUE(Codigo) as Codigo,ANY_VALUE(NumId) as NumId,SUM(CAST(SaldoCtasPagar AS SIGNED)) as Sumatoria FROM medios_magneticos.formato_1009 GROUP BY Codigo) c
             ...    ON  a.Codigo=c.Codigo
             ...    )
             ...    DELETE c FROM formato_1009 AS c INNER JOIN cuentas_dian AS o ON c.Id = o.Id WHERE Sumatoria=0 and Usuario='${usuario}' 

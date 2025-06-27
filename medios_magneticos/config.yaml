@@ -167,8 +167,8 @@ credenciales:
   base_datos:
     servidor: "178.156.139.34"   # Dirección del servidor de la base de datos
     puerto: "25"                                     # Puerto de la base de datos
-    usuario: "root"   # Usuario de la base de datos
-    contrasena: "7L9RHwrqHHqwt54HA2C74fPDDm4q2Qj2Ew4kWEBDfm2tetFzZvJ1lqOltcuEmVhU"  # Contraseña del usuario
+    usuario: "mysql"   # Usuario de la base de datos
+    contrasena: "CCdfdyEuDb4UkFUwsTQc1oqqzQaJySpq4Xlf6Xn28ZqPEaIJETdqTxKQEdGPWGQf"  # Contraseña del usuario
     nombre_bd: "medios_magneticos"   # Nombre de la base de datos
 
   # Credenciales de OneDrive

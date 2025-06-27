@@ -52,7 +52,7 @@ completar_informacion
 
             # ${sql}=    Catenate    
             # ...    SELECT ANY_VALUE(idBalances) AS idBalance, NumId, TipoDoc
-            # ...    FROM automatizaciones.balances
+            # ...    FROM medios_magneticos.balances
             # ...    WHERE (DV = '' OR TipoDoc IN ('13', '41', '22'))
             # ...    AND EncontradoDian IS NULL AND NumId IS NOT NULL    
             # ...    AND NumId REGEXP '^[0-9]+$'

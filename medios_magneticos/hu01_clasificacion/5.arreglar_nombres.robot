@@ -47,7 +47,7 @@ arreglar_nombres
             
             ${sql}=    Catenate    
              ...    SELECT NumId, TipoDoc, RazonSocial,Origen
-             ...    FROM automatizaciones.balances a
+             ...    FROM medios_magneticos.balances a
              ...    WHERE a.TipoDoc IN ('13', '41', '22') 
              ...    AND a.Origen = 'Terceros' AND a.Usuario='${usuario}'
              ...    AND PrimerNombre = ''
@@ -73,7 +73,7 @@ arreglar_nombres
 
             ${sql}=    Catenate    
             ...    SELECT NumId, TipoDoc, RazonSocial,Origen
-            ...    FROM automatizaciones.balances a
+            ...    FROM medios_magneticos.balances a
             ...    WHERE a.TipoDoc IN ('13', '41', '22') 
             ...    AND a.Origen = 'Rues' AND a.Usuario='${usuario}'
             ...    AND PrimerNombre = ''
