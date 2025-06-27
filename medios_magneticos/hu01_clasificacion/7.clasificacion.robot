@@ -27,7 +27,7 @@ clasificacion
             ${columnas}    Get From Dictionary    ${parametros['config_file']}    formatos
             ${sumatorias}    Get From Dictionary    ${parametros['config_file']}    sumatorias
             ${bd_config}       Get From Dictionary    ${parametros['config_file']['credenciales']}    base_datos
-            ${cliente}   Get From Dictionary   ${parametros['config_file']['credenciales']}   cliente
+            ${cliente}   Get From Dictionary   ${parametros['config_file']['credenciales']}  cliente
             ${usuario}   Get From Dictionary   ${parametros['config_file']['credenciales']}   usuario
 
 
@@ -39,14 +39,14 @@ clasificacion
             ${sql}    Catenate
             ...    SELECT IdSistema,IdCliente,IdTipoDoc,Nombre,IdPais,
             ...    IdDepartamento,IdMunicipio,Direccion 
-            ...    FROM cliente where Nombre='${cliente}'
+            ...    FROMcliente where Nombre='${cliente}'
 
             ${id_sistema}    Query    ${sql}           
 
             ${sql}    Catenate
             ...    SELECT *
             ...    FROM puc_exogena a INNER JOIN 
-            ...    Cliente b ON b.IdCliente=a.Cliente
+            ...   cliente b ON b.IdCliente=a.Cliente
             ...    WHERE b.Nombre='${cliente}' 
             ...    AND Formato !='formato_1012' 
             ...    and Formato !='formato_1010' 
