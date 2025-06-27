@@ -45,7 +45,6 @@ xx==3.3.2
 zstandard==0.23.0
 fastapi
 uvicorn[standard]
-rpaframework
 robotframework
 robotframework-databaselibrary
 pymysql
