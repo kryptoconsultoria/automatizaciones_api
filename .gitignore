@@ -57,3 +57,6 @@ config.json
 __pycache__/
 wandb/
 mlruns/
+
+# Excepcion
+!meta.json
