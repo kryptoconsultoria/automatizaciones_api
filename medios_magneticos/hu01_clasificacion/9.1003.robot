@@ -14,6 +14,13 @@ Resource          funciones/descargar_onedrive.robot
 # ${config_file_pdf}    ../config_pdf.yaml
 
 
+
+
+
+
+
+
+
 # *** Tasks ***
 # LLenar PDF 1003
 #     [Documentation]    Clasifica formatos de la Dian

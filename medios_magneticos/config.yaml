@@ -165,31 +165,31 @@ sumatorias:
 credenciales:
   # Credenciales de base de datos
   base_datos:
-    servidor: "{{ environment.SERVIDOR_MEDIOS_MAGNETICOS }}"   # Dirección del servidor de la base de datos
+    servidor: 127.0.0.1   # Dirección del servidor de la base de datos
     puerto: 3306                                     # Puerto de la base de datos
-    usuario: "{{ environment.USUARIO_BD_MEDIOS_MAGNETICOS }}"   # Usuario de la base de datos
-    contrasena: "{{ environment.CONTRASENA_BD_MEDIOS_MAGNETICOS }}"  # Contraseña del usuario
+    usuario: root   # Usuario de la base de datos
+    contrasena: 7L9RHwrqHHqwt54HA2C74fPDDm4q2Qj2Ew4kWEBDfm2tetFzZvJ1lqOltcuEmVhU@q4cg8swk8o8soc8kg8w08s0k  # Contraseña del usuario
     nombre_bd: "medios_magneticos"   # Nombre de la base de datos
 
   # Credenciales de OneDrive
   sharepoint:
-    id_cliente: "{{ environment.CLIENT_ID_OFFICE_MEDIOS_MAGNETICOS }}"            # ID del cliente
-    secreto_cliente: "{{ environment.SECRET_ID_MEDIOS_MAGNETICOS }}"   # Secreto del cliente
-    nombre_sitio: "{{ environment.SECRET_ID_MEDIOS_MAGNETICOS }}"      # nombre sitio (organización)
+    id_cliente: 952ce091-2362-481e-aa37-61325d6f2e0f            # ID del cliente
+    secreto_cliente: "jjk8Q~9~wfmhW4b-N2FDX1dY7mT1_gvgH0Kivc7y"   # Secreto del cliente
+    nombre_sitio: "kryptocolombia.sharepoint.com"      # nombre sitio (organización)
     scopes: ['Sites.ReadWrite.All','Files.ReadWrite.All']  
-    uri_redireccion: "{{ environment.REDIRECT_URI_MEDIOS_MAGNETICOS }}"
-    ruta_salidas:   "{{ environment.OUTPUT_PATH_MEDIOS_MAGNETICOS }}"
+    uri_redireccion: "https://login.microsoftonline.com/common/oauth2/nativeclient"
+    ruta_salidas:   "/Innovación y tecnología/IntegrIA/Proyectos Automatización/07 Medios Magnéticos/salidas/"
     ruta_salidas_local:   "medios_magneticos/salidas/"
     
   chat_gpt:
-    token: "{{ environment.CHAT_GPT_TOKEN }}"
+    token: "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"
 
   claude:
-    token:  "{{ environment.CLAUDE_TOKEN }}"
+    token:  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
 
   perplexity:
     modelo: "sonar-pro"
-    token:  "{{ environment.PERPLEXITY_TOKEN }}"
+    token:  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
     prompt:  "You are an advanced search engine designed to retrieve detailed business information."
     instrucciones: >
         with the  provided name of a business BUSINESS_NAME and optionally the city of its headquarters CITY_HEADQUARTERS, search for and retrieve the full name and the headquarter address, including the city and country. 
