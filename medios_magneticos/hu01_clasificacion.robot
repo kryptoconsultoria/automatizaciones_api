@@ -118,7 +118,7 @@ HU01 Clasificacion
         
             IF    ${completado} and '${palabra_clave}' == 'subir_archivos'
                 ${sql}    Catenate
-                ...    UPDATE medios_magneticos.estado SET Estado='Finalizado',HistoriaUsuario='HU01',Tarea='${palabra_clave}.robot' WHERE IdBot=1 AND idEstado=${estado_actual}[0][0] and Usuario='${usuario}'
+                ...    UPDATE medios_magneticos.estado SET Estado='Finalizado',HistoriaUsuario='HU01',Tarea='${palabra_clave}.robot',ErrorDetalle="" WHERE IdBot=1 AND idEstado=${estado_actual}[0][0] and Usuario='${usuario}'
                 ${estado}    Set Variable    Finalizado
                 ${hu}    Set Variable    HU01
                 ${tarea}    Set Variable    ${palabra_clave}
