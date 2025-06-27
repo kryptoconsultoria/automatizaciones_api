@@ -2,7 +2,6 @@
 Library           DatabaseLibrary
 Library           Collections
 Library           OperatingSystem
-Library           RPA.FileSystem
 Library           String
 Resource          funciones/leer_pdf.robot
 Resource          funciones/completar_informacion_dian.robot
@@ -36,8 +35,8 @@ ${REGEX_PORCENTAJE}      (?:(?:[0-9]{1,2}(?:[.,]\\d+)?|100(?:[.,]0+)?))%
    FOR    ${i}    IN RANGE    1    ${reintentos}
       TRY
          # Obtener las rutas locales y la configuración de la base de datos
-         ${pdf_1010}=    Get From Dictionary    ${parametros['config_pdf']['rutas_pdf']}   pdf_1010
-         ${bd_config}=       Get From Dictionary    ${parametros['config_file']['credenciales']}    base_datos
+         ${pdf_1010}    Get From Dictionary    ${parametros['config_pdf']['rutas_pdf']}   pdf_1010
+         ${bd_config}       Get From Dictionary    ${parametros['config_file']['credenciales']}    base_datos
          ${sharepoint}   Get From Dictionary   ${parametros['config_file']['credenciales']}   sharepoint
          ${usuario}   Get From Dictionary   ${parametros['config_file']['credenciales']}   usuario
 
@@ -64,14 +63,26 @@ ${REGEX_PORCENTAJE}      (?:(?:[0-9]{1,2}(?:[.,]\\d+)?|100(?:[.,]0+)?))%
          ${carpeta_1010}    Replace String    ${CURDIR}/../${pdf_1010["ruta_carpeta"]}    search_for=CLIENTE    replace_with=${cliente}
          ${ruta_nube}    Replace String    ${pdf_1010["ruta_nube"]}    CLIENTE   ${cliente}
 
+         # Crear carpeta si existe 
+         ${existe}=    Run Keyword And Return Status    Directory Should Exist    ${carpeta_1010}e
+         IF    not ${existe}
+               Create Directory    ${carpeta_1010}
+         END
+
          #Borrar archivos de cada carpeta
          OperatingSystem.Remove Files    ${carpeta_1010}/*
 
          #Enlistar archivo de sharepoint
-         ${estado}    ${archivos}=     Listar archivos    refresh_token=${token_refresco}     secreto_cliente=${sharepoint['secreto_cliente']}    url_redireccion=${sharepoint['uri_redireccion']}   nombre_del_sitio=${sharepoint['nombre_sitio']}    ruta_carpeta=${ruta_nube}    id_cliente=${sharepoint['id_cliente']}       
+         ${estado}    ${archivos}     Listar archivos    refresh_token=${token_refresco}     secreto_cliente=${sharepoint['secreto_cliente']}    url_redireccion=${sharepoint['uri_redireccion']}   nombre_del_sitio=${sharepoint['nombre_sitio']}    ruta_carpeta=${ruta_nube}    id_cliente=${sharepoint['id_cliente']}       
          IF    '${estado}' == 'No encontrado'
             ${completado}=    Set Variable    ${True}
             RETURN    ${completado}
+         END
+
+         # Crear carpeta si existe 
+         ${existe}    Run Keyword And Return Status    Directory Should Exist    ${carpeta_1010}
+         IF    not ${existe}
+            Create Directory    ${carpeta_1010}    
          END
          
          FOR    ${archivo}  IN   @{archivos}
@@ -79,6 +90,7 @@ ${REGEX_PORCENTAJE}      (?:(?:[0-9]{1,2}(?:[.,]\\d+)?|100(?:[.,]0+)?))%
                ${archivo}    Convert To String    item=${archivo}
                ${archivo}    Replace String    search_for=File:    string=${archivo}    replace_with=${empty}
                ${archivo}    Strip String    string=${archivo}
+               
                ${estado_descarga}      Descargar Archivo de Sharepoint   refresh_token=${token_refresco}    id_cliente=${sharepoint['id_cliente']}     secreto_cliente=${sharepoint['secreto_cliente']}     url_redireccion=${sharepoint['uri_redireccion']}     nombre_del_sitio=${sharepoint['nombre_sitio']}     ruta_archivo=${ruta_nube}${archivo}     ruta_descarga=${carpeta_1010}
                IF  '${estado_descarga}' == 'Fallido'
                   ${completado}=    Set Variable    ${False}

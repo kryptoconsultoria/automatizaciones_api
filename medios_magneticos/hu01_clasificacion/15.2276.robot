@@ -2,7 +2,6 @@
 Library           DatabaseLibrary
 Library           Collections
 Library           OperatingSystem
-Library           RPA.FileSystem
 Library           String
 Resource          funciones/leer_pdf.robot
 Resource          funciones/descargar_onedrive.robot
@@ -50,6 +49,12 @@ ${REGEX_EXP_NIT}  \\b\\d{2}\\s\\d{5,}\\b
             ${carpeta_2276}    Replace String    ${CURDIR}/../${pdf_2276["ruta_carpeta"]}    search_for=CLIENTE    replace_with=${cliente}
             ${ruta_nube}    Replace String    ${pdf_2276["ruta_nube"]}    CLIENTE   ${cliente}
 
+            # Crear carpeta si existe 
+            ${existe}    Run Keyword And Return Status    Directory Should Exist    ${carpeta_2276}
+            IF    not ${existe}
+                Create Directory    ${carpeta_2276}
+            END
+            
             #Borrar archivos de cada carpeta
             OperatingSystem.Remove Files    ${carpeta_2276}*
 

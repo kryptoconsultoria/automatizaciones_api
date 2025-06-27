@@ -2,7 +2,6 @@
 Library           DatabaseLibrary
 Library           Collections
 Library           OperatingSystem
-Library           RPA.FileSystem
 Library           String
 Library           JSONLibrary
 Resource          funciones/back_claude.robot
@@ -12,14 +11,6 @@ Resource          funciones/descargar_onedrive.robot
 # *** Variables ***
 # ${config_file}    ../config.yaml
 # ${config_file_pdf}    ../config_pdf.yaml
-
-
-
-
-
-
-
-
 
 # *** Tasks ***
 # LLenar PDF 1003
@@ -57,6 +48,12 @@ Resource          funciones/descargar_onedrive.robot
             # validar si la ruta contiene la palabra insumos si la contiene solo sube el excel asociado con el cliente
             ${carpeta_1003}    Replace String    ${CURDIR}/../${pdf_1003["ruta_carpeta"]}    search_for=CLIENTE    replace_with=${cliente}
             ${ruta_nube}    Replace String    ${pdf_1003["ruta_nube"]}    CLIENTE   ${cliente}
+
+            # Crear carpeta si existe 
+            ${existe}=    Run Keyword And Return Status    Directory Should Exist    ${carpeta_1003}
+            IF    not ${existe}
+                Create Directory    ${carpeta_1003}
+            END
 
             #Borrar archivos de cada carpeta
             OperatingSystem.Remove Files    ${carpeta_1003}/*

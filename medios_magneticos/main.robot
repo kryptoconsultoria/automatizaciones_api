@@ -2,7 +2,6 @@
 Library     SeleniumLibrary
 Library     RPA.Tasks
 Library     Collections
-Library     RPA.FileSystem
 Resource    hu01_clasificacion.robot
 
 
@@ -24,19 +23,19 @@ Medios magneticos
 
     Set To Dictionary    ${config['credenciales']}    cliente      ${CLIENTE}                        
     Set To Dictionary    ${config['credenciales']}    usuario      ${USUARIO}
+     
+    ${ruta_json}    Set Variable    ${CURDIR}/../medios_magneticos/salida.json
+    ${json_existe}    Does file exist      ${ruta_json}
+    
+    IF    ${json_existe}
+        Remove File    ${ruta_json}
+    END
 
     &{respuesta}    HU01 Clasificacion    ${config}     ${config_pdf}
 
     ${respuesta_json}=      Convert JSON to string    ${respuesta}
 
-    ${ruta_json}    Set Variable    ${CURDIR}/../medios_magneticos/salida.json
-    ${json_existe}    Does file exist      ${ruta_json}
-    
-    IF    ${json_existe}
-        RPA.FileSystem.Remove File    ${ruta_json}
-    END
-
-    RPA.FileSystem.Create File    ${ruta_json}    content=${respuesta_json}
+    Create File    ${ruta_json}    content=${respuesta_json}
         
 
     

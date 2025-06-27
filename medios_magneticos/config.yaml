@@ -92,15 +92,15 @@ rutas_contabilidad:
     columnas: "Id_1,IdentificationDocument,IdNumbers,CheckDigit,PrimerApellido,SegundoApellido,PrimerNombre,OtrosNombres,CommercialName,EmailBounced,ContactAddress,Email,CountryId,Phone,RefTypeId,DocumentTypeId,City,CityId"
     cabeceras: 2
     indice_columna: "N/A"
-  #========================================================================================
+
   exogena:
     ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/07 Medios Magnéticos/insumos/puc_exogena/CLIENTE/"
-    ruta_carpeta: "insumos/puc_exogena/"
+    ruta_carpeta: "insumos/puc_exogena/CLIENTE/"
     nombre_tabla: "puc"
     nombre_hoja: "PUC"
     columnas: "CuentaContable,Descripcion,Formato,Concepto,Columna,IdFormula,NitReporta,IdCliente"
     cabeceras: 1
-    indice_columna: "N/A" 
+    indice_columna: "N/A"   
 
 rutas_admin:
   rues:
@@ -110,8 +110,7 @@ rutas_admin:
     nombre_hoja: "N/A"
     columnas: "OrgJuridica,Categoria,FechaMatricula,RazonSocial,TipoIdentificacion,NumeroIdentificacion,ActividadEconomica,ActividadEconomica2,ActividadEconomica3,ActividadEconomica4,DescTamanoEmpresa,Departamento,Municipio,DireccionComercial,CorreoComercial,RepLegal"
     cabeceras: 4
-    indice_columna: "N/A"
-          
+    indice_columna: "N/A"       
   exclusion_nits:
     ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/07 Medios Magnéticos/insumos/exclusion_nits/"
     ruta_carpeta: "insumos/exclusion_nits/"

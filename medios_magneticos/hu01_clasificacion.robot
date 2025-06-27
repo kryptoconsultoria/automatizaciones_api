@@ -57,7 +57,7 @@ HU01 Clasificacion
     ${tam_estado_actual}    Get Length  ${estado_actual}  
     IF  ${tam_estado_actual} == 0
         ${sql}    Catenate
-        ...    INSERT INTO estado (Tarea,HistoriaUsuario,Estado,IdBot,Fecha,Usuario) VALUES ('actualizacion_insumos_contabilidad.robot','HU01','Iniciado',1,'${fecha_actual}','${usuario}')
+        ...    INSERT INTO estado (Tarea,HistoriaUsuario,Estado,IdBot,Fecha,Usuario) VALUES ('actualizacion_insumos_admin.robot','HU01','Iniciado',1,'${fecha_actual}','${usuario}')
         Execute SQL String    ${sql}
         ${sql}    Catenate    
         ...    select * from medios_magneticos.estado WHERE IdBot=1 AND HistoriaUsuario='HU01' and Estado IN ('Error','Iniciado') and Usuario='${usuario}' order by fecha desc limit 1
@@ -93,9 +93,9 @@ HU01 Clasificacion
         ...    Select Count(*) FROM medios_magneticos.estado WHERE IdBot=1 AND 
         ...    HistoriaUsuario='HU01' and Tarea='${palabra_clave}.robot' and idEstado=${estado_actual}[0][0] 
         ...    and Estado IN ('Error','Iniciado') and Usuario='${usuario}'
-
         ${Estado}    Query       ${sql}
-        Disconnect From Database  
+        Disconnect From Database
+          
         IF  '${Estado[0][0]}' == '1' 
             ${completado}     ${error}        Run Keyword    ${palabra_clave}     &{parametros}
             Connect To Database    pymysql    ${bd_config["nombre_bd"]}    ${bd_config["usuario"]}    ${bd_config["contrasena"]}    ${bd_config["servidor"]}    ${bd_config["puerto"]}
@@ -108,7 +108,7 @@ HU01 Clasificacion
                 Execute SQL String    ${sql}  
             ELSE
                 ${sql}    Catenate
-                ...    UPDATE medios_magneticos.estado SET Estado='Error',HistoriaUsuario='HU01',Tarea='${palabra_clave}.robot',ErrorDetalle="${error}" WHERE IdBot=1 AND idEstado=${estado_actual}[0][0] and Usuario='${usuario}'
+                ...    UPDATE medios_magneticos.estado SET Estado='Error',HistoriaUsuario='HU01',Tarea='${palabra_clave}.robot',ErrorDetalle="""${error}""" WHERE IdBot=1 AND idEstado=${estado_actual}[0][0] and Usuario='${usuario}'
                 ${estado}    Set Variable    Error
                 ${hu}    Set Variable    HU01
                 ${tarea}    Set Variable    ${palabra_clave}
@@ -125,8 +125,6 @@ HU01 Clasificacion
                 Execute SQL String    ${sql}
                 BREAK
             END 
-
-
             Disconnect From Database
         END
         ${contador}    Evaluate    ${contador}+1
