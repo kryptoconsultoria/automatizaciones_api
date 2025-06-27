@@ -4,10 +4,10 @@ Library           Collections
 Library           OperatingSystem
 Library           RPA.FileSystem
 Library           String
-Resource          ../funciones/leer_pdf.robot
-Resource          ../funciones/descargar_onedrive.robot
-Resource          ../funciones/convertir_excel.robot
-Resource          ../funciones/subir_insumo.robot
+Resource          funciones/leer_pdf.robot
+Resource          funciones/descargar_onedrive.robot
+Resource          funciones/convertir_excel.robot
+Resource          funciones/subir_insumo.robot
 
 
 # *** Variables ***

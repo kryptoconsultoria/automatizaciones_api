@@ -5,8 +5,8 @@ Library           OperatingSystem
 Library           RPA.FileSystem
 Library           String
 Library           JSONLibrary
-Resource          ../funciones/back_claude.robot
-Resource          ../funciones/descargar_onedrive.robot
+Resource          funciones/back_claude.robot
+Resource          funciones/descargar_onedrive.robot
 
 
 # *** Variables ***

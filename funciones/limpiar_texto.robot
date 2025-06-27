@@ -1,5 +1,5 @@
 *** Settings ***
-Library     ../librerias/ModeloDirecciones.py
+Library     librerias/ModeloDirecciones.py
 
 # *** Variables ***
 # ${texto}    OFIC 45 y KMS 23   

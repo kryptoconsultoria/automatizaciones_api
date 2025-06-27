@@ -1,5 +1,5 @@
 *** Settings ***
-Library           ../librerias/LibreriaGPT.py
+Library           librerias/LibreriaGPT.py
 Library           OperatingSystem
 Library           RPA.FileSystem
 Library           String

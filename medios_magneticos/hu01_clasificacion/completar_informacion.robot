@@ -3,7 +3,7 @@ Library           DatabaseLibrary
 Library           Collections
 Library           OperatingSystem
 Library           RPA.FileSystem
-Resource          ../funciones/completar_informacion_dian.robot
+Resource          funciones/completar_informacion_dian.robot
 
 #*** Variables ***
 #${config}    ../config.yaml

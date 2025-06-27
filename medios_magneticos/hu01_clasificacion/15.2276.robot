@@ -4,8 +4,8 @@ Library           Collections
 Library           OperatingSystem
 Library           RPA.FileSystem
 Library           String
-Resource          ../funciones/leer_pdf.robot
-Resource          ../funciones/descargar_onedrive.robot
+Resource          funciones/leer_pdf.robot
+Resource          funciones/descargar_onedrive.robot
 
 *** Variables ***
 # ${config_file}    ../config.yaml

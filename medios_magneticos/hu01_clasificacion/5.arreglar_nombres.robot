@@ -2,7 +2,7 @@
 Library           DatabaseLibrary
 Library           Collections
 Library           OperatingSystem
-Resource          ../funciones/arreglar_nombres.robot
+Resource          funciones/arreglar_nombres.robot
 Library           RPA.FileSystem
 
 

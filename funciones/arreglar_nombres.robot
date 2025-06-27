@@ -1,6 +1,6 @@
 *** Settings ***
 Library     RequestsLibrary
-Library     ../librerias/LibreriaNombres.py
+Library     librerias/LibreriaNombres.py
 
 
 
