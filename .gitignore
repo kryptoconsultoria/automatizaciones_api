@@ -56,3 +56,5 @@ mlruns/
 
 # Excepcion
 !meta.json
+!Formato_desglosado.xlsx
+!Formato.xlsx
