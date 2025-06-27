@@ -33,6 +33,7 @@ COPY . .
 # Puerto expuesto (ajusta si no aplicable)
 EXPOSE 82
 
+RUN pip install --upgrade pip
 RUN pip install rpaframework
 
 # Comando de arranque
