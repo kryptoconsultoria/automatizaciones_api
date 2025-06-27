@@ -123,9 +123,9 @@ rutas_admin:
 
 
 output:
-  ruta_plantilla: "medios_magneticos/plantillas/Formato.xlsx"
-  ruta_desglose: "medios_magneticos/plantillas/Formato_desglosado.xlsx"
-  salidas: "medios_magneticos/salidas/"
+  ruta_plantilla: "plantillas/Formato.xlsx"
+  ruta_desglose: "plantillas/Formato_desglosado.xlsx"
+  salidas: "salidas/"
 
 
 #============================================
