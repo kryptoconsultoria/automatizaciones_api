@@ -165,7 +165,7 @@ sumatorias:
 credenciales:
   # Credenciales de base de datos
   base_datos:
-    servidor: "mysql"   # Dirección del servidor de la base de datos
+    servidor: "178.156.139.34"   # Dirección del servidor de la base de datos
     puerto: "25"                                     # Puerto de la base de datos
     usuario: "root"   # Usuario de la base de datos
     contrasena: "7L9RHwrqHHqwt54HA2C74fPDDm4q2Qj2Ew4kWEBDfm2tetFzZvJ1lqOltcuEmVhU@q4cg8swk8o8soc8kg8w08s0k"  # Contraseña del usuario
