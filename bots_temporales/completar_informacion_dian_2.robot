@@ -94,4 +94,4 @@ Consulta DIAN
             Cerrar Navegador
         END
     END
-    [return]    ${datos}    ${completado}
+    RETURN    ${datos}    ${completado}

@@ -45,7 +45,7 @@ rutas_contabilidad:
     nombre_hoja: "Hoja1"
     nombre_tabla: "balance_siigo_pyme"
     columnas: "Grupo,Cuenta,Subcuenta,Auxiliar,Subauxil,NIT,Sucursal,DigitoVerificacion,CentroC,Empty1,Descripcion,UltimoMov,SaldoAnterior,Debito,Credito,NuevoSaldo"
-    cabeceras: 8
+    cabeceras: 7
     indice_columna: [0,1,2,3,4]
 
   listado_siigo_pyme:

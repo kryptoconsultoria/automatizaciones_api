@@ -2,7 +2,6 @@
 Library           DatabaseLibrary
 Library           Collections
 Library           OperatingSystem
-Library           RPA.FileSystem
 Library           String
 Library           Dialogs
 

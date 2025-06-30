@@ -1,8 +1,11 @@
 {
 	"folders": [
 		{
-			"name": "medios_magneticos",
-			"path": "."
+			"name": "Api_automatizaciones",
+			"path": "."{
+  "robot.pythonpath": ["."],
+  "robot.lint.robocop": true
+}
 		}
 	],
 	"settings": {}

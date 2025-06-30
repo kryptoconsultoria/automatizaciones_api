@@ -2,7 +2,6 @@
 Library           DatabaseLibrary
 Library           Collections
 Library           OperatingSystem
-Library           RPA.FileSystem
 Library           String
 Library           Dialogs
 Library           RPA.Excel.Files
@@ -65,7 +64,7 @@ exportar_excel_final
             Connect To Database    pymysql    ${bd_config["nombre_bd"]}    ${bd_config["usuario"]}    ${bd_config["contrasena"]}    ${bd_config["servidor"]}    ${bd_config["puerto"]}
 
             ${fecha_actual}    Get Current Date    result_format=%Y-%m-%d_%H_%M_%S
-            ${excel_ruta}    Set Variable   ${CURDIR}/../${output['salidas']}${/}medios_${cliente}_${fecha_actual}.xlsx
+            ${excel_ruta}    Set Variable   ${CURDIR}/../${output['salidas']}${/}medios_${cliente}_${usuario}_${fecha_actual}.xlsx
             OperatingSystem.Copy File    ${CURDIR}/../${output['ruta_plantilla']}    ${excel_ruta}
 
             Open Workbook     ${excel_ruta}      data_only=True

@@ -2,7 +2,6 @@
 Library           DatabaseLibrary
 Library           Collections
 Library           OperatingSystem
-Library           RPA.FileSystem
 Library           String
 Library           Dialogs
 
@@ -39,7 +38,7 @@ agrupacion
             
             ${id_sistema}=    Query    SELECT IdSistema,IdCliente,IdTipoDoc,Nombre,IdPais,IdDepartamento,IdMunicipio,Direccion FROM cliente where Nombre='${cliente}'
             
-            ${resultados}=     Query    SELECT Formato FROM puc_exogena a INNER JOIN Cliente b ON b.IdCliente=a.Cliente WHERE b.Nombre='${cliente}' AND (formato !='formato_1010') GROUP BY Formato 
+            ${resultados}=     Query    SELECT Formato FROM puc_exogena a INNER JOIN cliente b ON b.IdCliente=a.Cliente WHERE b.Nombre='${cliente}' AND (formato !='formato_1010') GROUP BY Formato 
 
             FOR    ${fila}    IN    @{resultados}
 

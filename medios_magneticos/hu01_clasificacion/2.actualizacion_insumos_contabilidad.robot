@@ -2,11 +2,11 @@
 Library    Collections
 Library    String
 Library    OperatingSystem
-Resource   funciones/convertir_excel.robot
-Resource   funciones/descargar_onedrive.robot
-Resource   funciones/subir_insumo.robot
+Resource   ${EXECDIR}/funciones/convertir_excel.robot
+Resource   ${EXECDIR}/funciones/descargar_onedrive.robot
+Resource   ${EXECDIR}/funciones/subir_insumo.robot
 Library    DatabaseLibrary
-
+Library    ConsoleDialogs
 # *** Variables ***
 # ${config}    ../config.yaml
 # ${REINTENTOS}    2
@@ -56,18 +56,31 @@ actualizacion_insumos_contabilidad
                     
                     #==================================================================================
                     # validar si la ruta contiene la palabra insumos si la contiene solo sube el excel asociado con el cliente
-                    ${ruta_cliente}    Replace String    ${CURDIR}/../${ruta["ruta_carpeta"]}    CLIENTE   ${cliente}
+                    ${ruta_completa}    Replace String    ${CURDIR}/../${ruta["ruta_carpeta"]}    CLIENTE   ${cliente}
                     ${ruta_nube}    Replace String    ${ruta["ruta_nube"]}    CLIENTE   ${cliente}
 
+                    # Crear carpeta si no xiste insumos sistema contabilidad
+                    ${ruta_sistema_contabilidad}    Set Variable    ${CURDIR}/../insumos/insumos_${nombre_sistema}[0][0]
+                    ${existe}=    Run Keyword And Return Status    Directory Should Exist    ${ruta_sistema_contabilidad}
+                    IF    not ${existe}
+                        Create Directory    ${ruta_sistema_contabilidad}
+                    END
 
-                    # Crear carpeta si existe 
+                    # Crear carpeta si no existe cliente
+                    ${ruta_cliente}    Set Variable    ${CURDIR}/../insumos/insumos_${nombre_sistema}[0][0]/${cliente}
                     ${existe}=    Run Keyword And Return Status    Directory Should Exist    ${ruta_cliente}
                     IF    not ${existe}
-                        Create Directory    ${ruta["ruta_carpeta"]}
+                        Create Directory    ${ruta_cliente}
+                    END
+
+                    # Crear carpeta si existe 
+                    ${existe}=    Run Keyword And Return Status    Directory Should Exist    ${ruta_completa}
+                    IF    not ${existe}
+                        Create Directory    ${ruta_completa}
                     END
 
                     #Borrar archivos de cada carpeta
-                    OperatingSystem.Remove Files    ${ruta_cliente}*
+                    OperatingSystem.Remove Files    ${ruta_completa}*
 
                     #Enlistar archivo de sharepoint
                     ${estado}    ${archivos}    Listar archivos    refresh_token=${token_refresco}     secreto_cliente=${sharepoint['secreto_cliente']}    url_redireccion=${sharepoint['uri_redireccion']}   nombre_del_sitio=${sharepoint['nombre_sitio']}    ruta_carpeta=${ruta_nube}    id_cliente=${sharepoint['id_cliente']}
@@ -77,11 +90,11 @@ actualizacion_insumos_contabilidad
                         ${archivo}    Convert To String    item=${archivo}
                         ${archivo}    Replace String    search_for=File:    string=${archivo}    replace_with=${empty}
                         ${archivo}    Strip String    string=${archivo}
-                        ${estado_descarga}      Descargar Archivo de Sharepoint   refresh_token=${token_refresco}    id_cliente=${sharepoint['id_cliente']}     secreto_cliente=${sharepoint['secreto_cliente']}     url_redireccion=${sharepoint['uri_redireccion']}     nombre_del_sitio=${sharepoint['nombre_sitio']}     ruta_archivo=${ruta_nube}${archivo}     ruta_descarga=${ruta_cliente}
+                        ${estado_descarga}      Descargar Archivo de Sharepoint   refresh_token=${token_refresco}    id_cliente=${sharepoint['id_cliente']}     secreto_cliente=${sharepoint['secreto_cliente']}     url_redireccion=${sharepoint['uri_redireccion']}     nombre_del_sitio=${sharepoint['nombre_sitio']}     ruta_archivo=${ruta_nube}${archivo}     ruta_descarga=${ruta_completa}
                     END
                     #==================================================================================
                            
-                    ${archivos}=    List files in directory    ${ruta_cliente}
+                    ${archivos}=    List files in directory    ${ruta_completa}
 
                     FOR    ${archivo}    IN    @{archivos}
                         ${archivo_path}=    Convert To String    ${archivo}
@@ -93,9 +106,9 @@ actualizacion_insumos_contabilidad
                         ${extension}=    Get From List    ${lista}    1
 
                         # Construir rutas de archivo
-                        ${archivo_csv}     Set Variable    ${ruta_cliente}${nombre_base}.csv
+                        ${archivo_csv}     Set Variable    ${ruta_completa}${nombre_base}.csv
                         ${archivo_csv}=    Replace String    ${archivo_csv}    search_for=\\    replace_with=/
-                        ${archivo_excel}   Set Variable    ${ruta_cliente}${nombre_base}.${extension}
+                        ${archivo_excel}   Set Variable    ${ruta_completa}${nombre_base}.${extension}
 
                         # Determinar acción según la extensión
                         IF    '${extension}' == 'xlsx' or '${extension}' == 'xls'
@@ -108,7 +121,6 @@ actualizacion_insumos_contabilidad
                         ELSE
                             Guardar CSV en UTF-8    ${archivo_csv}    ${archivo_csv}
                         END
-
                         # Subir archivo procesado a la base de datos
                         Ejecutar Carga Masiva desde CSV     nombre_bd=${bd_config["nombre_bd"]}    usuario=${bd_config["usuario"]}    contrasena=${bd_config["contrasena"]}    host=${bd_config["servidor"]}    puerto=${bd_config["puerto"]}    archivo_csv=${archivo_csv}  nombre_tabla=${ruta["nombre_tabla"]}    cabeceras=${ruta["cabeceras"]}    columnas=${ruta["columnas"]}    usuario_sistema=${usuario}
                         OperatingSystem.Remove File    ${archivo_csv}
@@ -121,17 +133,31 @@ actualizacion_insumos_contabilidad
             ${ruta}=    Get From Dictionary    ${rutas_contabilidad}    exogena
             #==================================================================================
             # validar si la ruta contiene la palabra insumos si la contiene solo sube el excel asociado con el cliente
-            ${ruta_cliente}    Replace String    ${CURDIR}/../${ruta["ruta_carpeta"]}    CLIENTE   ${cliente}
+            ${ruta_completa}    Replace String    ${CURDIR}/../${ruta["ruta_carpeta"]}    CLIENTE   ${cliente}
             ${ruta_nube}    Replace String    ${ruta["ruta_nube"]}    CLIENTE   ${cliente}
 
-            # Crear carpeta si existe 
-            ${existe}=    Run Keyword And Return Status    Should Contain    ${nombre_ruta}    ${ruta_cliente}
+            # Crear carpeta si no xiste insumos sistema contabilidad
+            ${ruta_puc_exogena}    Set Variable    ${CURDIR}/../insumos/puc_exogena
+            ${existe}=    Run Keyword And Return Status    Directory Should Exist    ${ruta_puc_exogena}
+            IF    not ${existe}
+                Create Directory    ${ruta_puc_exogena}
+            END
+
+            # Crear carpeta si no existe cliente
+            ${ruta_cliente}    Set Variable    ${CURDIR}/../insumos/puc_exogena/${cliente}
+            ${existe}=    Run Keyword And Return Status    Directory Should Exist    ${ruta_cliente}
             IF    not ${existe}
                 Create Directory    ${ruta_cliente}
             END
 
+            # Crear carpeta si existe 
+            ${existe}=    Run Keyword And Return Status    Directory Should Exist    ${ruta_completa}
+            IF    not ${existe}
+                Create Directory    ${ruta_completa}
+            END
+
             # Crear carpeta si existe archivos de cada carpeta
-            OperatingSystem.Remove Files    ${ruta_cliente}*
+            OperatingSystem.Remove Files    ${ruta_completa}*
 
             #Enlistar archivo de sharepoint
             ${estado}    ${archivos}    Listar archivos    refresh_token=${token_refresco}     secreto_cliente=${sharepoint['secreto_cliente']}    url_redireccion=${sharepoint['uri_redireccion']}   nombre_del_sitio=${sharepoint['nombre_sitio']}    ruta_carpeta=${ruta_nube}    id_cliente=${sharepoint['id_cliente']}
@@ -142,7 +168,7 @@ actualizacion_insumos_contabilidad
                 ${archivo}    Replace String    search_for=File:    string=${archivo}    replace_with=${empty}
                 ${archivo}    Strip String    string=${archivo}
 
-                ${estado_descarga}      Descargar Archivo de Sharepoint   refresh_token=${token_refresco}    id_cliente=${sharepoint['id_cliente']}     secreto_cliente=${sharepoint['secreto_cliente']}     url_redireccion=${sharepoint['uri_redireccion']}     nombre_del_sitio=${sharepoint['nombre_sitio']}     ruta_archivo=${ruta_nube}${archivo}     ruta_descarga=${ruta_cliente}
+                ${estado_descarga}      Descargar Archivo de Sharepoint   refresh_token=${token_refresco}    id_cliente=${sharepoint['id_cliente']}     secreto_cliente=${sharepoint['secreto_cliente']}     url_redireccion=${sharepoint['uri_redireccion']}     nombre_del_sitio=${sharepoint['nombre_sitio']}     ruta_archivo=${ruta_nube}${archivo}     ruta_descarga=${ruta_completa}
             END
 
             #==================================================================================               
@@ -158,14 +184,14 @@ actualizacion_insumos_contabilidad
                 ${extension}=    Get From List    ${lista}    1
 
                 # Construir rutas de archivo
-                ${archivo_csv}=     Set Variable    ${ruta_cliente}${nombre_base}.csv
+                ${archivo_csv}=     Set Variable    ${ruta_completa}${nombre_base}.csv
                 ${archivo_csv}=    Replace String    ${archivo_csv}    search_for=\\    replace_with=/
 
                 # Determinar acción según la extensión
                 Guardar CSV en UTF-8    ${archivo_csv}    ${archivo_csv}
                 # Subir archivo procesado a la base de datos
                 Ejecutar Carga Masiva desde CSV     nombre_bd=${bd_config["nombre_bd"]}    usuario=${bd_config["usuario"]}    contrasena=${bd_config["contrasena"]}    host=${bd_config["servidor"]}    puerto=${bd_config["puerto"]}    archivo_csv=${archivo_csv}  nombre_tabla=${ruta["nombre_tabla"]}    cabeceras=${ruta["cabeceras"]}    columnas=${ruta["columnas"]}    usuario_sistema=${usuario}
-                OperatingSystem.Remove File    ${archivo_csv}
+                #OperatingSystem.Remove File    ${archivo_csv}    
             END
             ${completado}=    Set Variable    ${True}
             ${error}    Set Variable     ${None}

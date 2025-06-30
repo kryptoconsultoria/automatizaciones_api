@@ -1,6 +1,6 @@
 *** Settings ***
 Library     RequestsLibrary
-Library     librerias/LibreriaClaude.py
+Library     ${EXECDIR}/librerias/LibreriaClaude.py
 
 # *** Variables ***
 # ${CLAVE_API}        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

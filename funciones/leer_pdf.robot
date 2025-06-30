@@ -2,7 +2,7 @@
 Library    RPA.PDF
 Library    Collections
 Library    String
-Library    librerias/LibreriaPDF.py
+Library    ${EXECDIR}/librerias/LibreriaPDF.py
 
 
 #*** Variables ***

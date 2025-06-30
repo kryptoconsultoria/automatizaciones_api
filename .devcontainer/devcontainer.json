@@ -1,0 +1,20 @@
+{
+  "name": "Api_automatizaciones",
+  "build": {
+    "dockerfile": "../Dockerfile",
+    "context": ".."
+  },
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/Api_automatizaciones,type=bind,consistency=cached",
+  "workspaceFolder": "/workspaces/Api_automatizaciones",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python"
+      }
+    }
+  },
+  "postCreateCommand": "pip install -r requirements.txt"
+}

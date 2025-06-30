@@ -4,8 +4,8 @@ Library           Collections
 Library           OperatingSystem
 Library           String
 Library           JSONLibrary
-Resource          funciones/back_claude.robot
-Resource          funciones/descargar_onedrive.robot
+Resource          ${EXECDIR}/funciones/back_claude.robot
+Resource          ${EXECDIR}/funciones/descargar_onedrive.robot
 
 
 # *** Variables ***
@@ -49,10 +49,18 @@ Resource          funciones/descargar_onedrive.robot
             ${carpeta_1003}    Replace String    ${CURDIR}/../${pdf_1003["ruta_carpeta"]}    search_for=CLIENTE    replace_with=${cliente}
             ${ruta_nube}    Replace String    ${pdf_1003["ruta_nube"]}    CLIENTE   ${cliente}
 
-            # Crear carpeta si existe 
-            ${existe}=    Run Keyword And Return Status    Directory Should Exist    ${carpeta_1003}
+            # Crear carpeta si no xiste insumos pdf_1003
+            ${ruta_1003}    Set Variable    ${CURDIR}/../insumos/pdf_1003
+            ${existe}=    Run Keyword And Return Status    Directory Should Exist    ${ruta_1003}
             IF    not ${existe}
-                Create Directory    ${carpeta_1003}
+                Create Directory    ${ruta_1003}
+            END
+            
+            # Crear carpeta si no existe cliente
+            ${ruta_cliente}    Set Variable    ${CURDIR}/../insumos/pdf_1003/${cliente}
+            ${existe}=    Run Keyword And Return Status    Directory Should Exist    ${ruta_cliente}
+            IF    not ${existe}
+                Create Directory    ${ruta_cliente}
             END
 
             #Borrar archivos de cada carpeta
@@ -73,7 +81,8 @@ Resource          funciones/descargar_onedrive.robot
                 ${estado_descarga}      Descargar Archivo de Sharepoint   refresh_token=${token_refresco}    id_cliente=${sharepoint['id_cliente']}     secreto_cliente=${sharepoint['secreto_cliente']}     url_redireccion=${sharepoint['uri_redireccion']}     nombre_del_sitio=${sharepoint['nombre_sitio']}     ruta_archivo=${ruta_nube}${archivo}     ruta_descarga=${carpeta_1003}
                 IF  '${estado_descarga}' == 'Fallido'
                   ${completado}=    Set Variable    ${False}
-                  RETURN    ${completado}
+                  ${error}    Set Variable    Error al descargar el archivo ${archivo} de SharePoint     
+                  RETURN    ${completado}    ${error}
                 ELSE IF    '${estado_descarga}' == 'No encontrado'
                   CONTINUE
                 END

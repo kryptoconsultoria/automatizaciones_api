@@ -35,6 +35,7 @@ EXPOSE 82
 
 RUN pip install --upgrade pip
 RUN pip install rpaframework
+RUN pip uninstall rpaframework-filesystem
 
 # Comando de arranque
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "82"]

@@ -34,7 +34,7 @@ Limpiar ceros
  
             ${id_sistema}=    Query    SELECT IdSistema,IdCliente,IdTipoDoc,Nombre,IdPais,IdDepartamento,IdMunicipio,Direccion,DV FROM cliente where Nombre='${cliente}'
             
-            ${resultados}=    Query    SELECT * FROM Formato WHERE Formato NOT IN ('formato_2276','formato_1010')
+            ${resultados}=    Query    SELECT * FROM formato WHERE Formato NOT IN ('formato_2276','formato_1010')
 
             FOR    ${fila}    IN    @{resultados}
 

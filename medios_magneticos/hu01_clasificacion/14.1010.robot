@@ -3,10 +3,10 @@ Library           DatabaseLibrary
 Library           Collections
 Library           OperatingSystem
 Library           String
-Resource          funciones/leer_pdf.robot
-Resource          funciones/completar_informacion_dian.robot
-Resource          funciones/descargar_onedrive.robot
-Resource          funciones/arreglar_nombres.robot
+Resource          ${EXECDIR}/funciones/leer_pdf.robot
+Resource          ${EXECDIR}/funciones/completar_informacion_dian.robot
+Resource          ${EXECDIR}/funciones/descargar_onedrive.robot
+Resource          ${EXECDIR}/funciones/arreglar_nombres.robot
 
 
 *** Variables ***
@@ -63,10 +63,18 @@ ${REGEX_PORCENTAJE}      (?:(?:[0-9]{1,2}(?:[.,]\\d+)?|100(?:[.,]0+)?))%
          ${carpeta_1010}    Replace String    ${CURDIR}/../${pdf_1010["ruta_carpeta"]}    search_for=CLIENTE    replace_with=${cliente}
          ${ruta_nube}    Replace String    ${pdf_1010["ruta_nube"]}    CLIENTE   ${cliente}
 
-         # Crear carpeta si existe 
-         ${existe}=    Run Keyword And Return Status    Directory Should Exist    ${carpeta_1010}e
+         # Crear carpeta si no xiste insumos pdf_1003
+         ${ruta_1010}    Set Variable    ${CURDIR}/../insumos/pdf_1010
+         ${existe}=    Run Keyword And Return Status    Directory Should Exist    ${ruta_1010}
          IF    not ${existe}
-               Create Directory    ${carpeta_1010}
+               Create Directory    ${ruta_1010}
+         END
+         
+         # Crear carpeta si no existe cliente
+         ${ruta_cliente}    Set Variable    ${CURDIR}/../insumos/pdf_1010/${cliente}
+         ${existe}=    Run Keyword And Return Status    Directory Should Exist    ${ruta_cliente}
+         IF    not ${existe}
+               Create Directory    ${ruta_cliente}
          END
 
          #Borrar archivos de cada carpeta

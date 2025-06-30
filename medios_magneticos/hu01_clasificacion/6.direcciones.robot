@@ -1,11 +1,10 @@
 *** Settings ***
-Library           librerias/LibreriaGPT.py
+Library           ${EXECDIR}/librerias/LibreriaGPT.py
 Library           OperatingSystem
-Library           RPA.FileSystem
 Library           String
 Library           Collections
 Library           DatabaseLibrary
-Resource          funciones/limpiar_texto.robot
+Resource          ${EXECDIR}/funciones/limpiar_texto.robot
 
 #*** Variables ***
 # ${CONFIG}    ../config.yaml

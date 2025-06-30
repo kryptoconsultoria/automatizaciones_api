@@ -2,9 +2,9 @@
 Library    Collections
 Library    String
 Library    OperatingSystem
-Resource   funciones/convertir_excel.robot
-Resource   funciones/descargar_onedrive.robot
-Resource   funciones/subir_insumo.robot
+Resource   ${EXECDIR}/funciones/convertir_excel.robot
+Resource   ${EXECDIR}/funciones/descargar_onedrive.robot
+Resource   ${EXECDIR}/funciones/subir_insumo.robot
 Library    DatabaseLibrary
 
 # *** Variables ***
@@ -37,6 +37,14 @@ actualizacion_insumos_admin
             Connect To Database    pymysql    ${bd_config["nombre_bd"]}    ${bd_config["usuario"]}    ${bd_config["contrasena"]}    ${bd_config["servidor"]}    ${bd_config["puerto"]}
             ${sql}      Execute SQL Script    ${CURDIR}/../sql/limpieza_admin.sql
             Disconnect From Database
+
+            #Crear carpeta de insumos si no existe
+            ${ruta_insumos}    Set Variable    ${CURDIR}/../insumos
+
+            ${existe}=    Run Keyword And Return Status    Directory Should Exist    ${ruta_insumos}
+            IF    not ${existe}
+                Create Directory    ${ruta_insumos}
+            END
 
             #Subida de insumos administración
             FOR    ${nombre_ruta}    IN    @{rutas_admin.keys()}

@@ -2,7 +2,7 @@
 Library           RPA.Tables
 Library           RPA.Excel.Files
 Library           String
-Library           librerias/LibreriaPandas.py
+Library           ${EXECDIR}/librerias/LibreriaPandas.py
 
 #*** Variables ***
 #${archivo_excel}    C:/Users/Krypto/PycharmProjects/medios_magneticos/insumos/insumos_siigo_pyme/balance_terceros/Balance Dic 2024.xlsx

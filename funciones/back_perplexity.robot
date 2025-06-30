@@ -1,5 +1,5 @@
 *** Settings ***
-Library           librerias/LibreriaPerplexity.py
+Library           ${EXECDIR}/librerias/LibreriaPerplexity.py
 Library           OperatingSystem
 Library           RPA.FileSystem
 Library           String

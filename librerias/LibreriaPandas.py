@@ -97,10 +97,7 @@ class LibreriaPandas:
         df[columnas] = df[columnas].ffill()
 
         # Guardar el DataFrame actualizado en formato CSV
-        df.to_csv(output_path, index=False)
-
-        # Guardar el DataFrame actualizado en formato CSV
-        df.to_csv(output_path, index=False)
+        df.to_csv(output_path, index=False, encoding='utf-8', lineterminator='\r\n')
 
         return f"Archivo procesado y guardado en: {output_path}"
 
