@@ -2,10 +2,7 @@
 	"folders": [
 		{
 			"name": "Api_automatizaciones",
-			"path": "."{
-  "robot.pythonpath": ["."],
-  "robot.lint.robocop": true
-}
+			"path": "."
 		}
 	],
 	"settings": {}

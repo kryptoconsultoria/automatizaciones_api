@@ -120,7 +120,6 @@ rutas_admin:
     cabeceras: 2
     indice_columna: "N/A"
 
-
 output:
   ruta_plantilla: "plantillas/Formato.xlsx"
   ruta_desglose: "plantillas/Formato_desglosado.xlsx"
@@ -167,28 +166,24 @@ credenciales:
     servidor: "178.156.139.34"   # Dirección del servidor de la base de datos
     puerto: "25"                                     # Puerto de la base de datos
     usuario: "mysql"   # Usuario de la base de datos
-    contrasena: "CCdfdyEuDb4UkFUwsTQc1oqqzQaJySpq4Xlf6Xn28ZqPEaIJETdqTxKQEdGPWGQf"  # Contraseña del usuario
     nombre_bd: "medios_magneticos"   # Nombre de la base de datos
 
   # Credenciales de OneDrive
-  sharepoint:
-    id_cliente: "952ce091-2362-481e-aa37-61325d6f2e0f"            # ID del cliente
-    secreto_cliente: "jjk8Q~9~wfmhW4b-N2FDX1dY7mT1_gvgH0Kivc7y"   # Secreto del cliente
+  sharepoint:        # ID del cliente   # Secreto del cliente
     nombre_sitio: "kryptocolombia.sharepoint.com"      # nombre sitio (organización)
     scopes: ['Sites.ReadWrite.All','Files.ReadWrite.All']  
     uri_redireccion: "https://login.microsoftonline.com/common/oauth2/nativeclient"
     ruta_salidas:   "/Innovación y tecnología/IntegrIA/Proyectos Automatización/07 Medios Magnéticos/salidas/"
     ruta_salidas_local:   "medios_magneticos/salidas/"
-    
-  chat_gpt:
-    token: "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"
 
+  # Chat_gpt
+  chat_gpt:
+  
+  # claude 
   claude:
-    token:  "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"
 
   perplexity:
     modelo: "sonar-pro"
-    token:  "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"
     prompt:  "You are an advanced search engine designed to retrieve detailed business information."
     instrucciones: >
         with the  provided name of a business BUSINESS_NAME and optionally the city of its headquarters CITY_HEADQUARTERS, search for and retrieve the full name and the headquarter address, including the city and country. 

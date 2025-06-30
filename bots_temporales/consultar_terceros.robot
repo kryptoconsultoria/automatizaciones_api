@@ -5,7 +5,7 @@ Library           OperatingSystem
 Library           RPA.FileSystem
 Library           String
 Library           JSONLibrary
-Resource          ../funciones/back_perplexity.robot
+Resource          ${EXECDIR}/funciones/back_perplexity.robot
 
 
 *** Variables ***
@@ -97,6 +97,6 @@ consultar_terceros
             ${completado}=    Set Variable    ${False}
         END
     END
-    [return]    ${completado}
+    RETURN    ${completado}
         
 
