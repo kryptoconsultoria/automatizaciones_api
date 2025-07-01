@@ -2,8 +2,8 @@
 Library     SeleniumLibrary
 Library     RPA.Tasks
 Library     Collections
-Library     dotenv
 Resource    hu01_clasificacion.robot
+Variables   ${EXECDIR}/env_vars.py
 
 
 *** Variables ***
@@ -11,13 +11,6 @@ ${CONFIG_FILE}    ${CURDIR}/config.yaml
 ${CONFIG_FILE_PDF}    ${CURDIR}/config_pdf.yaml
 ${CLIENTE}    Krypto_consultoria 
 ${USUARIO}    admin
-${CHAT_GPT_TOKEN}    Get Environment Variable    CHAT_GPT_TOKEN
-${CLAUDE_TOKEN}    Get Environment Variable    CLAUDE_TOKEN
-${CLIENT_ID_OFFICE_MEDIOS_MAGNETICOS}    Get Environment Variable    CLIENT_ID_OFFICE_MEDIOS_MAGNETICOS
-${CONTRASENA_BD_MEDIOS_MAGNETICOS}    Get Environment Variable    CONTRASENA_BD_MEDIOS_MAGNETICOS
-${PERPLEXITY_TOKEN}    Get Environment Variable    PERPLEXITY_TOKEN
-${SECRET_ID_MEDIOS_MAGNETICOS}    Get Environment Variable    SECRET_ID_MEDIOS_MAGNETICOS
-
 
 *** Tasks ***
 Medios magneticos
@@ -30,23 +23,6 @@ Medios magneticos
     ${config}=          Evaluate    yaml.safe_load('''${yaml_content}''')    modules=yaml
     ${config_pdf}=      Evaluate    yaml.safe_load('''${yaml_content_pdf}''')    modules=yaml
 
-    # Enviar al diccionario los datos capturados en fast api
-    Set To Dictionary    ${config['credenciales']}    cliente      ${CLIENTE}                        
-    Set To Dictionary    ${config['credenciales']}    usuario      ${USUARIO}
-
-    #Obtener por medio de variables de entorno tokens de acceso chat_gpt
-    Set To Dictionary    ${config['credenciales']['chat_gpt']}    token      ${CHAT_GPT_TOKEN}
-
-    #Obtener por medio de variables de entorno tokens de acceso claude                        
-    Set To Dictionary    ${config['credenciales']['claude']}    token      ${CLAUDE_TOKEN}
-
-    #Obtener por medio de variables de entorno tokens de acceso office
-    Set To Dictionary    ${config['credenciales']['sharepoint']}    id_cliente      ${CLIENT_ID_OFFICE_MEDIOS_MAGNETICOS}
-    Set To Dictionary    ${config['credenciales']['sharepoint']}    secreto_cliente      ${SECRET_ID_MEDIOS_MAGNETICOS}
-
-    #Obtener por medio de variables de entorno tokens de acceso perplexity
-    Set To Dictionary    ${config['credenciales']['perplexity']}    token      ${PERPLEXITY_TOKEN}
-
     #Crear json de salida
     ${ruta_json}    Set Variable    ${CURDIR}/../medios_magneticos/salida.json
     ${json_existe}    Does file exist      ${ruta_json}
@@ -55,8 +31,43 @@ Medios magneticos
         OperatingSystem.Remove File    ${ruta_json}
     END
 
-    &{respuesta}    HU01 Clasificacion    ${config}     ${config_pdf}
+    # Enviar al diccionario los datos capturados en fast api
+    Set To Dictionary    ${config['credenciales']}    cliente      ${CLIENTE}                        
+    Set To Dictionary    ${config['credenciales']}    usuario      ${USUARIO}
 
+    #Obtener por medio de variables de entorno tokens de acceso office
+    Set To Dictionary    ${config['credenciales']['sharepoint']}    id_cliente      ${CLIENT_ID_OFFICE_MEDIOS_MAGNETICOS}
+    Set To Dictionary    ${config['credenciales']['sharepoint']}    secreto_cliente      ${SECRET_ID_MEDIOS_MAGNETICOS}
+
+    #Obtener por medio de variables de entorno credenciales de la base de datos
+    Set To Dictionary    ${config['credenciales']['base_datos']}    contrasena      ${CONTRASENA_BD_MEDIOS_MAGNETICOS}
+
+     # Asegurar que 'perplexity' sea un diccionario
+    ${has}=    Run Keyword And Return Status    Dictionary Should Contain Key    ${config['credenciales']}    perplexity
+    IF    not ${has}
+        &{empty}=    Create Dictionary
+        Set To Dictionary    ${config['credenciales']}    perplexity=${empty}
+    END
+    Set To Dictionary    ${config['credenciales']['perplexity']}    token=${PERPLEXITY_TOKEN}
+
+    # Repetir para 'chat_gpt'
+    ${has}=    Run Keyword And Return Status    Dictionary Should Contain Key    ${config['credenciales']}    chat_gpt
+    IF    not ${has}
+        &{empty}=    Create Dictionary
+        Set To Dictionary    ${config['credenciales']}    chat_gpt=${empty}
+    END
+    Set To Dictionary    ${config['credenciales']['chat_gpt']}    token=${CHAT_GPT_TOKEN}
+
+    # Repetir para 'claude'
+    ${has}=    Run Keyword And Return Status    Dictionary Should Contain Key    ${config['credenciales']}    claude
+    IF    not ${has}
+        &{empty}=    Create Dictionary
+        Set To Dictionary    ${config['credenciales']}    claude=${empty}
+    END
+    Set To Dictionary    ${config['credenciales']['claude']}    token=${CLAUDE_TOKEN}
+
+    #Ejecucion de HU01 Clasificacion
+    &{respuesta}    HU01 Clasificacion    ${config}     ${config_pdf}
     ${respuesta_json}=      Convert JSON to string    ${respuesta}
 
     OperatingSystem.Create File    ${ruta_json}    content=${respuesta_json}

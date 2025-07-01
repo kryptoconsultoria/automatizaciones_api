@@ -50,3 +50,4 @@ robotframework-databaselibrary
 robotframework-jsonlibrary
 pymysql
 instructor
+dotenv
