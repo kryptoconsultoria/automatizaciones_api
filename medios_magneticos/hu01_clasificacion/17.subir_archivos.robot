@@ -32,8 +32,10 @@ subir_archivos
             FOR    ${archivo}    IN    @{archivos}
                 ${archivo_path}=    Convert To String    ${archivo}
                 Subida de insumo    refresh_token=${token_refresco}    id_cliente=${sharepoint['id_cliente']}    secreto_cliente=${sharepoint['secreto_cliente']}    url_redireccion=${sharepoint['uri_redireccion']}     nombre_del_sitio=${sharepoint['nombre_sitio']}    archivo_local=${archivo}    carpeta_onedrive=${sharepoint['ruta_salidas']}               
-                OperatingSystem.Remove File    ${archivo_path}
             END
+
+            OperatingSystem.Remove Files    ${CURDIR}/../${sharepoint['ruta_salidas_local']}/*
+
             ${completado}    Set Variable    ${True}
             ${error}    Set Variable     ${None} 
             BREAK

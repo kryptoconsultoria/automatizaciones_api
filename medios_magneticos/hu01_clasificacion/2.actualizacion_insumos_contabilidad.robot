@@ -6,7 +6,7 @@ Resource   ${EXECDIR}/funciones/convertir_excel.robot
 Resource   ${EXECDIR}/funciones/descargar_onedrive.robot
 Resource   ${EXECDIR}/funciones/subir_insumo.robot
 Library    DatabaseLibrary
-Library    ConsoleDialogs
+
 # *** Variables ***
 # ${config}    ../config.yaml
 # ${REINTENTOS}    2

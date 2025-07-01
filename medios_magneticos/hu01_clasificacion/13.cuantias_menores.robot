@@ -102,7 +102,7 @@ cuantias_menores
                 ${columna_din_5}    Replace String    ${columna_din_5}    ANY_VALUE(PaisResidencia)     '169' AS PaisResidencia
 
 
-                 ${sql}    Catenate    INSERT INTO ${formato}_cuantias (${columna_din_l},'${usuario}')
+                 ${sql}    Catenate    INSERT INTO ${formato}_cuantias (${columna_din_l},Usuario)
                 ...    SELECT ${columna_din_l},'${usuario}'
                 ...    FROM (SELECT  ${formula_cuantia} AS Agrupar,
                 ...    a.* FROM ${formato} a WHERE Usuario='${usuario}'
@@ -112,9 +112,9 @@ cuantias_menores
 
 
                 ${sql}    Catenate    CREATE TEMPORARY TABLE IF NOT EXISTS cuantias_menores_temp
-                ...    SELECT  ${columna_din_5},${columna_din_4},Usuario from ${formato}_cuantias
+                ...    SELECT  ${columna_din_5},${columna_din_4},ANY_VALUE(Usuario) as Usuario from ${formato}_cuantias
                 ...    UNION ALL
-                ...    SELECT ${columna_din_l}
+                ...    SELECT ${columna_din_l},'${usuario}'
                 ...    FROM (SELECT  ${formula_cuantia} AS Agrupar,a.*
                 ...    FROM ${formato} a WHERE Usuario='${usuario}') c WHERE Agrupar <> 'X';
                 Execute SQL String    ${sql}
