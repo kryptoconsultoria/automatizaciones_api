@@ -102,8 +102,8 @@ cuantias_menores
                 ${columna_din_5}    Replace String    ${columna_din_5}    ANY_VALUE(PaisResidencia)     '169' AS PaisResidencia
 
 
-                 ${sql}    Catenate    INSERT INTO ${formato}_cuantias (${columna_din_l})
-                ...    SELECT ${columna_din_l}
+                 ${sql}    Catenate    INSERT INTO ${formato}_cuantias (${columna_din_l},'${usuario}')
+                ...    SELECT ${columna_din_l},'${usuario}'
                 ...    FROM (SELECT  ${formula_cuantia} AS Agrupar,
                 ...    a.* FROM ${formato} a WHERE Usuario='${usuario}'
                 ...    ) b
@@ -112,17 +112,17 @@ cuantias_menores
 
 
                 ${sql}    Catenate    CREATE TEMPORARY TABLE IF NOT EXISTS cuantias_menores_temp
-                ...    SELECT  ${columna_din_5},${columna_din_4}  from ${formato}_cuantias
+                ...    SELECT  ${columna_din_5},${columna_din_4},Usuario from ${formato}_cuantias
                 ...    UNION ALL
                 ...    SELECT ${columna_din_l}
                 ...    FROM (SELECT  ${formula_cuantia} AS Agrupar,a.*
                 ...    FROM ${formato} a WHERE Usuario='${usuario}') c WHERE Agrupar <> 'X';
                 Execute SQL String    ${sql}
 
-                ${sql}    Set Variable        TRUNCATE TABLE ${formato}
+                ${sql}    Set Variable        DELETE FROM ${formato} WHERE Usuario='${usuario}'
                 Execute SQL String    ${sql}
 
-                ${sql}=    Set Variable    INSERT INTO ${formato} (${columna_din_l}) SELECT * FROM cuantias_menores_temp
+                ${sql}=    Set Variable    INSERT INTO ${formato} (${columna_din_l},Usuario) SELECT * FROM cuantias_menores_temp WHERE Usuario='${usuario}'
                 Execute SQL String    ${sql}
 
                 ${sql}    Set Variable        DROP TEMPORARY TABLE IF EXISTS cuantias_menores_temp

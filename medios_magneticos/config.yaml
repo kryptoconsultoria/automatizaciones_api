@@ -174,7 +174,7 @@ credenciales:
     scopes: ['Sites.ReadWrite.All','Files.ReadWrite.All']  
     uri_redireccion: "https://login.microsoftonline.com/common/oauth2/nativeclient"
     ruta_salidas:   "/Innovación y tecnología/IntegrIA/Proyectos Automatización/07 Medios Magnéticos/salidas/"
-    ruta_salidas_local:   "medios_magneticos/salidas/"
+    ruta_salidas_local:   "/salidas/"
 
   # Chat_gpt
   chat_gpt:

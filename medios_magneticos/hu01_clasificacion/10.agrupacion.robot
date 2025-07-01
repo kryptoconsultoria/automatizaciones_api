@@ -100,7 +100,7 @@ agrupacion
                 Execute SQL String    ${sql}
 
                 ${sql}    Catenate         
-                ...    TRUNCATE TABLE ${formato}
+                ...    DELETE FROM ${formato} WHERE Usuario='${usuario}'
                 Execute SQL String    ${sql}
 
                 ${sql}    Catenate      
