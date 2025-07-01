@@ -2,7 +2,6 @@
 Library           DatabaseLibrary
 Library           Collections
 Library           OperatingSystem
-Library           RPA.FileSystem
 Library           String
 Resource          hu01_clasificacion/1.actualizacion_insumos_admin.robot
 Resource          hu01_clasificacion/2.actualizacion_insumos_contabilidad.robot
@@ -101,18 +100,37 @@ HU01 Clasificacion
             Connect To Database    pymysql    ${bd_config["nombre_bd"]}    ${bd_config["usuario"]}    ${bd_config["contrasena"]}    ${bd_config["servidor"]}    ${bd_config["puerto"]}
             IF    ${completado}
                 ${sql}    Catenate
-                ...    UPDATE medios_magneticos.estado SET Estado='Iniciado',HistoriaUsuario='HU01',Tarea='${siguiente_palabra_clave}.robot',ErrorDetalle="" WHERE IdBot=1 AND idEstado=${estado_actual}[0][0] and Usuario='${usuario}'
+                ...    UPDATE medios_magneticos.estado SET 
+                ...    Estado='Iniciado',HistoriaUsuario='HU01',
+                ...    Tarea='${siguiente_palabra_clave}.robot',
+                ...    ErrorDetalle="" WHERE IdBot=1 AND 
+                ...    idEstado=${estado_actual}[0][0] and 
+                ...    Usuario='${usuario}'
+
                 ${estado}    Set Variable    Iniciado
                 ${hu}    Set Variable    HU01
                 ${tarea}    Set Variable    ${siguiente_palabra_clave}
                 Execute SQL String    ${sql}  
             ELSE
                 ${sql}    Catenate
-                ...    UPDATE medios_magneticos.estado SET Estado='Error',HistoriaUsuario='HU01',Tarea='${palabra_clave}.robot',ErrorDetalle="""${error}""" WHERE IdBot=1 AND idEstado=${estado_actual}[0][0] and Usuario='${usuario}'
+                ...    UPDATE medios_magneticos.estado SET Estado=%s,
+                ...    HistoriaUsuario=%s,Tarea=%s,
+                ...    ErrorDetalle=%s WHERE IdBot=%s AND 
+                ...    idEstado=%s and Usuario=%s
+
+                ${params}=    Create List
+                ...    Error
+                ...    HU01
+                ...    ${palabra_clave}.robot
+                ...    ${error}
+                ...    1
+                ...    ${estado_actual}[0][0]
+                ...    ${usuario}
+
                 ${estado}    Set Variable    Error
                 ${hu}    Set Variable    HU01
                 ${tarea}    Set Variable    ${palabra_clave}
-                Execute SQL String    ${sql}
+                Execute SQL String    ${sql}    parameters=${params}
                 BREAK
             END
         

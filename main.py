@@ -16,9 +16,9 @@ class RunMedios(BaseModel):
 
 @app.post("/medios_magneticos")
 async def medios_magneticos(req: RunMedios):
-    #sys.stdout = open(os.devnull, 'w')
-    #sys.stderr = open(os.devnull, 'w')
-    #logging.disable(logging.CRITICAL)
+    sys.stdout = open(os.devnull, 'w')
+    sys.stderr = open(os.devnull, 'w')
+    logging.disable(logging.CRITICAL)
 
     date_str = datetime.now().strftime("%Y-%m-%d_%H_%M_%S")
     output_dir = f"medios_magneticos/logs/{date_str}/"
@@ -36,7 +36,7 @@ async def medios_magneticos(req: RunMedios):
         "--report", "report.html",
         "--variable", f"CLIENTE:{req.cliente}",
         "--variable", f"USUARIO:{req.usuario}",
-    #    "--console", "none",
+        "--console", "none",
     #    "--pythonpath", ".",
         "medios_magneticos/main.robot"
     ]

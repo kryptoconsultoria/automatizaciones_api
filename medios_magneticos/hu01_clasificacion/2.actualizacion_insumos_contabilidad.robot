@@ -36,8 +36,20 @@ actualizacion_insumos_contabilidad
 
             #Limpieza
             Connect To Database    pymysql    ${bd_config["nombre_bd"]}    ${bd_config["usuario"]}    ${bd_config["contrasena"]}    ${bd_config["servidor"]}    ${bd_config["puerto"]}
-            Execute SQL Script    ${CURDIR}/../sql/limpieza_contabilidad.sql
-            Execute SQL Script    ${CURDIR}/../sql/limpieza_balances.sql
+            
+            ${exists}=    Run Keyword And Return Status    File Should Exist    ${CURDIR}/../sql/tmp.sql
+            Run Keyword If    ${exists}    OperatingSystem.Remove File    ${CURDIR}/../sql/tmp.sql
+            ${content}=    Get File    ${CURDIR}/../sql/limpieza_contabilidad.sql
+            ${content2}=   Replace String    ${content}    search_for=USUARIO    replace_with=${usuario}
+            OperatingSystem.Create File    ${CURDIR}/../sql/tmp.sql    ${content2} 
+            Execute SQL Script    ${CURDIR}/../sql/tmp.sql
+
+            ${exists}=    Run Keyword And Return Status    File Should Exist    ${CURDIR}/../sql/tmp.sql
+            Run Keyword If    ${exists}    OperatingSystem.Remove File    ${CURDIR}/../sql/tmp.sql
+            ${content}=    Get File    ${CURDIR}/../sql/limpieza_balances.sql
+            ${content2}=   Replace String    ${content}    search_for=USUARIO    replace_with=${usuario}
+            OperatingSystem.Create File    ${CURDIR}/../sql/tmp.sql    ${content2}  
+            Execute SQL Script    ${CURDIR}/../sql/tmp.sql
 
             ${sql}    Catenate     
             ...    SELECT b.Nombre FROM cliente a 
@@ -94,7 +106,7 @@ actualizacion_insumos_contabilidad
                     END
                     #==================================================================================
                            
-                    ${archivos}=    List files in directory    ${ruta_completa}
+                    ${archivos}=    OperatingSystem.List files in directory    ${ruta_completa}
 
                     FOR    ${archivo}    IN    @{archivos}
                         ${archivo_path}=    Convert To String    ${archivo}

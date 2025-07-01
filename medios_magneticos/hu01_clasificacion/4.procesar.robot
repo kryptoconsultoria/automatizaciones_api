@@ -1,7 +1,6 @@
 *** Settings ***
 Library           DatabaseLibrary
 Library           Collections
-Library           RPA.FileSystem
 Library           OperatingSystem
 Library           String
 Library           Dialogs
@@ -42,30 +41,26 @@ procesar
             Execute SQL Script    ${CURDIR}/../sql/tablas_temporales.sql
 
             ${exists}=    Run Keyword And Return Status    File Should Exist    ${CURDIR}/../sql/tmp.sql
-            Run Keyword If    ${exists}    RPA.FileSystem.Remove File    ${CURDIR}/../sql/tmp.sql
+            Run Keyword If    ${exists}    OperatingSystem.Remove File    ${CURDIR}/../sql/tmp.sql
 
             IF     ${id_sistema}[0][0] == 1
                 ${content}=    Get File    ${CURDIR}/../sql/siigo_pyme.sql
                 ${content2}=   Replace String    ${content}    search_for=USUARIO    replace_with=${usuario}
-                RPA.FileSystem.Create File    ${CURDIR}/../sql/tmp.sql    ${content2}
             ELSE IF  ${id_sistema}[0][0] == 2
                 ${content}=    Get File    ${CURDIR}/../sql/siigo_nube.sql
                 ${content2}=   Replace String    ${content}    search_for=USUARIO    replace_with=${usuario}  
-                RPA.FileSystem.Create File    ${CURDIR}/../sql/tmp.sql    ${content2}
             ELSE IF  ${id_sistema}[0][0] == 3
                 ${content}=    Get File    ${CURDIR}/../sql/avansys.sql
                 ${content2}=   Replace String    ${content}    search_for=USUARIO    replace_with=${usuario} 
-                RPA.FileSystem.Create File    ${CURDIR}/../sql/tmp.sql    ${content2}
             ELSE IF  ${id_sistema}[0][0] == 4
                 ${content}=    Get File    ${CURDIR}/../sql/allegra.sql
                 ${content2}=   Replace String    ${content}    search_for=USUARIO    replace_with=${usuario}  
-                RPA.FileSystem.Create File    ${CURDIR}/../sql/tmp.sql    ${content2}
             ELSE IF  ${id_sistema}[0][0] == 5
                 ${content}=    Get File    ${CURDIR}/../sql/aliaddo.sql
                 ${content2}=   Replace String    ${content}    search_for=USUARIO    replace_with=${usuario}  
-                RPA.FileSystem.Create File    ${CURDIR}/../sql/tmp.sql    ${content2}
             END
 
+            OperatingSystem.Create File    ${CURDIR}/../sql/tmp.sql    ${content2}
             Execute SQL Script    ${CURDIR}/../sql/tmp.sql
 
             ${sql}=    Catenate

@@ -44,7 +44,8 @@ Medios magneticos
 
      # Asegurar que 'perplexity' sea un diccionario
     ${has}=    Run Keyword And Return Status    Dictionary Should Contain Key    ${config['credenciales']}    perplexity
-    IF    not ${has}
+    ${is_none}=    Evaluate    ${config['credenciales'].get('perplexity', None)} is None
+    IF    not ${has} or ${is_none}
         &{empty}=    Create Dictionary
         Set To Dictionary    ${config['credenciales']}    perplexity=${empty}
     END
@@ -52,7 +53,8 @@ Medios magneticos
 
     # Repetir para 'chat_gpt'
     ${has}=    Run Keyword And Return Status    Dictionary Should Contain Key    ${config['credenciales']}    chat_gpt
-    IF    not ${has}
+    ${is_none}=    Evaluate    ${config['credenciales'].get('chat_gpt', None)} is None
+    IF    not ${has} or ${is_none}
         &{empty}=    Create Dictionary
         Set To Dictionary    ${config['credenciales']}    chat_gpt=${empty}
     END
@@ -60,7 +62,8 @@ Medios magneticos
 
     # Repetir para 'claude'
     ${has}=    Run Keyword And Return Status    Dictionary Should Contain Key    ${config['credenciales']}    claude
-    IF    not ${has}
+    ${is_none}=    Evaluate    ${config['credenciales'].get('claude', None)} is None
+    IF    not ${has} or ${is_none}
         &{empty}=    Create Dictionary
         Set To Dictionary    ${config['credenciales']}    claude=${empty}
     END

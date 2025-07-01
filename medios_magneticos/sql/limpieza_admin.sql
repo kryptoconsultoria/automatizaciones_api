@@ -1,2 +1,2 @@
 TRUNCATE TABLE rues;
-DELETE FROM puc;
+DELETE FROM puc WHERE Usuario = 'USUARIO';

@@ -29,14 +29,24 @@ actualizacion_insumos_admin
             ${bd_config}       Get From Dictionary    ${parametros['config_file']['credenciales']}    base_datos
             ${cliente}   Get From Dictionary   ${parametros['config_file']['credenciales']}   cliente
             ${sharepoint}   Get From Dictionary   ${parametros['config_file']['credenciales']}   sharepoint
+            ${usuario}   Get From Dictionary   ${parametros['config_file']['credenciales']}   usuario
 
             #Conexion a sharepoint 
             ${token_refresco}    Get File    path=${CURDIR}/../token.txt    encoding=UTF-8
 
             #Limpieza
             Connect To Database    pymysql    ${bd_config["nombre_bd"]}    ${bd_config["usuario"]}    ${bd_config["contrasena"]}    ${bd_config["servidor"]}    ${bd_config["puerto"]}
-            ${sql}      Execute SQL Script    ${CURDIR}/../sql/limpieza_admin.sql
+
+            ${exists}=    Run Keyword And Return Status    File Should Exist    ${CURDIR}/../sql/tmp.sql
+            Run Keyword If    ${exists}    OperatingSystem.Remove File    ${CURDIR}/../sql/tmp.sql
+            ${content}=    Get File    ${CURDIR}/../sql/limpieza_admin.sql
+            ${content2}=   Replace String    ${content}    search_for=USUARIO    replace_with=${usuario}
+            OperatingSystem.Create File    ${CURDIR}/../sql/tmp.sql    ${content2} 
+            Execute SQL Script    ${CURDIR}/../sql/tmp.sql
+
+
             Disconnect From Database
+
 
             #Crear carpeta de insumos si no existe
             ${ruta_insumos}    Set Variable    ${CURDIR}/../insumos
@@ -82,8 +92,8 @@ actualizacion_insumos_admin
                     BREAK
                 END
                 #==================================================================================
-                ${archivos}=    List files in directory    ${admin}
-                    
+                ${archivos}=    OperatingSystem.List files in directory    ${admin}
+
                 FOR    ${archivo}    IN    @{archivos}
                     ${archivo_path}=    Convert To String    ${archivo}
                     ${nombre_archivo}=    Get File Name    ${archivo_path}

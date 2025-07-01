@@ -19,6 +19,7 @@ pip-delete-this-directory.txt
 .settings/
 .vscode/
 .idea/
+.code-workspace
 *.iml
 
 # Archivos de logs
