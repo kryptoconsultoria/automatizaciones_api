@@ -36,6 +36,7 @@ EXPOSE 82
 RUN pip install --upgrade pip
 RUN pip install rpaframework
 RUN pip uninstall rpaframework-filesystem
+RUN pip install --upgrade pdfminer.six pdfplumber
 
 # Comando de arranque
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "82"]
