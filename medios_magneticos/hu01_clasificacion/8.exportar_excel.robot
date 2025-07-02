@@ -61,13 +61,12 @@ exportar_excel
             ${sumatorias}    Get From Dictionary    ${parametros['config_file']}    sumatorias
             ${usuario}   Get From Dictionary   ${parametros['config_file']['credenciales']}   usuario
 
+            OperatingSystem.Remove Files    ${CURDIR}/../${output['salidas']}/*
+
             Connect To Database    pymysql    ${bd_config["nombre_bd"]}    ${bd_config["usuario"]}    ${bd_config["contrasena"]}    ${bd_config["servidor"]}    ${bd_config["puerto"]}
-
             ${fecha_actual}    Get Current Date    result_format=%Y-%m-%d_%H_%M_%S
-
             ${excel_ruta}    Set Variable   ${CURDIR}/../${output['salidas']}${/}exogena_${cliente}__${usuario}_desglosado_${fecha_actual}.xlsx
             OperatingSystem.Copy File    ${CURDIR}/../${output['ruta_desglose']}    ${excel_ruta}
-            
             Open Workbook     ${excel_ruta}      data_only=True
 
             ${resultados}=    Query    SELECT Formato FROM formato
