@@ -103,14 +103,14 @@ rutas_contabilidad:
     indice_columna: "N/A"   
 
 rutas_admin:
-  rues:
-    ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/07 Medios Magnéticos/insumos/rues/"
-    ruta_carpeta: "insumos/rues/"
-    nombre_tabla: "rues"
-    nombre_hoja: "N/A"
-    columnas: "OrgJuridica,Categoria,FechaMatricula,RazonSocial,TipoIdentificacion,NumeroIdentificacion,ActividadEconomica,ActividadEconomica2,ActividadEconomica3,ActividadEconomica4,DescTamanoEmpresa,Departamento,Municipio,DireccionComercial,CorreoComercial,RepLegal"
-    cabeceras: 4
-    indice_columna: "N/A"       
+  # rues:
+  #   ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/07 Medios Magnéticos/insumos/rues/"
+  #   ruta_carpeta: "insumos/rues/"
+  #   nombre_tabla: "rues"
+  #   nombre_hoja: "N/A"
+  #   columnas: "OrgJuridica,Categoria,FechaMatricula,RazonSocial,TipoIdentificacion,NumeroIdentificacion,ActividadEconomica,ActividadEconomica2,ActividadEconomica3,ActividadEconomica4,DescTamanoEmpresa,Departamento,Municipio,DireccionComercial,CorreoComercial,RepLegal"
+  #   cabeceras: 4
+  #   indice_columna: "N/A"       
   exclusion_nits:
     ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/07 Medios Magnéticos/insumos/exclusion_nits/"
     ruta_carpeta: "insumos/exclusion_nits/"
