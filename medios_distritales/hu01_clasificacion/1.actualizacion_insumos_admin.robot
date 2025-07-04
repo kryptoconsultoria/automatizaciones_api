@@ -3,9 +3,9 @@ Library    RPA.FileSystem
 Library    Collections
 Library    String
 Library    OperatingSystem
-Resource   ../funciones/convertir_excel.robot
-Resource   ../funciones/descargar_onedrive.robot
-Resource   ../funciones/subir_insumo.robot
+Resource   ${EXECDIR}/funciones/convertir_excel.robot
+Resource   ${EXECDIR}/funciones/descargar_onedrive.robot
+Resource   ${EXECDIR}/funciones/subir_insumo.robot
 
 # *** Variables ***
 # ${config}    ../config.yaml

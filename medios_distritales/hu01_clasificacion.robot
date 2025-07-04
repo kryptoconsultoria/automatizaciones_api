@@ -35,7 +35,7 @@ HU01 Clasificacion
     #============================================================================================================================================================================ 
     Connect To Database    pymysql    ${bd_config["nombre_bd"]}    ${bd_config["usuario"]}    ${bd_config["contrasena"]}    ${bd_config["servidor"]}    ${bd_config["puerto"]}
     ${sql}    Catenate    
-    ...    select * from medios_magneticos.estado WHERE IdBot=1 AND HistoriaUsuario='HU01' and Estado IN ('Error','Iniciado') order by fecha desc limit 1
+    ...    select * from medios_distritales.estado WHERE IdBot=1 AND HistoriaUsuario='HU01' and Estado IN ('Error','Iniciado') order by fecha desc limit 1
     ${estado_actual}    Query       ${sql}
     ${tam_estado_actual}    Get Length  ${estado_actual}  
     IF  ${tam_estado_actual} == 0
@@ -43,11 +43,11 @@ HU01 Clasificacion
         ...    INSERT INTO estado (Tarea,HistoriaUsuario,Estado,IdBot,Fecha,Usuario) VALUES ('actualizacion_insumos_admin.robot','HU01','Iniciado',1,'${fecha_actual}','${usuario}')
         Execute SQL String    ${sql}
         ${sql}    Catenate    
-        ...    select * from medios_magneticos.estado WHERE IdBot=1 AND HistoriaUsuario='HU01' and Estado IN ('Error','Iniciado') and Usuario='${usuario}' order by fecha desc limit 1
+        ...    select * from medios_distritales.estado WHERE IdBot=1 AND HistoriaUsuario='HU01' and Estado IN ('Error','Iniciado') and Usuario='${usuario}' order by fecha desc limit 1
         ${estado_actual}    Query       ${sql}
     ELSE
         ${sql}    Catenate
-        ...    UPDATE medios_magneticos.estado SET Estado='Iniciado',HistoriaUsuario='HU01' WHERE IdBot=1 AND idEstado=${estado_actual}[0][0] and Usuario='${usuario}'
+        ...    UPDATE medios_distritales.estado SET Estado='Iniciado',HistoriaUsuario='HU01' WHERE IdBot=1 AND idEstado=${estado_actual}[0][0] and Usuario='${usuario}'
         Execute SQL String    ${sql}
     END
     Disconnect From Database
@@ -73,7 +73,7 @@ HU01 Clasificacion
 
         Connect To Database    pymysql    ${bd_config["nombre_bd"]}    ${bd_config["usuario"]}    ${bd_config["contrasena"]}    ${bd_config["servidor"]}    ${bd_config["puerto"]}
         ${sql}    Catenate    
-        ...    Select Count(*) FROM medios_magneticos.estado WHERE IdBot=1 AND 
+        ...    Select Count(*) FROM medios_distritales.estado WHERE IdBot=1 AND 
         ...    HistoriaUsuario='HU01' and Tarea='${palabra_clave}.robot' and idEstado=${estado_actual}[0][0] 
         ...    and Estado IN ('Error','Iniciado') and Usuario='${usuario}'
         ${Estado}    Query       ${sql}
@@ -84,7 +84,7 @@ HU01 Clasificacion
             Connect To Database    pymysql    ${bd_config["nombre_bd"]}    ${bd_config["usuario"]}    ${bd_config["contrasena"]}    ${bd_config["servidor"]}    ${bd_config["puerto"]}
             IF    ${completado}
                 ${sql}    Catenate
-                ...    UPDATE medios_magneticos.estado SET 
+                ...    UPDATE medios_distritales.estado SET 
                 ...    Estado='Iniciado',HistoriaUsuario='HU01',
                 ...    Tarea='${siguiente_palabra_clave}.robot',
                 ...    ErrorDetalle="" WHERE IdBot=1 AND 
@@ -97,7 +97,7 @@ HU01 Clasificacion
                 Execute SQL String    ${sql}  
             ELSE
                 ${sql}    Catenate
-                ...    UPDATE medios_magneticos.estado SET Estado=%s,
+                ...    UPDATE medios_distritales.estado SET Estado=%s,
                 ...    HistoriaUsuario=%s,Tarea=%s,
                 ...    ErrorDetalle=%s WHERE IdBot=%s AND 
                 ...    idEstado=%s and Usuario=%s
@@ -120,7 +120,7 @@ HU01 Clasificacion
         
             IF    ${completado} and '${palabra_clave}' == 'subir_archivos'
                 ${sql}    Catenate
-                ...    UPDATE medios_magneticos.estado SET Estado='Finalizado',HistoriaUsuario='HU01',Tarea='${palabra_clave}.robot',ErrorDetalle="" WHERE IdBot=1 AND idEstado=${estado_actual}[0][0] and Usuario='${usuario}'
+                ...    UPDATE medios_distritales.estado SET Estado='Finalizado',HistoriaUsuario='HU01',Tarea='${palabra_clave}.robot',ErrorDetalle="" WHERE IdBot=1 AND idEstado=${estado_actual}[0][0] and Usuario='${usuario}'
                 ${estado}    Set Variable    Finalizado
                 ${hu}    Set Variable    HU01
                 ${tarea}    Set Variable    ${palabra_clave}

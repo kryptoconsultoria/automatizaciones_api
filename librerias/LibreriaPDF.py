@@ -105,8 +105,6 @@ class LibreriaPDF:
             # pagina = self.__recortar_pagina(pagina)  # Uncomment if cropping is needed
 
             configuracion_tabla = {
-                "vertical_strategy": "text",
-                "horizontal_strategy": "text"
             }
 
             tablas = pagina.extract_tables(configuracion_tabla)
@@ -124,11 +122,11 @@ if __name__ == "__main__":
     # Ejemplo de uso independiente (para pruebas)
     libreria = LibreriaPDF()
     
-    ruta_pdf = "C:\\Users\\Krypto\\PycharmProjects\\automatizaciones_api\\medios_distritales\\insumos\\Rete_ICA\\4. Kconsultoria rte ica presentado IV Bim 2023.pdf"
+    ruta_pdf = "2. KCONSULTORIA ICA BIM II PRESENTADO 2023.pdf"
     
     print("Testing 'Abrir PDF':")
     print(libreria.abrir_pdf(ruta_pdf))
-    print(libreria.contar_paginas())
+    #print(libreria.contar_paginas())
 
     #print("Testing 'Pasar a base 64':")
     #print(libreria.base_64(ruta_pdf))
@@ -136,8 +134,8 @@ if __name__ == "__main__":
     print("\nTesting 'Extraer Texto' en la página 1:")
     print(libreria.extraer_texto(0))
 
-    #print("\nTesting 'Extraer Tablas' en la página 1:")
-    #print(libreria.extraer_tablas(0, 0))
+    print("\nTesting 'Extraer Tablas' en la página 1:")
+    print(libreria.extraer_tablas(0, 0))
 
 
     # print("\nTesting 'Cerrar PDF':")

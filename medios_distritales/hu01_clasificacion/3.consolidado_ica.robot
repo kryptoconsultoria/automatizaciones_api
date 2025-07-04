@@ -1,11 +1,11 @@
 *** Settings ***
 Library           DatabaseLibrary
 Library           Collections
-Library           RPA.FileSystem
+Library           OperatingSystem
 Library           String
 Library           Dialogs
-Resource          ../funciones/leer_pdf.robot
-Resource          ../funciones/descargar_onedrive.robot
+Resource          ${EXECDIR}/funciones/leer_pdf.robot
+Resource          ${EXECDIR}/funciones/descargar_onedrive.robot
 
 
 *** Keywords ***
@@ -30,19 +30,44 @@ consolidado_ica
 
             # Conectar a la base de datos
             Connect To Database    pymysql    ${bd_config["nombre_bd"]}    ${bd_config["usuario"]}    ${bd_config["contrasena"]}    ${bd_config["servidor"]}    ${bd_config["puerto"]}
-
-
             ${sql}     Catenate  
             ...    TRUNCATE TABLE consolidado_ica
             Execute Sql String   ${sql}
+
+
 
             #==================================================================================
             # validar si la ruta contiene la palabra insumos si la contiene solo sube el excel asociado con el cliente
             ${carpeta_ica}    Replace String    ${CURDIR}/../${ica["ruta_carpeta"]}    search_for=CLIENTE    replace_with=${cliente}
             ${ruta_nube}    Replace String    ${ica["ruta_nube"]}    CLIENTE   ${cliente}
 
+            #==================================================================================
+            # validar si la ruta contiene la palabra insumos si la contiene solo sube el excel asociado con el cliente
+            ${ruta_completa}    Replace String    ${CURDIR}/../${ica["ruta_carpeta"]}    CLIENTE   ${cliente}
+            ${ruta_nube}    Replace String    ${ica["ruta_nube"]}    CLIENTE   ${cliente}
+
+            # Crear carpeta si no xiste insumos sistema contabilidad
+            ${ruta_insumos}    Set Variable    ${CURDIR}/../insumos
+            ${existe}=    Run Keyword And Return Status    Directory Should Exist    ${ruta_insumos}
+            IF    not ${existe}
+                Create Directory    ${ruta_insumos}
+            END
+            
+            # Crear carpeta si no xiste insumos sistema contabilidad
+            ${ruta_ica}    Set Variable    ${CURDIR}/../insumos/ica
+            ${existe}=    Run Keyword And Return Status    Directory Should Exist    ${ruta_ica}
+            IF    not ${existe}
+                Create Directory    ${ruta_ica}
+            END
+
+            # Crear carpeta si no existe cliente
+            ${existe}=    Run Keyword And Return Status    Directory Should Exist    ${ruta_completa}
+            IF    not ${existe}
+                Create Directory    ${ruta_completa}
+            END
+            
             #Borrar archivos de cada carpeta
-            RPA.FileSystem.Remove Files    ${carpeta_ica}/*
+            Remove Files    ${ruta_completa}/*
 
             #Enlistar archivo de sharepoint
             ${estado}    ${archivos}=     Listar archivos    refresh_token=${token_refresco}     secreto_cliente=${sharepoint['secreto_cliente']}    url_redireccion=${sharepoint['uri_redireccion']}   nombre_del_sitio=${sharepoint['nombre_sitio']}    ruta_carpeta=${ruta_nube}    id_cliente=${sharepoint['id_cliente']}       
