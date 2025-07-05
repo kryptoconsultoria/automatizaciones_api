@@ -18,18 +18,27 @@ rutas_contabilidad:
     nombre_tabla: "ingresos_anexo_ica"
     columnas: "CuentaDescripcion,Grupo,Ing,Tarifa,Comprobante,Fecha,Mes,Bimestre,Nit,Nombre,Municipio,DescripcionDetalle"
     cabeceras: 8
-  
+
+  ica_bogota:
+    ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/11 Medios Distritales/insumos/insumos_siigo_pyme/CLIENTE/anexo_ica"
+    ruta_carpeta: "medios_distritales/insumos/insumos_siigo_pyme/CLIENTE/anexo_ica"
+    nombre_hoja: "Bogotá"
+    nombre_tabla: "ica_bogota"
+    columnas: "vacio,Concepto,Declarado1,Contable1,Diferencia1,Declarado2,Contable2,Diferencia2,Declarado3,Contable3,Diferencia3,Declarado4,Contable4,Diferencia4,Declarado5,Contable5,Diferencia5,Declarado6,Contable6,Diferencia6,Declarado7,Contable7,Diferencia7"
+    cabeceras: 8
+    
 #============================================
 # CREDENCIALES
 #============================================
 credenciales:
   # Credenciales de base de datos
   base_datos:
-    servidor: "127.0.0.1"                            # Dirección del servidor de la base de datos
-    puerto: 3306                                     # Puerto del za
+    servidor: "178.156.139.34"                            # Dirección del servidor de la base de datos
+    puerto: 24                                     # Puerto del za
     usuario: "mysql"                                  # Usuario de la base de datos
     nombre_bd: "medios_distritales"                   # Nombre de la base de datos
 
+  sharepoint:
   # Credenciales de OneDrive
     nombre_sitio: "kryptocolombia.sharepoint.com"                      # nombre sitio (organización)
     scopes:   ['Sites.ReadWrite.All','Files.ReadWrite.All']            # scopes

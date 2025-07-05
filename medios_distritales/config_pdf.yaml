@@ -4,21 +4,21 @@
 rutas_pdf:
 
   rete_ica:
-    ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/11 Medios Magnéticos/insumos/reta_ica/CLIENTE/"
-    ruta_carpeta: "medios_distritales/insumos/rete_ica/CLIENTE/"
-    BR: 1
-    RP: 2
-    DR: 3
-    BH: 4
-    VS: 5
-    HA: 6
-    VP: 7
-    IM: 8
-    TP: 9
+    ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/11 Medios Distritales/insumos/rete_ica/CLIENTE/"
+    ruta_carpeta: "insumos/rete_ica/CLIENTE/"
+    BR: 0
+    RP: 1
+    DR: 2
+    BH: 3
+    VS: 4
+    HA: 5
+    VP: 6
+    IM: 7
+    TP: 8
 
   ica:
-    ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/11 Medios Magnéticos/insumos/ica/CLIENTE/"
-    ruta_carpeta: "medios_distritales/insumos/ica/CLIENTE/"
+    ruta_nube: "/Innovación y tecnología/IntegrIA/Proyectos Automatización/11 Medios Distritales/insumos/ica/CLIENTE/"
+    ruta_carpeta: "insumos/ica/CLIENTE/"
     BA: 1
     BC: 2
     BT: 3
